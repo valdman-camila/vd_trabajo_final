@@ -8,6 +8,9 @@
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 
+
+    let arrdos=[]
+
     function manejarClick(i, j) {
       llamadoGato.update(n => n + 1);
       gatoEspecifico.set(i+j*4);
@@ -21,8 +24,14 @@
 
   onMount(() => {
     window.addEventListener('scroll', manejarScroll);
+    arrdos=agruparCuatro(series)
     return () => window.removeEventListener('scroll', manejarScroll);
   })
+  let gatos= "series"
+  let orden = "orden_rating"
+  let filtro = "todas"
+	let resaltar = "todas"
+  $: seriePelicu = series;
 
     const maxRating = d3.max(series, (d) => d.Rating)
     const minRating = d3.min(series, (d) => d.Rating)
@@ -42,24 +51,66 @@
     let manchaVentas=d3.scaleLinear()
         .domain([minVentas, maxVentas]).range([1, 5])
 
-  let arr= [];
-  let temp=[];
-  for(let i = 0; i < series.length; i++){
-            temp.push(series[i]);
-      if((i+1) % 4 == 0 || (i + 1) == series.length){
-        arr.push(temp);
-        temp=[];
+ 
+
+ 
+
+  function agruparCuatro( lista){
+    let filas=[];
+     let temp2=[];
+  for(let i = 0; i < seriePelicu.length; i++){
+            temp2.push(seriePelicu[i]);
+      if((i+1) % 4 == 0 || (i + 1) == seriePelicu.length){
+        filas.push(temp2);
+        temp2=[];
       } 
-
-
   }
-  console.log("m", arr)
+  return filas;
+}
+function orderSelection(valorOrden ){
+  orden = valorOrden;
+        if (orden == "orden_ventas") {
+        seriePelicu = d3.sort(series, s => s.Ventas)
+        seriePelicu= d3.reverse(seriePelicu)
+      } else if (orden == "orden_tipo") {
+        seriePelicu = d3.sort(series, escena => escena.Tipo)
+
+      }else if (orden == "orden_rating") {
+        seriePelicu = d3.sort(series, escena => escena.Rating)
+        seriePelicu= d3.reverse(seriePelicu)
+      }
+arrdos=agruparCuatro(seriePelicu)
+console.log("m", arrdos)
+  
+}
+function filterSelection(valorFilter){
+  filtro=valorFilter
+    if (filtro != "todas") {
+    seriePelicu = series.filter(p => p.Tipo == filtro)
+  }else{
+    seriePelicu=series
+  }
+  arrdos=agruparCuatro(seriePelicu)
+
+}
 
 
 
 
 
 </script>
+<button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Mas ventas</button>
+<button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
+<button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>por rating</button>
+
+<!-- Agregamos reactivamente la clase "actve" de acuerdo al valor de la variable filtro -->
+<h3>Filtrar</h3>
+<!-- Cambiamos el valor de la variable filtro con el click de los botones -->
+<button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
+<button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
+<button on:click={() => filterSelection("Serializada")} class:active={filtro == "Serializada"}>Serializadas</button>
+<button on:click={() => filterSelection("Episodica")} class:active={filtro == "Episodica"}>Episodico</button>
+
 {#if mostrarBoton}
   <button class="volver-a-guia"
           on:click={() => window.scrollTo({ top: document.getElementById("guia-container").offsetTop, behavior: "smooth" })}
@@ -75,7 +126,7 @@
           <div class="mueble">
             
 <div class="container">
-    {#each arr as cuatroG, j}
+    {#each arrdos as cuatroG, j}
       <!-- Iteramos la data para visualizar c/ entidad -->
       <div class= "gatos-con-estante">
       {#each cuatroG as serie,i}
@@ -143,6 +194,13 @@
     </div>
 
 <style>
+    	button {
+		cursor: pointer;
+	}
+	.active {
+		color: black;
+		background: white;
+	}
   .gatos-con-estante{
             display: flex;
     justify-content: center;
@@ -162,7 +220,7 @@
   margin: auto;
     background-color: #F0D786;
       width: 1230px;
-    height: 1420px;
+
  border: 50px solid transparent;
       border-image-slice: 60;
   border-image-source:url("/images/estante-borde.svg"); 

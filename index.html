@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="images/icono.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Font Gloria Hallelujah-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Pangolin&display=swap" rel="stylesheet">
+    <!--Font Pangolin-->
+    
+    <title>VD | Maqueta</title>
+
+    <!-- Llamada reseteo de estilos default: public/css/main.css  -->
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <style>
+
+            .section.active {
+        opacity: 1;
+        pointer-events: auto;
+        position: relative;
+      }
+      .section {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transition: opacity 0.5s ease;
+      }
+      .active {
+        display: block;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .section {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, height 0.5s ease;
+}
+
+.section.active {
+  opacity: 1;
+  height: auto;
+  overflow: visible;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <!-- Sección de inicio, con la visualización de gatos -->
+    <div id="home" class="section active">
+    <div class="header-container">
+      <div class="header-overlay">
+        <h1> <img src="/images/TituloIdea.svg" class="titulo-nuevo" alt=""/></h1>
+      </div>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <!-- JS for flourish charts -->
+    <script src="https://public.flourish.studio/resources/embed.js"></script>
+    <button class="change-section" onclick="loadSection('pre-armar-gato')">Home</button>
+    <div id="juego"></div>
+    <div id="scrolly" class="section active">
+      <!--Aca ponemos el archivo con el scrollytelling-->
+          <!-- Contenedor de la story de flourish (scrolly)-->
+    <div id="my-wrapper">
+      <!--  Reemplazar el ID de ejemplo por la de la propia story -->
+      <div
+        class="flourish-embed"
+        data-src="story/2041907"
+        data-url="https://flo.uri.sh/story/2041907/embed"
+        data-height="100vh"
+      >
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+      </div>
+
+      <!-- Acá es donde agregás tus epígrafes, vinculándolos a las visualizaciones específicas de la story. Reemplazar los IDs y numerar los slide-1, slide-2, etc. Debe haber uno por cada slide de la story. -->
+      <p>
+        Texto slide 1. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-1"></a>
+      </p>
+
+      <p>
+        Texto slide 2. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-2"></a>
+      </p>
+
+      <p>
+        Texto slide 3. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-3"></a>
+      </p>
+
+      <p>
+        Texto slide 4. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-4"></a>
+      </p>
+
+      <p>
+        Texto slide 5. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-5"></a>
+      </p>
+
+      <p>
+        Texto slide 6. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-6"></a>
+      </p>
+
+      <p>
+        Texto slide 7. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-7"></a>
+      </p>
+
+      <p>
+        Texto slide 8. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-8"></a>
+      </p>
+
+      <p>
+        Texto slide 9. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-9"></a>
+      </p>
+      <p>
+        Texto slide 8. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-10"></a>
+      </p>
+
+      <p>
+        Texto slide 9. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-11"></a>
+      </p>
+      <p>
+        Texto slide 8. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-12"></a>
+      </p>
+
+      <p>
+        Texto slide 9. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-13"></a>
+      </p>
+      <p>
+        Texto slide 8. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-14"></a>
+      </p>
+
+      <p>
+        Texto slide 9. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-15"></a>
+      </p>
+      <p>
+        Texto slide 8. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-16"></a>
+      </p>
+
+      <p>
+        Texto slide 9. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-17"></a>
+      </p>
+      <p>
+        Texto slide 8. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-18"></a>
+      </p>
+
+      <p>
+        Texto slide 9. Fusce quis augue et tortor interdum bibendum. Nam dolor
+        elit
+        <a href="#story/2041907/slide-19"></a>
+      </p>
+    </div>
+
+    </div>
+    <div class="footer-container">
+      <div class="footer-overlay">
+        <p>Dataviz creativa | Visualización de Datos</p>
+        <p>Delfina Abbate, Luciana Alarcón y Camila Nicole Valdman</p>
+        <a href="https://github.com/redandder/vd_maqueta_marcas_canales-main" target="_blank" class="button">Ver en GitHub</a>    
+      </div>
+    </div>
+    </div>
+
+    <!-- Sección en la que se le presenta al usuario la posibilidad de armar un gato-->
+    <div id="pre-armar-gato" class="section">
+      <div class="container-pre-armar">
+        <p>Crea tu propio gato.</p>
+        <button class="change-section" onclick="loadSection('armar-gato')">Empezar</button>
+      </div>
+    </div>
+
+    <!-- Sección en la que la persona puede armar a su propio gato -->
+    <div id="armar-gato" class="section">
+      <div id="app2"></div>
+      <button class="change-section" onclick="loadSection('home')">Volver al inicio</button>
+    </div>
+
+    
+  <!-- Tu JS principal -->
+  <script type="module" src="/src/main.js"></script>
+
+  <script>
+    function loadSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.classList.add('active');
+      }
+    }
+
+  </script>
+      <script
+      src="https://cdn.flourish.rocks/flourish-scrolly-v3.1.0.min.js"
+      type="text/javascript"
+    ></script>
+
+    <!-- ¡Inicializa la biblioteca para convertir tu historia en magia de desplazamiento! -->
+    <script type="text/javascript">
+      initFlourishScrolly()
+    </script>
+
+  </body>
+</html>

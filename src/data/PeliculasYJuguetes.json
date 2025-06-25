@@ -1,0 +1,142 @@
+[
+ {
+   "Nombre": "My Little Pony: Equestria Girls",
+   "Rating": 6.3,
+   "Duracion": 72,
+   "Tipo": "4",
+   "Ventas": 1000
+ },
+ {
+   "Nombre": "Monster High: 13 Wishes",
+   "Rating": 6.9,
+   "Duracion": 73,
+   "Tipo": "1",
+   "Ventas": 500
+ },
+ {
+   "Nombre": "Transformers Live Action",
+   "Rating": 7.9,
+   "Duracion": 144,
+   "Tipo": "6",
+   "Ventas": 333
+ },
+ {
+   "Nombre": "Teenage Mutant Ninja Turtles",
+   "Rating": 5.8,
+   "Duracion": 101,
+   "Tipo": "2",
+   "Ventas": 1100
+ },
+ {
+   "Nombre": "The Lego Ninjago Movie",
+   "Rating": 6.1,
+   "Duracion": 101,
+   "Tipo": "1",
+   "Ventas": 1156
+ },
+ {
+   "Nombre": "Action Man",
+   "Rating": 6.3,
+   "Duracion": 104,
+   "Tipo": "1",
+   "Ventas": 120
+ },
+ {
+   "Nombre": "Barbie and the Diamond Castle",
+   "Rating": 7.6,
+   "Duracion": 78,
+   "Tipo": "1",
+   "Ventas": 1202
+ },
+ {
+   "Nombre": "Ever After High: Way Too Wonderland",
+   "Rating": 7.8,
+   "Duracion": 90,
+   "Tipo": "1",
+   "Ventas": 33
+ },
+ {
+   "Nombre": "The Care Bears Movie",
+   "Rating": 6.1,
+   "Duracion": 76,
+   "Tipo": "1",
+   "Ventas": 350
+ },
+ {
+   "Nombre": "Playmobil: The Movie",
+   "Rating": 4.9,
+   "Duracion": 99,
+   "Tipo": "1",
+   "Ventas": 100
+ },
+ {
+   "Nombre": "Hello Kitty: Fantasy in the Apple Forest",
+   "Rating": 6.4,
+   "Duracion": 93,
+   "Tipo":"1",
+   "Ventas": 4236
+ },
+ {
+   "Nombre": "Hot Wheels: AcceleRacers",
+   "Rating": 7.8,
+   "Duracion": 60,
+   "Tipo": "4",
+   "Ventas": 1575
+ },
+ {
+   "Nombre": "Max Steel",
+   "Rating": 6.6,
+   "Duracion": 92,
+   "Tipo": "1",
+   "Ventas": 150
+ },
+ {
+   "Nombre": "Bratz: Rock Angelz",
+   "Rating": 6.5,
+   "Duracion": 73,
+   "Tipo": "1",
+   "Ventas": 500
+ },
+ {
+   "Nombre": "PollyWorld",
+   "Rating": 6.1,
+   "Duracion": 68,
+   "Tipo": "1",
+   "Ventas": 261
+ },
+ {
+   "Nombre": "Kit Kittredge: An American Girl",
+   "Rating": 6.5,
+   "Duracion": 101,
+   "Tipo": "1",
+   "Ventas": 900
+ },
+ {
+   "Nombre": "Beyblade: Fierce Battle",
+   "Rating": 5.7,
+   "Duracion": 74,
+   "Tipo": "1",
+   "Ventas": 500
+ },
+ {
+   "Nombre": "Bionicle Mask of Light",
+   "Rating": 5.6,
+   "Duracion": 70,
+   "Tipo": "4",
+   "Ventas": 350
+ },
+ {
+   "Nombre": "Dragons: Fire & Ice",
+   "Rating": 5.4,
+   "Duracion": 72,
+   "Tipo": "2",
+   "Ventas": 50
+ },
+ {
+   "Nombre": "The Secret of the Sword",
+   "Rating": 7.2,
+   "Duracion": 100,
+   "Tipo": "1",
+   "Ventas": 1300
+ }
+]

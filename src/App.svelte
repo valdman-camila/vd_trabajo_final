@@ -91,6 +91,28 @@
   }
 });
 
+import { onMount } from "svelte";
+
+let mostrarBotones = false;
+
+onMount(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      mostrarBotones = entry.isIntersecting;
+    },
+    {
+      threshold: 0.2, 
+    }
+  );
+
+  const target = document.getElementById("visualizacion");
+  if (target) {
+    observer.observe(target);
+  }
+
+  return () => observer.disconnect();
+});
+
 
 </script>
 
@@ -98,31 +120,23 @@
 <main>
   <div id="overlay" class="hidden">
     <div id="guia-visualizacion" class="guia-visualizacion hidden">
-                  <button class="nav-arrow left-arrow" on:click={showPreviousGuideImage} disabled={currentGuideImage === 'series'}>&lt;</button>
+                  
 
             <div class="guia-image-wrapper">
-                {#if currentGuideImage === 'series'}
-                    <img
-                        src="/images/GuiaVisualDeSeriesFinal.svg"
-                        alt="Guía Visual de Series"
-                        width="950"
-                        in:fade={{ duration: 500 }}
-                        out:fade={{ duration: 500 }}
-                        class="guia-content-image"
-                    />
-                {:else if currentGuideImage === 'peliculas'}
-                    <img
-                        src="/images/GuiaVisualDePeliculasFinal2.svg"
-                        alt="Guía Visual de Películas"
-                        width="950"
-                        in:fade={{ duration: 500 }}
-                        out:fade={{ duration: 500 }}
-                        class="guia-content-image"
-                    />
-                {/if}
+                <img
+    src={currentDataType === 'series' 
+    ? "/images/GuiaVisualDeSeriesFinal.svg" 
+    : "/images/GuiaVisualDePeliculasFinal2.svg"}
+  alt="Guía Visual"
+  width="950"
+  in:fade={{ duration: 500 }}
+  out:fade={{ duration: 500 }}
+  class="guia-content-image"
+/>
+
             </div>
 
-            <button class="nav-arrow right-arrow" on:click={showNextGuideImage} disabled={currentGuideImage === 'peliculas'}>&gt;</button>
+          
 
     <button class="boton-cerrar-popup" on:click={cerrarPopup}>Cerrar</button>
   </div>
@@ -142,33 +156,36 @@
       </button>
     </div>
 
- <div class="data-type-switcher">
-        <button
-            class="change-data-button"
-            class:active={currentDataType === 'series'}
-            on:click={() => changeDataType('series')}
-        >
-            Ver Series
-        </button>
-        
-        <button
-            class="change-data-button"
-            class:active={currentDataType === 'peliculas'}
-            on:click={() => changeDataType('peliculas')}
-        >
-            Ver Películas
-        </button>
-    </div>
+{#if mostrarBotones}
+  <div class="data-type-fijo" transition:fade>
+    <button
+      class="change-data-button"
+      class:active={currentDataType === 'series'}
+      on:click={() => changeDataType('series')}
+      aria-label="Ver series"
+    >
+      <img src="/images/live-line.svg" alt="Series" />
+    </button>
+    <button
+      class="change-data-button"
+      class:active={currentDataType === 'peliculas'}
+      on:click={() => changeDataType('peliculas')}
+      aria-label="Ver películas"
+    >
+      <img src="/images/movie-2-line.svg" alt="Películas" />
+    </button>
+  </div>
+{/if}
 
-    <div class="gatos-visualizacion">
-   {#if currentDataType === 'series'}
-           <Gatos series={series} />
-    {:else if currentDataType === 'peliculas'}
-      <Gatos2 peliculas={peliculas} />
-   {/if}
- 
 
-    </div>
+<div class="gatos-visualizacion" id="visualizacion">
+  {#if currentDataType === 'series'}
+    <Gatos series={series} />
+  {:else if currentDataType === 'peliculas'}
+    <Gatos2 peliculas={peliculas} />
+  {/if}
+</div>
+
   
  <!--<Gatos series={series} />-->
 
@@ -383,6 +400,40 @@
     border-radius: 50%;
     display: inline-block;
   }
+
+  .data-type-fijo {
+  position: fixed;
+  top: 120px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.data-type-fijo .change-data-button {
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 2px solid #b0a6aa;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-type-fijo .change-data-button.active {
+  background-color: #c7c2c4;
+  border-color: #8d8d8d;
+}
+
+.data-type-fijo .change-data-button img {
+  width: 24px;
+  height: 24px;
+}
+
   
   .seccion4 {
  
@@ -492,7 +543,7 @@
     }
 
     .guia-content-image {
-        max-width: 100%; 
+        max-width: 79%; 
         height: auto; 
         position: absolute; 
         top: 50%; 

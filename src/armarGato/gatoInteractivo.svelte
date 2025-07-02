@@ -14,6 +14,7 @@
   let cantidadManchas = 0;
 
   const avanzar = () => paso += 1;
+
 </script>
 
 <div class="contenedor">
@@ -39,12 +40,14 @@
   <!-- Componente actual según el paso -->
   {#if paso === 0}
     <SeleccionTipo bind:tipo on:next={avanzar} />
-  {:else if paso === 1}
+  <!--{:else if paso === 2}
     <SeleccionAltura bind:altura on:next={avanzar} />
-  {:else if paso === 2}
+  {:else if paso === 1}
     <SeleccionColor bind:color on:next={avanzar} />
   {:else if paso === 3}
-    <SeleccionManchas bind:cantidadManchas on:next={avanzar} />
+    <SeleccionManchas bind:cantidadManchas on:next={avanzar} />-->
+  {:else if paso === 1}
+    <SeleccionColor bind:color on:next={avanzar} />
   {/if}
 
   {#if paso >= 4}

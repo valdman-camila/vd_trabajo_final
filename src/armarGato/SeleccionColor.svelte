@@ -1,6 +1,7 @@
 <script>
   import {createEventDispatcher} from "svelte";
   export let color;
+  import  { jugadorColor } from '/src/store.js';
 
   const dispatch = createEventDispatcher();
 
@@ -14,10 +15,12 @@
 
   const seleccionar = (c) => {
     color = c;
+    jugadorColor.set(color);
   };
 
   const siguiente = () => {
     dispatch("next");
+    jugadorColor.set(color);
   };
 </script>
 

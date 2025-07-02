@@ -24,7 +24,6 @@
         #basket {
             width: 57px;
             height: 91px;
-            background-image: url("/images/prueba_1.png");
             position: absolute;
             bottom: 0;
         }
@@ -96,7 +95,7 @@
 
     </div>
     <div id="game-container">
-        <div id="basket"></div>
+        <GatoJugador id="basket" />
     </div>
 
     <p class="texto_juego">Score: <span id="score">0</span></p>
@@ -104,6 +103,7 @@
     <button id="start-button">Start Game</button>
 
     <script>
+        import GatoJugador from './armarGato/GatoJugador.svelte';
         document.addEventListener("DOMContentLoaded", function () {
 
         var basket = document.getElementById("basket");
@@ -237,6 +237,6 @@
             }
         }
 
-          // todo tu código va acá
+
     });
     </script>

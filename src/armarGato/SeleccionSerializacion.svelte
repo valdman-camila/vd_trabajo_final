@@ -1,8 +1,9 @@
 <script>
   import {createEventDispatcher} from "svelte";
   export let tipo;
-  //import {faPlay} from "@fortawesome/free-solid-svg-icons";
-  //import {FontAwesomeIcon} from "@fortawesome/svelte-fontawesome";
+  import {faPlay} from "@fortawesome/free-solid-svg-icons";
+  import {FontAwesomeIcon} from "@fortawesome/svelte-fontawesome";
+  import  { jugadorTipo } from '/src/store.js';
 
   const dispatch = createEventDispatcher();
 
@@ -12,9 +13,11 @@
   const cambiar = (dir) => {
     index = (index + dir + opciones.length) % opciones.length;
     tipo = opciones[index];
+    jugadorTipo.set(tipo);
   };
 
   const siguiente = () => {
+    jugadorTipo.set(tipo);
     dispatch("next");
   };
   

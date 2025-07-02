@@ -2,6 +2,7 @@ import './app.css'
 import App from "./App.svelte"
 import Gato from "./armarGato/gatoInteractivo.svelte"
 import Juego from "/src/juego.svelte"
+import Juego2 from "/src/juego2.svelte"
 
 const app = new App({
   target: document.getElementById("app"),
@@ -9,6 +10,10 @@ const app = new App({
 
 const juego = new Juego({
   target: document.getElementById("juego")
+})
+
+const juego2 = new Juego2({
+  target: document.getElementById("juego2")
 })
 
 const gato = new Gato({

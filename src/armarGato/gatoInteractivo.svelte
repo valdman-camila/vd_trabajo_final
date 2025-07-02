@@ -6,6 +6,11 @@
   import Mancha from "/src/mancha.svelte";
   import Color from "/src/color.svelte";
 
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
+  import  { jugadorGatoTerminado } from '/src/store.js';
+
   let paso = 0;
 
   let tipo = "Serializada";
@@ -13,7 +18,17 @@
   let color;
   let cantidadManchas = 0;
 
+
   const avanzar = () => paso += 1;
+
+  $: if (paso >= 2) {
+    terminado();
+  }
+
+  function terminado() {
+    jugadorGatoTerminado.set(true);
+    dispatch('completo');
+  }
 
 </script>
 
@@ -50,7 +65,7 @@
     <SeleccionColor bind:color on:next={avanzar} />
   {/if}
 
-  {#if paso >= 4}
+  {#if paso >= 2}
     <p>¡Gato completo!</p>
   {/if}
 </div>

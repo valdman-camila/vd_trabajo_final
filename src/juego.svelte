@@ -19,6 +19,7 @@
             position: relative;
             margin: 50px auto;
               background:transparent;
+            
         }
         
         #basket {
@@ -61,13 +62,13 @@
         .retro-tv {
             position: absolute;
             width: 481px;
-            transform: translateX(97.3%) translateY(-10%);
+             transform: translateX(-50%) translateY(-15%);
         }
         .screen {
             position: relative;
             width: 400px;
             height: 400px;
-            transform: translateX(50%);
+            transform: translateX(120%);
 
         }
         .bezel {
@@ -75,15 +76,25 @@
             height: 400px;
             width: 450px;
             z-index: 5;
-            transform: translateX(107%) translateY(25%);
+             transform: translateX(-50%) translateY(18%);
             box-shadow: 2px 2px 8px rgb(24, 24, 24);
             background-image: radial-gradient(transparent 50%, rgb(30, 29, 25));
         }
         /*https://stackoverflow.com/questions/70498819/retro-crt-curved-screen-effect-for-website-ccs
         https://codepen.io/msriki12/pen/wBwMzjq*/
 
+    .catch-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;    
+    min-height: 100vh;   
+    text-align: center;
+    }
+
     </style>
 
+<div class="catch-container">
     <h1 class="titulo_juego">Catch the Fruit</h1>
     <div id="tv-background">          
         <img class="bezel"
@@ -100,10 +111,13 @@
 
     <p class="texto_juego">Score: <span id="score">0</span></p>
     <p class="texto_juego">Time: <span id="time">30</span></p>
-    <button id="start-button">Start Game</button>
-
+    <button id="start-button" disabled={!$jugadorGatoTerminado}>Start Game</button>
+</div>
     <script>
         import GatoJugador from './armarGato/GatoJugador.svelte';
+        import {jugadorGatoTerminado} from './store.js';
+        import { onMount } from 'svelte';
+
         document.addEventListener("DOMContentLoaded", function () {
 
         var basket = document.getElementById("basket");

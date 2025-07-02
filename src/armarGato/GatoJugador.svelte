@@ -3,7 +3,7 @@
     import {jugadorColor} from '/src/store.js';
     import Color from "/src/color.svelte";
     
-    export let altura = 91; // default del juego
+    export let altura = 90; // default del juego
     export let cantidadManchas = 0;
 
     $: serializacion = $jugadorTipo;
@@ -26,7 +26,7 @@
   />
 
     <div class="person-color">
-      <Color tipo={serializacion} tamano={91 * 0.674} altura={91} color={colorJugador} />
+      <Color tipo={serializacion} tamano={91 * 0.674} altura={85} color={colorJugador} />
     </div>
 </div>
 
@@ -63,7 +63,7 @@
     .person-color {
     z-index: -1;
     position: absolute;
-    bottom: -7%;
-    left: -4%;
+    bottom: -5%;
+    left: -3%;
   }
 </style>

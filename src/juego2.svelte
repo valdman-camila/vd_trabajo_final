@@ -1,6 +1,7 @@
 <script>
     import GatoJugador from './armarGato/GatoJugador.svelte';
     import {jugadorGatoTerminado} from './store.js';
+    import { resultadoJuego2 } from './store.js';
 
     //board
     let tileSize = 32;
@@ -124,6 +125,13 @@
             document.getElementById("game-over-text").style.display = 'block';
             document.getElementById("start-game-button").style.display = 'block';
             document.getElementById("start-game-button").style.display = 'none';
+
+            if (score !== null && resultadoJuego2) {
+                //convertimos el score en manchas: cada 1000 pts = 1 mancha, máximo 5
+                let manchas = Math.min(5, Math.floor(score / 1000));
+                resultadoJuego2.set(manchas);
+            }
+
             return;
         }
 

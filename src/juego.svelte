@@ -116,6 +116,7 @@
     <script>
         import GatoJugador from './armarGato/GatoJugador.svelte';
         import {jugadorGatoTerminado} from './store.js';
+         import { resultadoJuego1 } from './store.js';
         import { onMount } from 'svelte';
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -179,6 +180,17 @@
             alert("Game Over! Your score: " + score);
             clearFruits();
 
+            const altura = calcularAltura(score);
+            resultadoJuego1.set(altura);
+        }
+
+        function calcularAltura(puntaje) {
+            const min = 160;
+            const max = 360;
+            const maxPuntaje = 600; 
+
+            const altura = min + ((Math.min(puntaje, maxPuntaje) / maxPuntaje) * (max - min));
+            return Math.round(altura);
         }
         
         function createFruit() {

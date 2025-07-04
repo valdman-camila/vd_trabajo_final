@@ -152,3 +152,6 @@ a.button:hover {
             position: absolute;
             top: 0;
         }
+.button-linkedin {
+    background-color: #ffffff00;
+}

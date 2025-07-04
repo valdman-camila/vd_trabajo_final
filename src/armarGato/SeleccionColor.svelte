@@ -1,7 +1,9 @@
 <script>
-  import {createEventDispatcher} from "svelte";
+  import { createEventDispatcher } from "svelte";
+  import { scale } from 'svelte/transition';
+  import { jugadorColor } from '/src/store.js';
+
   export let color;
-  import  { jugadorColor } from '/src/store.js';
 
   const dispatch = createEventDispatcher();
 
@@ -33,8 +35,10 @@
 
   .circulos {
     display: flex;
-    gap: 1rem;
-    margin: 1rem 0;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .circulo {
@@ -43,27 +47,37 @@
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .circulo:hover {
+    transform: scale(1.2);
   }
 
   .seleccionado {
-    border-color: black;
+    border-color: white;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+  }
+
+  button {
+    margin-top: 1rem;
   }
 </style>
 
 <div class="selector-color">
   <p>Elegí el color del gato</p>
   <div class="circulos">
-    {#each coloresDisponibles as c}
-      <div
-        class="circulo {c === color ? 'seleccionado' : ''}"
-        style="background-color: {c}"
-        on:click={() => seleccionar(c)}
-      ></div>
-    {/each}
+{#each coloresDisponibles as c (c)}
+  <div
+    class="circulo {c === color ? 'seleccionado' : ''}"
+    style="background-color: {c}"
+    on:click={() => seleccionar(c)}
+    in:scale={{ duration: 300 }}
+  ></div>
+{/each}
+
   </div>
 
   <button on:click={siguiente}>Siguiente</button>
 </div>
-
-
-

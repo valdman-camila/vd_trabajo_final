@@ -32,7 +32,6 @@
         .fruit {
             width: 30px;
             height: 30px;
-            background-color: #4CAF50;
             position: absolute;
             top: 0;
         }
@@ -47,6 +46,7 @@
         
         button {
             background-color: #4CAF50;
+
             color: #FFFFFF;
             border: none;
             padding: 10px 20px;
@@ -108,6 +108,7 @@
     <div id="game-container">
         <GatoJugador id="basket" />
     </div>
+
 
     <p class="texto_juego">Score: <span id="score">0</span></p>
     <p class="texto_juego">Time: <span id="time">30</span></p>

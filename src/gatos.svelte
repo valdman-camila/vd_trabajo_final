@@ -99,17 +99,7 @@ function filterSelection(valorFilter){
 
 
 </script>
-<button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Mas ventas</button>
-<button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
-<button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>por rating</button>
 
-<!-- Agregamos reactivamente la clase "actve" de acuerdo al valor de la variable filtro -->
-<h3>Filtrar</h3>
-<!-- Cambiamos el valor de la variable filtro con el click de los botones -->
-<button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
-<button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
-<button on:click={() => filterSelection("Serializada")} class:active={filtro == "Serializada"}>Serializadas</button>
-<button on:click={() => filterSelection("Episodica")} class:active={filtro == "Episodica"}>Episodico</button>
 
 {#if mostrarBoton}
   <button class="volver-a-guia"
@@ -118,13 +108,32 @@ function filterSelection(valorFilter){
     Volver a la guía
   </button>
 {/if}
-                    <img
-            class="techo"
-            src="./images/techoo.svg"
-            alt="">
-            
-          <div class="mueble">
-            
+<div class="filtros">
+<div class="ordenar">
+  <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
+  <button class="boton_ordenar">Ordenar por ▾</button>
+  <div class=ops_ordenar>
+    <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Mas ventas</button>
+    <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
+    <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>por rating</button>
+  </div>
+</div>
+
+ <div class="filtrar">
+  <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="">
+  <button class="boton_filtrar">Filtrar por ▾</button>
+  <div class=ops_filtrar>
+    <button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
+    <button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
+    <button on:click={() => filterSelection("Serializada")} class:active={filtro == "Serializada"}>Serializadas</button>
+    <button on:click={() => filterSelection("Episodica")} class:active={filtro == "Episodica"}>Episodico</button>
+  </div>
+</div> 
+</div>
+
+<img class="techo" src="./images/techoo.svg" alt=""> 
+<div class="mueble">
+
 <div class="container">
     {#each arrdos as cuatroG, j}
       <!-- Iteramos la data para visualizar c/ entidad -->
@@ -194,7 +203,148 @@ function filterSelection(valorFilter){
     </div>
 
 <style>
-    	button {
+
+
+    .ordenar {
+      position: relative;
+          display: flex;
+
+    }
+    .imagen_orden{
+    width: 250px;
+top: 481px;
+    left: 50%;
+    position: relative;
+    align-self: center;
+
+    z-index: 1;
+    }
+
+    .boton_ordenar {
+            position: relative;
+            display: flex;
+                        height: 50px;
+    top: 496px;
+    left: 38%;
+      background-color: #D9D9D9;
+      color: black;
+      padding: 10px 16px;
+      font-size: 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    user-select: none;
+    z-index: 50;
+    }
+
+    .ops_ordenar {
+    top: 550px;
+    left: 28%;
+      width: 150px;
+         
+    width: 119px;
+      display: none;
+      position: relative;
+      background-color: #D9D9D9;
+  
+      /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    .ops_ordenar button {
+      color: black;
+      padding: 10px 14px;
+      text-align: left;
+      text-decoration: none;
+      background: none;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .ops_ordenar button:hover {
+      background-color: #f1f1f1;
+    }
+
+    .ordenar:hover .ops_ordenar {
+      display: block;
+    }
+
+
+
+
+    
+    .filtrar {
+      position: static;
+          display: flex;
+
+    }
+    .imagen_filtrar{
+    width: 250px;
+
+    position: relative;
+    align-self: center;
+
+    top: 360px;
+    left: 30%;
+    z-index: 1;
+    }
+
+    .boton_filtrar {
+            position: relative;
+            display: flex;
+            height: 50px;
+       bottom: -376px;
+    left: 19%;
+      background-color: #D9D9D9;
+      color: black;
+      padding: 10px 16px;
+      font-size: 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    user-select: none;
+    z-index: 50;
+    }
+
+    .ops_filtrar {
+    top: 1008px;
+    left: 37%;
+    width: 115px;
+      display: none;
+      position: absolute;
+      background-color: #D9D9D9;
+  
+      /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    .ops_filtrar button {
+      color: black;
+      padding: 10px 14px;
+      text-align: left;
+      text-decoration: none;
+      background: none;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .ops_filtrar button:hover {
+      background-color: #f1f1f1;
+    }
+
+    .filtrar:hover .ops_filtrar {
+      display: block;
+    }
+
+
+
+  button {
 		cursor: pointer;
 	}
 	.active {
@@ -219,7 +369,7 @@ function filterSelection(valorFilter){
   .mueble{
   margin: auto;
     background-color: #F0D786;
-      width: 1230px;
+ margin: 0px 50px;
 
  border: 50px solid transparent;
       border-image-slice: 60;
@@ -230,7 +380,7 @@ function filterSelection(valorFilter){
     height: 100%;
      width: 100%;
 }
-      .container{
+    .container{
         display: flex;
     justify-content: center;
     align-items: end;
@@ -238,11 +388,7 @@ function filterSelection(valorFilter){
     flex-wrap: wrap;
    row-gap: 50px;
     column-gap: 50px;
-    
-  
-  
-  
-  
+
   }
   .person-container {
     display: flex;
@@ -287,16 +433,6 @@ function filterSelection(valorFilter){
     right: 3.10%;
      */
     bottom: -4%;  
-
-
-
-    
-
- 
- 
-
-   
-
      
   }
 

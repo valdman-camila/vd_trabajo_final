@@ -19,7 +19,7 @@
       let mostrarBoton = false;
 
   function manejarScroll() {
-    mostrarBoton = window.scrollY > 400; 
+    mostrarBoton = window.scrollY > 400 && window.scrollY < 2500; 
   }
 
   onMount(() => {
@@ -96,18 +96,35 @@ function filterSelection(valorFilter){
 
 
 
+  function abrirPopup() {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.getElementById('guia-visualizacion').classList.remove('hidden');
+    document.getElementById('overlay').classList.remove('hidden');
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = '${scrollBarWidth}px';
+  }
 
+  function cerrarPopup() {
+    document.getElementById('guia-visualizacion').classList.add('hidden');
+    document.getElementById('overlay').classList.add('hidden');
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    currentGuideImage = 'series';
+    $gatoEspecifico = undefined;
+    llamadoGato.set(false);
+  }
 
 </script>
 
 
 {#if mostrarBoton}
   <button class="volver-a-guia"
-          on:click={() => window.scrollTo({ top: document.getElementById("guia-container").offsetTop, behavior: "smooth" })}
+          on:click={abrirPopup}
           transition:fade>
-    Volver a la guía
+    Guía
   </button>
 {/if}
+
 <div class="filtros">
 <div class="ordenar">
   <img class="imagen_orden" src="./images/orden_boton.svg" alt="">

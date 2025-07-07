@@ -39,3 +39,4 @@ function loadSection(sectionId) {
     target.classList.add("active");
   }
 }
+

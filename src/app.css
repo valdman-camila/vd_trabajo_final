@@ -155,3 +155,11 @@ a.button:hover {
 .button-linkedin {
     background-color: #ffffff00;
 }
+
+.video-full {
+  width: 100vw;          /* Ocupa todo el ancho de la ventana */
+  height: auto;          /* Mantiene la proporción original */
+  display: block;        /* Elimina espacio debajo del video */
+  margin: 0 auto;        /* Centrado horizontal */
+  object-fit: cover;     /* Opcional: llena el ancho sin deformar */
+}

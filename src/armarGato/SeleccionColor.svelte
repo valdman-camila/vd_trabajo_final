@@ -79,5 +79,5 @@
 
   </div>
 
-  <button on:click={siguiente}>Siguiente</button>
+  <button class="boton-siguiente" on:click={siguiente}>Siguiente</button>
 </div>

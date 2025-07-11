@@ -15,14 +15,6 @@
 
   let mostrarBoton = false;
 
-  function manejarScroll() {
-    mostrarBoton = window.scrollY > 400;
-  }
-
-  onMount(() => {
-    window.addEventListener('scroll', manejarScroll);
-    return () => window.removeEventListener('scroll', manejarScroll);
-  });
 
   let arr2 = [];
   let temp2 = [];
@@ -60,7 +52,7 @@
 
 
   function manejarScroll2() {
-    mostrarBoton = window.scrollY > 400 && window.scrollY < 2000; 
+    mostrarBoton = window.scrollY > 400 && window.scrollY < 2300; 
   }
 
   onMount(() => {
@@ -334,6 +326,8 @@
   padding: 12px 20px;
   z-index: 1000;
   cursor: pointer;
+  width: 100px;
+  height: 60px;
 
     background-color: #ffe4f0;
     color: #5b3c40;

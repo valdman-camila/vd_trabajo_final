@@ -142,12 +142,17 @@ onMount(() => {
   </div>
   </div>
   
-  <div class="header">
-    <p class="bajada">
+
+    <!--<p class="bajada">
      Durante décadas, muchas líneas de juguetes dieron origen a series animadas pensadas para promocionarlos. Esta colección recorre esas historias que nacieron del marketing y terminaron marcando infancias.
     </p>
+    -->
+  <div class="bunni-container">
+  <div class="speech">
+    ¡Bienvenidos, queridísima audiencia! Soy Bunni, su anfitrión. Acá no van a encontrar cualquier historia… Esta es una colección de series y películas que nacieron de algo muy noble: ¡vender juguetes! Pero ojo, lo que empezó como pura estrategia de marketing terminó dejando huella en miles de infancias. Así que adelante, exploren, comparen, y revivan!
   </div>
-
+  <img class="conejo" src="/images/Bunny_intro.svg" alt="Conejo" />
+</div>
   
     <div id="guia-container">
       <img src="/images/nube.svg" class="fondo-nube" alt=""/>
@@ -164,7 +169,7 @@ onMount(() => {
       on:click={() => changeDataType('series')}
       aria-label="Ver series"
     >
-      <img src="/images/live-line.svg" alt="Series" />
+      <img src="/images/series_icono5.svg" alt="Series" style="width: 50px; height: 50px; margin-right:5px;"/>
     </button>
     <button
       class="change-data-button"
@@ -172,7 +177,7 @@ onMount(() => {
       on:click={() => changeDataType('peliculas')}
       aria-label="Ver películas"
     >
-      <img src="/images/movie-2-line.svg" alt="Películas" />
+     <img src="/images/peliculas_icono5.svg" alt="Películas" style="width: 50px; height: 50px;" />
     </button>
   </div>
 {/if}
@@ -327,6 +332,48 @@ onMount(() => {
     border-radius: 25px;
     transform-origin: center center;
   }
+    @keyframes flotar2 {
+    0%, 100% {transform: translate(0%, -25%);}
+    50% {transform: translate(0%, -20%);}
+  }
+  .bunni-container {
+  position: relative;
+  width: fit-content;
+  margin: auto;
+}
+
+.speech {
+  position: absolute;
+  bottom:450px; /* ajustá según el diseño */
+  left: 0%;
+  background-image: url('/images/Speech_intro.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px 50px 60px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Pangolin", cursive;
+  font-size: 18px;
+  min-width: 150px;
+  min-height: 400px;
+  max-width: 800px;
+  flex-wrap: wrap;
+  width:600px;
+  animation: flotar2 5s ease-in-out infinite;
+  z-index: 10;
+  
+}
+
+.conejo {
+  width: 500px;
+  height: 500px;
+  margin-top: 350px;
+  animation: flotar2 5s ease-in-out infinite;
+}
+
 
 
   button {
@@ -415,7 +462,7 @@ onMount(() => {
   padding: 10px;
   background-color: #ffffff;
   border-radius: 50%;
-  border: 2px solid #b0a6aa;
+  border: 2px solid #777676;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -425,7 +472,7 @@ onMount(() => {
 }
 
 .data-type-fijo .change-data-button.active {
-  background-color: #c7c2c4;
+  background-color: #d8d6d6;
   border-color: #8d8d8d;
 }
 
@@ -585,5 +632,4 @@ onMount(() => {
         box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         transform: translateY(-1px);
     }
-
-</style>
+    </style>

@@ -1,9 +1,7 @@
 <script>
   import GatoJugador from './armarGato/GatoJugador.svelte';
-  import { jugadorGatoTerminado } from './store.js';
-  import { resultadoJuego1 } from './store.js';
+  import { jugadorGatoTerminado, resultadoJuego1 } from './store.js';
   import { onMount } from 'svelte';
-  import { get } from 'svelte/store';
 
   let score = 0;
   let time = 30;
@@ -17,7 +15,10 @@
   let basket;
   let gameContainer;
 
-  // Esperamos que el DOM esté listo
+  $: if (!gameStart && !gameOver) {
+    moveLoop(); // activa el loop de movimiento continuo del gato
+  }
+
   onMount(() => {
     basket = document.getElementById("basket");
     gameContainer = document.getElementById("game-container");
@@ -27,7 +28,7 @@
   });
 
   function startGame() {
-    if (!get(jugadorGatoTerminado)) return;
+    if (!$jugadorGatoTerminado) return;
 
     score = 0;
     time = 30;
@@ -61,7 +62,7 @@
   function calcularAltura(puntaje) {
     const min = 160;
     const max = 360;
-    const maxPuntaje = 600;
+    const maxPuntaje = 1000;
     return Math.round(min + ((Math.min(puntaje, maxPuntaje) / maxPuntaje) * (max - min)));
   }
 
@@ -114,24 +115,25 @@
   }
 
   function handleKeyDown(event) {
-    if (event.key === "ArrowLeft") {
-      isMovingLeft = true;
-    } else if (event.key === "ArrowRight") {
-      isMovingRight = true;
-    }
-    moveBasket();
+    if (event.key === "ArrowLeft") isMovingLeft = true;
+    if (event.key === "ArrowRight") isMovingRight = true;
   }
 
   function handleKeyUp(event) {
-    if (event.key === "ArrowLeft") {
-      isMovingLeft = false;
-    } else if (event.key === "ArrowRight") {
-      isMovingRight = false;
-    }
+    if (event.key === "ArrowLeft") isMovingLeft = false;
+    if (event.key === "ArrowRight") isMovingRight = false;
+  }
+
+  function moveLoop() {
+    if (gameOver || gameStart) return;
+    requestAnimationFrame(() => {
+      moveBasket();
+      moveLoop();
+    });
   }
 
   function moveBasket() {
-    if (!basket || gameOver || gameStart) return;
+    if (!basket) return;
 
     let basketLeft = basket.offsetLeft;
 
@@ -144,6 +146,14 @@
 </script>
 
 <style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
   .catch-container {
     min-height: 100vh;
     display: flex;
@@ -152,6 +162,13 @@
     justify-content: flex-start;
     padding-top: 40px;
     position: relative;
+  }
+
+  .titulo_juego {
+    margin: 0 0 10px 0;
+    font-size: 2.8rem;
+    color: #4caf50;
+    text-shadow: 0 0 8px #4caf50aa;
   }
 
   #tv-background {
@@ -166,7 +183,7 @@
     height: 400px;
     top: 15px;
     left: 50%;
-    transform: translate(-50%, 35%);
+    transform: translateX(-50%);
     box-shadow: 2px 2px 8px #181818;
     background-image: radial-gradient(transparent 50%, #1e1d19);
     z-index: 10;
@@ -193,7 +210,7 @@
     background: #000;
     border-radius: 10px;
     overflow: hidden;
-    transform: translate(-50%, 20%);
+    transform: translateX(-50%);
     z-index: 15;
   }
 
@@ -286,19 +303,20 @@
 </style>
 
 <div class="catch-container">
+  <h1 class="titulo_juego">Catch the Fruit</h1>
 
   <div id="tv-background">
     <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
     <img class="retro-tv" src="/images/retro-tv.svg" alt="Retro TV" />
 
     <div id="game-container">
-      {#if !get(jugadorGatoTerminado)}
+      {#if !$jugadorGatoTerminado}
         <div class="tv-interference"></div>
       {/if}
 
       <GatoJugador id="basket" />
 
-      {#if get(jugadorGatoTerminado) && (gameStart || gameOver)}
+      {#if $jugadorGatoTerminado && (gameStart || gameOver)}
         <button id="start-button" on:click={startGame}>
           {gameOver ? "Jugar otra vez" : "Comenzar juego"}
         </button>
@@ -313,4 +331,3 @@
     </div>
   </div>
 </div>
-

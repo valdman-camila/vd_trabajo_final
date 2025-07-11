@@ -16,7 +16,7 @@
   let gameContainer;
 
   $: if (!gameStart && !gameOver) {
-    moveLoop(); // activa el loop de movimiento continuo del gato
+    moveLoop(); 
   }
 
   onMount(() => {
@@ -47,252 +47,28 @@
 
     createFruit();
   }
-    <style>
-        body {
+    function mostrarModal(score) {
+        document.getElementById("scoreText").textContent = "Tu rating es: " + score;
+        document.getElementById("gameOverModal").style.display = "block";
 
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .titulo_juego {
-            margin-top: 50px;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        
-        #game-container {
-            width: 400px;
-            height: 316px;
-            position: relative;
-            margin-top: 109px;
-            margin-right: auto;
-            margin-bottom: 100px;
-            margin-left: auto;
+        // setTimeout(() => {
+        //     document.getElementById("gameOverModal").style.display = "none";
+        // }, 2000); // 2000 milisegundos = 2 segundos
+    }
+    function cerrarModal() {
+        document.getElementById("gameOverModal").style.display = "none";
 
-            background-image: url("./images/fondo_juego2.svg");
-            
-        }
-        
-        #basket {
-            width: 57px;
-            height: 91px;
-            position: absolute;
-            bottom: 50;
-            margin-bottom: 50%;
-        }
-        
-        .fruit {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            background-image: url("./images/pez.svg");
-            top: 0;
-        }
-        
-        .texto_juego {
-            margin-top: 20px;
-            font-size: 18px;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        
-        button {
-            background-color: #4CAF50;
+    }
+  function endGame() {
+    clearInterval(timerId);
+    gameOver = true;
+    gameStart = true;
+    clearFruits();
 
-            color: #FFFFFF;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        button:hover {
-            background-color: #45A049;
-        }
-
-        .retro-tv {
-            position: absolute;
-            width: 481px;
-             transform: translateX(-50%) translateY(-15%);
-        }
-        .screen {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            transform: translateX(120%);
-            /* background-image: url("./images/fondo_juego.svg");  */
-
-        }
-        .bezel {
-            position: absolute;
-            height: 400px;
-            width: 450px;
-            z-index: 5;
-             transform: translateX(-50%) translateY(18%);
-            box-shadow: 2px 2px 8px rgb(24, 24, 24);
-            background-image: radial-gradient(transparent 50%, rgb(30, 29, 25));
-        }
-        /*https://stackoverflow.com/questions/70498819/retro-crt-curved-screen-effect-for-website-ccs
-        https://codepen.io/msriki12/pen/wBwMzjq*/
-
-        .catch-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center;    
-            min-height: 100vh;   
-            text-align: center;
-        }
-        #tv-background{
-            margin-top: 10%;
-
-        }
-        .modal {
-  display: none; /* Oculto por defecto */
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 400px;
-  text-align: center;
-}
- 
-
-    </style>
-
-<div class="catch-container">
-    <h1 class="titulo_juego">Entretené a tu audencia!</h1>
-    <div id="tv-background">          
-        <!-- <img class="bezel"
-          src="/images/bezel.png"
-          alt=""> -->
-          <img class="retro-tv"
-          src="/images/retro-tv.svg"
-          alt="">
-
-    </div>
-    <div id="game-container">
-        <GatoJugador id="basket" />
-    </div>
-
-
-    <p class="texto_juego">Score: <span id="score">0</span></p>
-    <p class="texto_juego">Time: <span id="time">30</span></p>
-    <button id="start-button" disabled={!$jugadorGatoTerminado}>Start Game</button>
-</div>
-<!-- Modal -->
-<div id="gameOverModal" class="modal">
-  <div class="modal-content">
-    <h2>¡Juego terminado!</h2>
-    <p id="scoreText"></p>
-    <button onclick="cerrarModal()">Cerrar</button> 
-  </div>
-</div>
-
-
-
-
-    <script>
-        import GatoJugador from './armarGato/GatoJugador.svelte';
-        import {jugadorGatoTerminado} from './store.js';
-        import { resultadoJuego1 } from './store.js';
-        import { onMount } from 'svelte';
- 
-        document.addEventListener("DOMContentLoaded", function () {
-
-        var basket = document.getElementById("basket");
-        var scoreLabel = document.getElementById("score");
-        var timeLabel = document.getElementById("time");
-        var startButton = document.getElementById("start-button");
-        var gameContainer = document.getElementById("game-container");
-        var score = 0;
-        var time = 30;
-        var timerId;
-        var isMovingLeft = false;
-        var isMovingRight = false;
-        var gameOver = false;
-        var gameStart = true;
-        let showModal = false;
-        
-        startButton.addEventListener("click", startGame);
-        document.addEventListener("keydown", handleKeyDown);
-        document.addEventListener("keyup", handleKeyUp);
-
-        onMount(() => {
-            document.addEventListener("keydown", handleKeyDown);
-            document.addEventListener("keyup", handleKeyUp);
-        });
-        
-        function startGame() {
-            startButton.disabled = true;
-            gameStart = false;
-            resetGame();
-            timerId = setInterval(updateTime, 1000);
-            createFruit();
-        }
-        
-        function resetGame() {
-            score = 0;
-            time = 30;
-            scoreLabel.textContent = score;
-            timeLabel.textContent = time;
-            basket.style.left = "175px";
-            gameOver = false;
-            clearFruits();
-        }
-        
-        function updateTime() {
-            if (!gameOver) {
-                time--;
-                timeLabel.textContent = time;
-            }
-            if (time === -1) {
-                endGame(); 
-                timeLabel.textContent = 0;
-
-            }
-        }
-        function mostrarModal(score) {
-            document.getElementById("scoreText").textContent = "Tu rating es: " + score;
-            document.getElementById("gameOverModal").style.display = "block";
-
-            // setTimeout(() => {
-            //     document.getElementById("gameOverModal").style.display = "none";
-            // }, 2000); // 2000 milisegundos = 2 segundos
-        }
-        function cerrarModal() {
-            document.getElementById("gameOverModal").style.display = "none";
-
-        }
-
-
-        function endGame() {
-            clearInterval(timerId);
-            gameOver = true;
-            startButton.disabled = false;
-            // alert("Game Over! Tu rating es: " + score);
-            clearFruits();
-
-            const altura = calcularAltura(score);
-            resultadoJuego1.set(altura);
-            mostrarModal(score); 
-        }
+    const altura = calcularAltura(score);
+    resultadoJuego1.set(altura);
+    mostrarModal(score);
+  }
 
   function calcularAltura(puntaje) {
     const min = 160;
@@ -442,9 +218,11 @@
     left: 50%;
     width: 400px;
     height: 400px;
+    margin-top: 19%;
     background: #000;
     border-radius: 10px;
     overflow: hidden;
+    background-image: url("./images/fondo_juego2.svg");
     transform: translateX(-50%);
     z-index: 15;
   }
@@ -497,8 +275,8 @@
   }
 
   #start-button:hover:not(:disabled) {
-    background-color: #45a049;
-    box-shadow: 0 6px 14px rgba(69, 160, 73, 0.9);
+    background-color: #ebf1e2;
+    box-shadow: 0 6px 14px rgba(197, 227, 199, 0.9);
   }
 
   .status-panel {
@@ -535,13 +313,52 @@
     top: 0;
     user-select: none;
   }
+ .modal {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+.btn-cerrar{
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50000;
+    background-color: #cc4c3b;
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(155, 49, 49, 0.7);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+}
+ 
 </style>
 
 <div class="catch-container">
-  <h1 class="titulo_juego">Catch the Fruit</h1>
+  <h1 class="titulo_juego">Entretené a tu audencia!</h1>
 
   <div id="tv-background">
-    <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
+
     <img class="retro-tv" src="/images/retro-tv.svg" alt="Retro TV" />
 
     <div id="game-container">
@@ -550,6 +367,7 @@
       {/if}
 
       <GatoJugador id="basket" />
+              <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
 
       {#if $jugadorGatoTerminado && (gameStart || gameOver)}
         <button id="start-button" on:click={startGame}>
@@ -564,5 +382,13 @@
         </div>
       {/if}
     </div>
+
+  </div>
+</div>
+<div id="gameOverModal" class="modal">
+  <div class="modal-content">
+    <h2>¡Juego terminado!</h2>
+    <p id="scoreText"></p>
+    <button class="btn-cerrar" on:click={cerrarModal}>Cerrar</button> 
   </div>
 </div>

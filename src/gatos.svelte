@@ -28,7 +28,7 @@
     return () => window.removeEventListener('scroll', manejarScroll);
   })
   let gatos= "series"
-  let orden = "orden_rating"
+  let orden = ""
   let filtro = "todas"
 	let resaltar = "todas"
   $: seriePelicu = series;
@@ -67,32 +67,77 @@
   }
   return filas;
 }
-function orderSelection(valorOrden ){
-  orden = valorOrden;
-        if (orden == "orden_ventas") {
-        seriePelicu = d3.sort(series, s => s.Ventas)
-        seriePelicu= d3.reverse(seriePelicu)
-      } else if (orden == "orden_tipo") {
-        seriePelicu = d3.sort(series, escena => escena.Tipo)
 
-      }else if (orden == "orden_rating") {
-        seriePelicu = d3.sort(series, escena => escena.Rating)
+
+  let textoBotonO = 'Ordenar por ▾';
+   let textoBtnF="Filtrar por ▾";
+   let serieFiltrar=series
+
+  function orderSelection(opcion) {
+    orden = opcion;
+
+    // Cambiar el texto del botón basado en la opción seleccionada
+    switch (opcion) {
+      case 'orden_ventas':
+        textoBotonO = 'Más ventas';
+        seriePelicu = d3.sort(seriePelicu, s => s.Ventas)
         seriePelicu= d3.reverse(seriePelicu)
-      }
-arrdos=agruparCuatro(seriePelicu)
-console.log("m", arrdos)
-  
-}
+        
+        
+        break;
+      case 'orden_tipo':
+        textoBotonO = 'Por tipo';
+        seriePelicu = d3.sort(seriePelicu, escena => escena.Tipo)
+        
+        break;
+      case 'orden_rating':
+        textoBotonO = 'Por rating';
+        seriePelicu = d3.sort(seriePelicu, escena => escena.Rating)
+        seriePelicu= d3.reverse(seriePelicu)
+        
+        break;
+      default:
+        textoBotonO = 'Ordenar por ▾';
+        seriePelicu = series
+
+
+    }
+    arrdos=agruparCuatro(seriePelicu)
+  }
 function filterSelection(valorFilter){
   filtro=valorFilter
-    if (filtro != "todas") {
-    seriePelicu = series.filter(p => p.Tipo == filtro)
-  }else{
-    seriePelicu=series
-  }
-  arrdos=agruparCuatro(seriePelicu)
+    // Cambiar el texto del botón basado en la opción seleccionada
+    switch (valorFilter) {
+      case 'Episodica':
+        textoBtnF = 'Episodica';
 
-}
+    seriePelicu = series.filter(p => p.Tipo == filtro)
+
+        break;
+      case 'Serializada':
+        textoBtnF = 'Serializada';
+
+    seriePelicu = series.filter(p => p.Tipo == filtro)
+        break;
+      case 'Ambas':
+        textoBtnF = 'Ambas';
+
+    seriePelicu = series.filter(p => p.Tipo == filtro)
+        break;
+      case 'todas':
+        textoBtnF = 'Ordenar por ▾';
+
+        seriePelicu = series
+
+        break;
+      default:
+        textoBtnF = 'Ordenar por ▾';
+
+        seriePelicu = series
+
+    }
+    arrdos=agruparCuatro(seriePelicu)
+  }
 
 
 
@@ -126,21 +171,23 @@ function filterSelection(valorFilter){
 {/if}
 
 <div class="techo-container">
-  <div class="ordenar">
-      <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
-      <div class="container_btn_ordenar">
-        <button class="boton_ordenar">Ordenar por ▾</button>
-        <div class=ops_ordenar>
-          <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Mas ventas</button>
-          <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
-          <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>por rating</button>
-        </div>
+<div class="ordenar">
+  <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
+  <div class="container_btn_ordenar">
+    <!-- El texto del botón cambia según la selección -->
+    <button class="boton_ordenar">{textoBotonO}</button>
+
+    <div class="ops_ordenar">
+      <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Más ventas</button>
+      <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
+      <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>Por rating</button>
     </div>
   </div>
+</div>
 
   <div class="filtrar">
     <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="">
-    <button class="boton_filtrar">Filtrar por ▾</button>
+    <button class="boton_filtrar">{textoBtnF}</button>
     <div class=ops_filtrar>
       <button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
       <button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
@@ -264,12 +311,14 @@ margin-top: 23%;
       text-align: center;
     user-select: none;
     z-index: 50;
+        font-family: "Pangolin", cursive;
+
     }
 
     .ops_ordenar {
 
       width: 150px;
-
+    font-family: "Pangolin", cursive;
       display: none;
     margin-top: 30%;
     margin-left: 48%;
@@ -282,6 +331,7 @@ margin-top: 23%;
     }
 
     .ops_ordenar button {
+      font-family: "Pangolin", cursive;
       color: black;
       padding: 10px 14px;
       text-align: left;
@@ -323,7 +373,7 @@ margin-top: 23%;
     .boton_filtrar {
 
       position: absolute;
-
+    font-family: "Pangolin", cursive;
       height: 50px;
           width: 160px;
 margin-top: 25%;
@@ -344,7 +394,7 @@ margin-top: 25%;
 
       background-color: #D9D9D9;
         width: 150px;
-
+    font-family: "Pangolin", cursive;
       display: none;
     margin-top: 31%;
     margin-left: 2%;
@@ -355,6 +405,7 @@ margin-top: 25%;
     }
 
     .ops_filtrar button {
+          font-family: "Pangolin", cursive;
       color: black;
       padding: 10px 14px;
       text-align: left;

@@ -125,30 +125,33 @@ function filterSelection(valorFilter){
   </button>
 {/if}
 
-<div class="filtros">
-<div class="ordenar">
-  <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
-  <button class="boton_ordenar">Ordenar por ▾</button>
-  <div class=ops_ordenar>
-    <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Mas ventas</button>
-    <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
-    <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>por rating</button>
+<div class="techo-container">
+  <div class="ordenar">
+      <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
+      <div class="container_btn_ordenar">
+        <button class="boton_ordenar">Ordenar por ▾</button>
+        <div class=ops_ordenar>
+          <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Mas ventas</button>
+          <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
+          <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>por rating</button>
+        </div>
+    </div>
   </div>
-</div>
 
- <div class="filtrar">
-  <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="">
-  <button class="boton_filtrar">Filtrar por ▾</button>
-  <div class=ops_filtrar>
-    <button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
-    <button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
-    <button on:click={() => filterSelection("Serializada")} class:active={filtro == "Serializada"}>Serializadas</button>
-    <button on:click={() => filterSelection("Episodica")} class:active={filtro == "Episodica"}>Episodico</button>
-  </div>
-</div> 
-</div>
+  <div class="filtrar">
+    <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="">
+    <button class="boton_filtrar">Filtrar por ▾</button>
+    <div class=ops_filtrar>
+      <button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
+      <button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
+      <button on:click={() => filterSelection("Serializada")} class:active={filtro == "Serializada"}>Serializadas</button>
+      <button on:click={() => filterSelection("Episodica")} class:active={filtro == "Episodica"}>Episodico</button>
+    </div>
+  </div> 
 
-<img class="techo" src="./images/techoo.svg" alt=""> 
+
+  <img class="techo" src="./images/techoo.svg" alt=""> 
+</div>
 <div class="mueble">
 
 <div class="container">
@@ -224,25 +227,33 @@ function filterSelection(valorFilter){
 
     .ordenar {
       position: relative;
-          display: flex;
+
+              margin-top: 20%;
+    margin-left: 35%;
+
+
 
     }
     .imagen_orden{
     width: 250px;
-top: 481px;
-    left: 50%;
-    position: relative;
-    align-self: center;
+    /* top: 610%; 
+    left: 50%; */
+margin-top: 23%;
+    margin-left: 39%;
+    position: absolute;
 
     z-index: 1;
     }
 
     .boton_ordenar {
-            position: relative;
-            display: flex;
-                        height: 50px;
-    top: 496px;
-    left: 38%;
+      position: absolute;
+
+      height: 50px;
+          width: 160px;
+     margin-top: 25%;
+    margin-left: 47%;
+    /* top: 496px;
+    left: 38%; */
       background-color: #D9D9D9;
       color: black;
       padding: 10px 16px;
@@ -256,13 +267,13 @@ top: 481px;
     }
 
     .ops_ordenar {
-    top: 550px;
-    left: 28%;
+
       width: 150px;
-         
-    width: 119px;
+
       display: none;
-      position: relative;
+    margin-top: 30%;
+    margin-left: 48%;
+    position: absolute;
       background-color: #D9D9D9;
   
       /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
@@ -288,33 +299,35 @@ top: 481px;
     .ordenar:hover .ops_ordenar {
       display: block;
     }
-
-
-
-
     
     .filtrar {
-      position: static;
-          display: flex;
+      position: relative;
+     
+
+    margin-left: 35%;
+    margin-bottom: 20%;
+
 
     }
     .imagen_filtrar{
     width: 250px;
+    /* top: 610%; 
+    left: 50%; */
+    margin-top: 23%;
+    margin-left: -5%;
+    position: absolute;
 
-    position: relative;
-    align-self: center;
-
-    top: 360px;
-    left: 30%;
     z-index: 1;
     }
 
     .boton_filtrar {
-            position: relative;
-            display: flex;
-            height: 50px;
-       bottom: -376px;
-    left: 19%;
+
+      position: absolute;
+
+      height: 50px;
+          width: 160px;
+margin-top: 25%;
+    margin-left: 2%;
       background-color: #D9D9D9;
       color: black;
       padding: 10px 16px;
@@ -328,13 +341,14 @@ top: 481px;
     }
 
     .ops_filtrar {
-    top: 1008px;
-    left: 37%;
-    width: 115px;
-      display: none;
-      position: absolute;
+
       background-color: #D9D9D9;
-  
+        width: 150px;
+
+      display: none;
+    margin-top: 31%;
+    margin-left: 2%;
+    position: absolute;
       /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
       border-radius: 4px;
       z-index: 1;

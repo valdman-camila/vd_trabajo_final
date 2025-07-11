@@ -79,7 +79,7 @@
         }
 
         alienImg = new Image();
-        alienImg.src = "/images/alien.png";
+        alienImg.src = "/images/perro_malo.svg";
 
         document.addEventListener("keydown", moveShip);
         document.addEventListener("keydown", shoot);

@@ -12,7 +12,9 @@ const app = new App({
 
 const juego = new Juego({
   target: document.getElementById("juego")
+  
 })
+
 
 const juego2 = new Juego2({
   target: document.getElementById("juego2")

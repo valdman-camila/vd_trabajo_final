@@ -129,11 +129,12 @@ a.button:hover {
     position: relative;
 }
 
-        #game-container {
+        /* #game-container {
             width: 400px;
             height: 400px;
             background-color: #F5F5F5;
             position: relative;
+            background-image: url("./images/fondo_juego2.svg");
             margin: 50px auto;
         }
         
@@ -144,14 +145,15 @@ a.button:hover {
             position: absolute;
             bottom: 0;
         }
-        
+        */
         .fruit {
-            width: 30px;
+            width: 24.11px;
             height: 30px;
-            background-image: url("./images/moneda.svg");
+            background-image: url("./images/pez.svg");
             position: absolute;
             top: 0;
-        }
+        } 
+
 .button-linkedin {
     background-color: #ffffff00;
 }

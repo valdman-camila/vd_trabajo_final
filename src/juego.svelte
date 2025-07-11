@@ -15,10 +15,14 @@
         
         #game-container {
             width: 400px;
-            height: 400px;
+            height: 316px;
             position: relative;
-            margin: 50px auto;
-              background:transparent;
+            margin-top: 109px;
+            margin-right: auto;
+            margin-bottom: 100px;
+            margin-left: auto;
+
+            background-image: url("./images/fondo_juego2.svg");
             
         }
         
@@ -26,13 +30,15 @@
             width: 57px;
             height: 91px;
             position: absolute;
-            bottom: 0;
+            bottom: 50;
+            margin-bottom: 50%;
         }
         
         .fruit {
             width: 30px;
             height: 30px;
             position: absolute;
+            background-image: url("./images/pez.svg");
             top: 0;
         }
         
@@ -69,6 +75,7 @@
             width: 400px;
             height: 400px;
             transform: translateX(120%);
+            /* background-image: url("./images/fondo_juego.svg");  */
 
         }
         .bezel {
@@ -83,23 +90,49 @@
         /*https://stackoverflow.com/questions/70498819/retro-crt-curved-screen-effect-for-website-ccs
         https://codepen.io/msriki12/pen/wBwMzjq*/
 
-    .catch-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center;    
-    min-height: 100vh;   
-    text-align: center;
-    }
+        .catch-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;    
+            min-height: 100vh;   
+            text-align: center;
+        }
+        #tv-background{
+            margin-top: 10%;
+
+        }
+        .modal {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+ 
 
     </style>
 
 <div class="catch-container">
-    <h1 class="titulo_juego">Catch the Fruit</h1>
+    <h1 class="titulo_juego">Entretené a tu audencia!</h1>
     <div id="tv-background">          
-        <img class="bezel"
+        <!-- <img class="bezel"
           src="/images/bezel.png"
-          alt="">
+          alt=""> -->
           <img class="retro-tv"
           src="/images/retro-tv.svg"
           alt="">
@@ -114,12 +147,24 @@
     <p class="texto_juego">Time: <span id="time">30</span></p>
     <button id="start-button" disabled={!$jugadorGatoTerminado}>Start Game</button>
 </div>
+<!-- Modal -->
+<div id="gameOverModal" class="modal">
+  <div class="modal-content">
+    <h2>¡Juego terminado!</h2>
+    <p id="scoreText"></p>
+    <button onclick="cerrarModal()">Cerrar</button> 
+  </div>
+</div>
+
+
+
+
     <script>
         import GatoJugador from './armarGato/GatoJugador.svelte';
         import {jugadorGatoTerminado} from './store.js';
-         import { resultadoJuego1 } from './store.js';
+        import { resultadoJuego1 } from './store.js';
         import { onMount } from 'svelte';
-
+ 
         document.addEventListener("DOMContentLoaded", function () {
 
         var basket = document.getElementById("basket");
@@ -134,6 +179,7 @@
         var isMovingRight = false;
         var gameOver = false;
         var gameStart = true;
+        let showModal = false;
         
         startButton.addEventListener("click", startGame);
         document.addEventListener("keydown", handleKeyDown);
@@ -173,16 +219,30 @@
 
             }
         }
+        function mostrarModal(score) {
+            document.getElementById("scoreText").textContent = "Tu rating es: " + score;
+            document.getElementById("gameOverModal").style.display = "block";
+
+            // setTimeout(() => {
+            //     document.getElementById("gameOverModal").style.display = "none";
+            // }, 2000); // 2000 milisegundos = 2 segundos
+        }
+        function cerrarModal() {
+            document.getElementById("gameOverModal").style.display = "none";
+
+        }
+
 
         function endGame() {
             clearInterval(timerId);
             gameOver = true;
             startButton.disabled = false;
-            alert("Game Over! Your score: " + score);
+            // alert("Game Over! Tu rating es: " + score);
             clearFruits();
 
             const altura = calcularAltura(score);
             resultadoJuego1.set(altura);
+            mostrarModal(score); 
         }
 
         function calcularAltura(puntaje) {
@@ -266,4 +326,7 @@
 
 
     });
+    window.cerrarModal = function () {
+    document.getElementById("gameOverModal").style.display = "none";
+    };
     </script>

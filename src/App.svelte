@@ -244,9 +244,12 @@ onMount(() => {
       {/if}
       <label for="down"></label>
   </div>
+
   
 
 {/if}
+
+
 
 </main>
 

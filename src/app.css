@@ -128,6 +128,47 @@ a.button:hover {
     height: 600px;
     position: relative;
 }
+.bunni-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin: 400px auto 0 auto; 
+  width: fit-content;
+}
+
+.speech {
+  position: absolute;
+  bottom:450px; /* ajustá según el diseño */
+  left: 0%;
+
+  background-image: url('/images/Speech_intro.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px 50px 60px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Pangolin", cursive;
+  font-size: 25px;
+  min-width: 150px;
+  min-height: 400px;
+  max-width: 800px;
+  flex-wrap: wrap;
+  width:600px;
+  z-index: 10;
+  
+}
+
+.conejo {
+  width: 500px;
+  height: 500px;
+  margin-top: 350px;
+}
+
 
         /* #game-container {
             width: 400px;

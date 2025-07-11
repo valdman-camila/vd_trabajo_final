@@ -285,7 +285,7 @@
     </div>
 
     <h2 id="game-over-text" style="display:none; color:white; margin-top: 20px;">GAME OVER!</h2>
-    <button id="start-game-button" style="margin-top: 10px; padding: 10px 20px; font-size: 20px; cursor: pointer;" disabled={!$jugadorGatoTerminado}>Start Game</button>
+    <button id="start-game-button" style="margin-top: 10px; padding: 10px 20px; font-size: 20px; cursor: pointer;" disabled={!$jugadorGatoTerminado}>Jugar</button>
 </div>
 
 <style>

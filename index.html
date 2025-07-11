@@ -54,6 +54,18 @@
   overflow: visible;
 }
 
+.video-fondo {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+
     </style>
   </head>
 
@@ -73,7 +85,20 @@
     <!-- Sección en la que la persona puede armar a su propio gato -->
     <div id="app2"></div>
 
-    <div id="juego"></div>
+<div id="tv-time" style="position: relative; overflow: hidden; min-height: 100vh;">
+  <div id="juego"></div>
+  <video
+  class="video-fondo"
+  autoplay
+  muted
+  playsinline
+  loop
+>
+  <source src="/video/kidswatchparty.mp4" type="video/mp4" />
+  Tu navegador no soporta el video.
+</video>
+</div>
+    
 
   <video
   class="video-full"

@@ -534,6 +534,8 @@ margin-top: 25%;
   padding: 12px 20px;
   z-index: 1000;
   cursor: pointer;
+  width: 100px;
+  height: 60px;
 
     background-color: #ffe4f0;
     color: #5b3c40;

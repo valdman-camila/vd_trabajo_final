@@ -39,15 +39,67 @@
     manchaVentas2 = d3.scaleLinear().domain([minVentas2, maxVentas2]).range([1, 5]);
 
 
-    arr2 = [];
-    temp2 = [];
-    for (let i = 0; i < peliculas.length; i++) {
-      temp2.push(peliculas[i]);
-      if ((i + 1) % 4 === 0 || (i + 1) === peliculas.length) {
-        arr2.push(temp2);
-        temp2 = [];
-      }
+
+  }
+
+
+  let orden = ""
+  let filtro = "todas"
+	let resaltar = "todas"
+  $: seriePelicu = peliculas;
+  function agruparCuatro( lista){
+    let filas=[];
+     let temp2=[];
+  for(let i = 0; i < seriePelicu.length; i++){
+            temp2.push(seriePelicu[i]);
+      if((i+1) % 4 == 0 || (i + 1) == seriePelicu.length){
+        filas.push(temp2);
+        temp2=[];
+      } 
+  }
+  return filas;
+}
+  
+  let textoBotonO = 'Ordenar por ▾';
+   let textoBtnF="Filtrar por ▾";
+   let serieFiltrar=peliculas
+
+  function orderSelection(opcion) {
+    orden = opcion;
+
+    // Cambiar el texto del botón basado en la opción seleccionada
+    switch (opcion) {
+      case 'orden_ventas':
+        textoBotonO = 'Más ventas';
+        seriePelicu = d3.sort(seriePelicu, s => s.Ventas)
+        seriePelicu= d3.reverse(seriePelicu)
+        
+        
+        break;
+      case 'orden_tipo':
+        textoBotonO = 'Por tipo';
+        seriePelicu = d3.sort(seriePelicu, escena => escena.Tipo)
+        
+        break;
+      case 'orden_rating':
+        textoBotonO = 'Por rating';
+        seriePelicu = d3.sort(seriePelicu, escena => escena.Rating)
+        seriePelicu= d3.reverse(seriePelicu)
+        
+        break;
+      case 'orden_duracion':
+        textoBotonO = 'Por duración';
+        seriePelicu = d3.sort(seriePelicu, escena => escena.Duracion)
+        seriePelicu= d3.reverse(seriePelicu)
+        
+        break;
+      default:
+        textoBotonO = 'Ordenar por ▾';
+        seriePelicu = peliculas
+
+
     }
+    arr2=agruparCuatro(seriePelicu)
   }
 
 
@@ -57,8 +109,47 @@
 
   onMount(() => {
     window.addEventListener('scroll', manejarScroll2);
+        arr2=agruparCuatro(peliculas)
     return () => window.removeEventListener('scroll', manejarScroll2);
   })
+  function filtertresomas(elem){
+    return elem =="4" && elem=="6"
+  }
+
+function filterSelection(valorFilter){
+  filtro=valorFilter
+    // Cambiar el texto del botón basado en la opción seleccionada
+    switch (valorFilter) {
+      case "1":
+        textoBtnF = "Una pelicula";
+
+    seriePelicu = peliculas.filter(p => p.Tipo == filtro)
+
+        break;
+      case "2":
+        textoBtnF = "Dos peliculas";
+
+         seriePelicu = peliculas.filter(p => p.Tipo == filtro)
+        break;
+     case "3":
+        textoBtnF = "Tres o más películas";
+        // Convertimos a número y filtramos si Tipo >= 3
+        seriePelicu = peliculas.filter(p => Number(p.Tipo) >= 3);
+        break;
+      case 'todas':
+        textoBtnF = 'Filtrar por ▾';
+
+        seriePelicu = peliculas
+
+        break;
+      default:
+        textoBtnF = 'Filtrar por ▾';
+
+        seriePelicu = peliculas
+
+    }
+    arr2=agruparCuatro(seriePelicu)
+  }
     function abrirPopup() {
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.getElementById('guia-visualizacion').classList.remove('hidden');
@@ -72,7 +163,7 @@
     document.getElementById('overlay').classList.add('hidden');
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
-    currentGuideImage = 'series';
+    currentGuideImage = 'peliculas';
     $gatoEspecifico = undefined;
     llamadoGato.set(false);
   }
@@ -84,12 +175,35 @@
     Guía
   </button>
 {/if}
-                    <img
-            class="techo"
-            src="./images/techoo.svg"
-            alt="">
-            
-          <div class="mueble">
+<div class="techo-container">
+<div class="ordenar">
+  <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
+  <div class="container_btn_ordenar">
+    <!-- El texto del botón cambia según la selección -->
+    <button class="boton_ordenar">{textoBotonO}</button>
+
+    <div class="ops_ordenar">
+      <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Más ventas</button>
+      <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
+      <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>Por rating</button>
+      <button on:click={() => orderSelection("orden_duracion")} class:active={orden == "orden_duracion"}>Por duración</button>
+    </div>
+  </div>
+</div>
+
+  <div class="filtrar">
+    <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="">
+    <button class="boton_filtrar">{textoBtnF}</button>
+    <div class=ops_filtrar>
+      <button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
+      <button on:click={() => filterSelection("1")} class:active={filtro == "1"}>Una pelicula</button>
+      <button on:click={() => filterSelection("2")} class:active={filtro == "2"}>Dos peliculas</button>
+      <button on:click={() => filterSelection("3")} class:active={filtro == "3"}>Tres o más peliculas</button>
+    </div>
+  </div> 
+    <img class="techo" src="./images/techoo.svg" alt="">
+</div>         
+<div class="mueble">
             
 <div class="container">
     {#each arr2 as cuatroG, j}
@@ -160,6 +274,160 @@
     </div>
 
 <style>
+    .ordenar {
+      position: relative;
+
+              margin-top: 20%;
+    margin-left: 35%;
+
+
+
+    }
+
+    .imagen_orden{
+    width: 250px;
+    /* top: 610%; 
+    left: 50%; */
+margin-top: 23%;
+    margin-left: 39%;
+    position: absolute;
+
+    z-index: 1;
+    }
+
+    .boton_ordenar {
+      position: absolute;
+        /* box-shadow: 0 5px 10px rgba(0,0,0,0.2); */
+      height: 50px;
+          width: 160px;
+     margin-top: 25%;
+    margin-left: 47%;
+    /* top: 496px;
+    left: 38%; */
+      background-color: #F6F5EA;
+      color: black;
+      /* padding: 10px 16px; */
+      font-size: 23px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    user-select: none;
+    z-index: 50;
+        font-family: "Pangolin", cursive;
+
+    }
+
+    .ops_ordenar {
+
+      width: 150px;
+    font-family: "Pangolin", cursive;
+      display: none;
+    margin-top: 30%;
+    margin-left: 48%;
+    position: absolute;
+      background-color: #F6F5EA;
+  
+      /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    .ops_ordenar button {
+      font-family: "Pangolin", cursive;
+      color: black;
+      padding: 10px 14px;
+      text-align: left;
+      text-decoration: none;
+      background: none;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .ops_ordenar button:hover {
+      background-color: #F0D786;
+    }
+
+    .ordenar:hover .ops_ordenar {
+      display: block;
+    }
+    
+    .filtrar {
+      position: relative;
+     
+
+    margin-left: 35%;
+    margin-bottom: 20%;
+
+
+    }
+    .imagen_filtrar{
+    width: 250px;
+    /* top: 610%; 
+    left: 50%; */
+    margin-top: 23%;
+    margin-left: -5%;
+    position: absolute;
+
+    z-index: 1;
+    }
+
+    .boton_filtrar {
+
+      position: absolute;
+    font-family: "Pangolin", cursive;
+      height: 50px;
+          width: 160px;
+margin-top: 25%;
+    margin-left: 2%;
+      background-color: #F6F5EA;
+      color: black;
+      /* padding: 10px 16px; */
+      font-size: 23px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    user-select: none;
+    z-index: 50;
+    }
+
+    .ops_filtrar {
+
+      background-color: #F6F5EA;
+        width: 150px;
+    font-family: "Pangolin", cursive;
+      display: none;
+    margin-top: 30%;
+    margin-left: 2%;
+    position: absolute;
+      /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    .ops_filtrar button {
+          font-family: "Pangolin", cursive;
+      color: black;
+      padding: 10px 14px;
+      text-align: left;
+      text-decoration: none;
+      background: none;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .ops_filtrar button:hover {
+      background-color: #F0D786;
+    }
+
+    .filtrar:hover .ops_filtrar {
+      display: block;
+    }
+
+
   .gatos-con-estante{
             display: flex;
     justify-content: center;
@@ -178,8 +446,7 @@
   .mueble{
   margin: auto;
     background-color: #dfcdaf;
-      width: 1230px;
-    height: 1420px;
+ margin: 0px 50px;
  border: 50px solid transparent;
       border-image-slice: 60;
   border-image-source:url("/images/estante-borde.svg"); 
@@ -197,11 +464,7 @@
     flex-wrap: wrap;
    row-gap: 50px;
     column-gap: 50px;
-    
-  
-  
-  
-  
+
   }
   .person-container {
     display: flex;
@@ -246,16 +509,6 @@
     right: 3.10%;
      */
     bottom: -4%;  
-
-
-
-    
-
- 
- 
-
-   
-
      
   }
 

@@ -278,6 +278,7 @@
 </script>
 
 <div class="space-container">
+      <h1 class="titulo_juego">Vencé a tu competencia!</h1>
     <canvas id="board"></canvas>
 
     <div id="player-character" style="display: none;">

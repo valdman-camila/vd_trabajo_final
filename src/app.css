@@ -170,7 +170,7 @@ a.button:hover {
 }
 
 
-        /* #game-container {
+        #game-container {
             width: 400px;
             height: 400px;
             background-color: #F5F5F5;
@@ -179,14 +179,14 @@ a.button:hover {
             margin: 50px auto;
         }
         
-        #basket {
+        /* #basket {
             width: 57px;
             height: 91px;
             background-image: url("./images/prueba_1.png");
             position: absolute;
             bottom: 0;
-        }
-        */
+        } */
+       
         .fruit {
             width: 24.11px;
             height: 30px;

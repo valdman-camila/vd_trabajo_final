@@ -12,7 +12,6 @@ const app = new App({
 
 const juego = new Juego({
   target: document.getElementById("juego")
-  
 })
 
 

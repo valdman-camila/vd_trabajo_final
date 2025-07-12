@@ -96,6 +96,12 @@
         seriePelicu= d3.reverse(seriePelicu)
         
         break;
+        case 'orden_duracipn':
+        textoBotonO = 'Por duración';
+        seriePelicu = d3.sort(seriePelicu, escena => escena.D)
+        seriePelicu= d3.reverse(seriePelicu)
+        
+        break;
       default:
         textoBotonO = 'Ordenar por ▾';
         seriePelicu = series
@@ -125,13 +131,13 @@ function filterSelection(valorFilter){
     seriePelicu = series.filter(p => p.Tipo == filtro)
         break;
       case 'todas':
-        textoBtnF = 'Ordenar por ▾';
+        textoBtnF = 'Filtrar por ▾';
 
         seriePelicu = series
 
         break;
       default:
-        textoBtnF = 'Ordenar por ▾';
+        textoBtnF = 'Filtrar por ▾';
 
         seriePelicu = series
 
@@ -181,6 +187,7 @@ function filterSelection(valorFilter){
       <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Más ventas</button>
       <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
       <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>Por rating</button>
+        <button on:click={() => orderSelection("orden_duracion")} class:active={orden == "orden_duracion"}>Por duración</button>
     </div>
   </div>
 </div>
@@ -268,6 +275,7 @@ function filterSelection(valorFilter){
     {/each}
     </div>
     </div>
+    <img class="piso" src="./images/piso-mueble.svg" alt=""> 
 
 <style>
 
@@ -281,6 +289,7 @@ function filterSelection(valorFilter){
 
 
     }
+
     .imagen_orden{
     width: 250px;
     /* top: 610%; 
@@ -294,17 +303,17 @@ margin-top: 23%;
 
     .boton_ordenar {
       position: absolute;
-
+        /* box-shadow: 0 5px 10px rgba(0,0,0,0.2); */
       height: 50px;
           width: 160px;
      margin-top: 25%;
     margin-left: 47%;
     /* top: 496px;
     left: 38%; */
-      background-color: #D9D9D9;
+      background-color: #F6F5EA;
       color: black;
-      padding: 10px 16px;
-      font-size: 20px;
+      /* padding: 10px 16px; */
+      font-size: 24px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -323,7 +332,7 @@ margin-top: 23%;
     margin-top: 30%;
     margin-left: 48%;
     position: absolute;
-      background-color: #D9D9D9;
+      background-color: #F6F5EA;
   
       /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
       border-radius: 4px;
@@ -343,7 +352,7 @@ margin-top: 23%;
     }
 
     .ops_ordenar button:hover {
-      background-color: #f1f1f1;
+      background-color: #F0D786;
     }
 
     .ordenar:hover .ops_ordenar {
@@ -378,10 +387,10 @@ margin-top: 23%;
           width: 160px;
 margin-top: 25%;
     margin-left: 2%;
-      background-color: #D9D9D9;
+      background-color: #F6F5EA;
       color: black;
-      padding: 10px 16px;
-      font-size: 20px;
+      /* padding: 10px 16px; */
+      font-size: 24px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -392,11 +401,11 @@ margin-top: 25%;
 
     .ops_filtrar {
 
-      background-color: #D9D9D9;
+      background-color: #F6F5EA;
         width: 150px;
     font-family: "Pangolin", cursive;
       display: none;
-    margin-top: 31%;
+    margin-top: 30%;
     margin-left: 2%;
     position: absolute;
       /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
@@ -417,7 +426,7 @@ margin-top: 25%;
     }
 
     .ops_filtrar button:hover {
-      background-color: #f1f1f1;
+      background-color: #F0D786;
     }
 
     .filtrar:hover .ops_filtrar {
@@ -445,13 +454,13 @@ margin-top: 25%;
   .techo{
       margin: auto;
         position: relative;
-     width: 10011px;
+
      bottom: -16px;
   }
   .mueble{
   margin: auto;
     background-color: #F0D786;
- margin: 0px 50px;
+ margin: 0px 61px;
 
  border: 50px solid transparent;
       border-image-slice: 60;
@@ -461,6 +470,13 @@ margin-top: 25%;
   
     height: 100%;
      width: 100%;
+     
+}
+.piso{
+        margin: auto;
+        position: relative;
+
+          bottom: 11px;
 }
     .container{
         display: flex;

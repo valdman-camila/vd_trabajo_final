@@ -17,33 +17,79 @@
 </script>
 
 {#if alturaJugador !== null && manchasJugador !== null}
-<div class="contenedor">
-  <div class="person-container">
-    <img
-      src={
-        serializacion === "Serializada"
-          ? "/images/gatoDer.svg"
-          : serializacion === "Episodica"
-          ? "/images/gatoIzq.svg"
-          : "/images/linea-gato-dos.svg"
-      }
-      alt="Gato"
-      class="gato"
-      style="height: {alturaJugador}px"
-    />
-
-    <div class="person-color">
-      <Color tipo={serializacion} tamano={alturaJugador * 0.674} altura={alturaJugador} color={colorJugador} />
-    </div>
-
-    <div class="manchas">
-      <Mancha tipo={serializacion} cant={manchasJugador} tamano={alturaJugador * 0.674} altura={alturaJugador} />
-    </div>
+<div class="cuadro-final">
+  <div class="cuadro-texto">
+    <h2>Este es tu gato!</h2>
+    <p> Tu serie es {serializacion} y tiene una duracion de: ...</p>
+    <p>Un rating de: ..</p>
+    <p>Una ganacia de: ..</p>
   </div>
+  <div class="contenedor">
+
+    <div class="person-container">
+      <img
+        src={
+          serializacion === "Serializada"
+            ? "/images/gatoDer.svg"
+            : serializacion === "Episodica"
+            ? "/images/gatoIzq.svg"
+            : "/images/linea-gato-dos.svg"
+        }
+        alt="Gato"
+        class="gato"
+        style="height: {alturaJugador}px"
+      />
+
+      <div class="person-color">
+        <Color tipo={serializacion} tamano={alturaJugador * 0.674} altura={alturaJugador} color={colorJugador} />
+      </div>
+
+      <div class="manchas">
+        <Mancha tipo={serializacion} cant={manchasJugador} tamano={alturaJugador * 0.674} altura={alturaJugador} />
+      </div>
+    </div>
+</div>
 </div>
 {/if}
 
 <style>
+
+  .cuadro-final{
+    margin-top: 3%;
+    text-align: center;
+
+    font-size: 21px;
+    scale:1;
+    background-color: azure;
+    animation-name: example;
+    width: 50%;
+    height: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 2%;
+    animation-iteration-count: 1;
+    animation-duration: 2.5s;
+ padding: 2%;
+    border-radius: 25px; 
+
+
+
+  }
+  @keyframes example {
+  0%   {
+width: 50%;
+    height: 50%;
+  }
+  50%  {
+/* width: 70%;
+    height: 70%; */
+    scale:1.15;
+  }
+  100% {
+width: 50%;
+    height: 50%;
+  }
+}
   .contenedor {
     display: flex;
     flex-direction: column;
@@ -55,7 +101,7 @@
 
   .person-container {
     position: relative;
-    height: 360px; 
+    height: 250px; 
     width: 100%;
     display: flex;
     justify-content: center;

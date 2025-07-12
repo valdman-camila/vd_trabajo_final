@@ -173,9 +173,9 @@ a.button:hover {
         #game-container {
             width: 400px;
             height: 400px;
-            background-color: #F5F5F5;
+      
             position: relative;
-            background-image: url("./images/fondo_juego2.svg");
+            background-image: url("/images/fondo_juego2.svg");
             margin: 50px auto;
         }
         
@@ -190,7 +190,7 @@ a.button:hover {
         .fruit {
             width: 24.11px;
             height: 30px;
-            background-image: url("./images/pez.svg");
+            background-image: url("/images/pez.svg");
             position: absolute;
             top: 0;
         } 

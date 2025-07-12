@@ -160,7 +160,7 @@
   body {
     margin: 0;
     padding: 0;
-    background: #121212;
+    
     color: #eee;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -219,7 +219,7 @@
     width: 400px;
     height: 400px;
     margin-top: 19%;
-    background: #000;
+ 
     border-radius: 10px;
     overflow: hidden;
     background-image: url("./images/fondo_juego2.svg");
@@ -311,7 +311,9 @@
     height: 30px;
     position: absolute;
     top: 0;
+    background-image: url("./images/pez.svg");
     user-select: none;
+    
   }
  .modal {
   display: none; /* Oculto por defecto */

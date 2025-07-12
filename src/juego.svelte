@@ -222,7 +222,7 @@
  
     border-radius: 10px;
     overflow: hidden;
-    background-image: url("./images/fondo_juego2.svg");
+    background-image: url("/images/fondo_juego2.svg");
     transform: translateX(-50%);
     z-index: 15;
   }
@@ -311,7 +311,7 @@
     height: 30px;
     position: absolute;
     top: 0;
-    background-image: url("./images/pez.svg");
+    background-image: url("/images/pez.svg");
     user-select: none;
     
   }

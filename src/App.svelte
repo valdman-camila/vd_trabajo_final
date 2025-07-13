@@ -342,7 +342,8 @@ onMount(() => {
   .bunni-container {
   position: relative;
   width: fit-content;
-  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .speech {

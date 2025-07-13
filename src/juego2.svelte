@@ -140,7 +140,7 @@
             context.clearRect(0, 0, board.width, board.height);
             context.fillStyle="white";
             context.font="16px courier";
-            context.fillText("Press Start to Play!", boardWidth / 2 - 80, boardHeight / 2);
+            context.fillText("", boardWidth / 2 - 80, boardHeight / 2);
 
             //asegurarse de que el div del jugador esté oculto antes de empezar
             if (playerDiv) {

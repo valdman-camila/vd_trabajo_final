@@ -200,7 +200,7 @@ width: 597px;
 
     box-shadow: 2px 2px 8px #181818;
     background-image: radial-gradient(transparent 50%, #1e1d19);
-    z-index: 10;
+    z-index: 20;
     border-radius: 12px;
   }
 
@@ -244,7 +244,7 @@ width: 597px;
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 30;
+    z-index: 19;
     background: repeating-linear-gradient(
       0deg,
       rgba(255,255,255,0.1) 0px,
@@ -367,6 +367,16 @@ width: 597px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     user-select: none;
 }
+.tapar-gato {
+    width: 57px;
+    height: 91px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 17;
+    user-select: none;
+    background-color: #1e1d19;
+}
  
 </style>
 
@@ -381,8 +391,9 @@ width: 597px;
         {#if !$jugadorGatoTerminado}
           <div class="tv-interference-fondo"></div>
           <div class="tv-interference"></div>
+          <div class="tapar-gato"></div>
         {/if}
-
+        
         <GatoJugador id="basket" />
                 <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
 
@@ -394,7 +405,7 @@ width: 597px;
 
         {#if !gameStart && !gameOver}
           <div class="status-panel">
-            <div class="score">Score: {score}</div>
+            <div class="score">Puntaje: {score}</div>
             <div class="time">Tiempo: {time}s</div>
           </div>
         {/if}

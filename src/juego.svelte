@@ -164,7 +164,6 @@
     padding: 0;
     
     color: #eee;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .catch-container {

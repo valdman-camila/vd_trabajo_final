@@ -139,7 +139,7 @@
         if (!gameStarted) {
             context.clearRect(0, 0, board.width, board.height);
             context.fillStyle="white";
-            context.font="16px courier";
+            context.font="16px Pangolin";
             context.fillText("", boardWidth / 2 - 80, boardHeight / 2);
 
             //asegurarse de que el div del jugador esté oculto antes de empezar
@@ -219,7 +219,7 @@
         }
 
         context.fillStyle="black";
-        context.font="16px courier";
+        context.font="16px Pangolin";
         context.fillText(score, 5, 20);
     }
 
@@ -323,6 +323,7 @@
         border: none;
         padding: 10px 20px;
         font-size: 16px;
+        font-family: "Pangolin", cursive;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }

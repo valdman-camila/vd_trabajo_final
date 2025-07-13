@@ -446,7 +446,7 @@ margin-top: 25%;
   }
     .mueble{
       margin: auto;
-        background-color: #F0D786;
+        background-color: #e8c7b3;
     margin: 0px 70px;
 
     border: 50px solid transparent;

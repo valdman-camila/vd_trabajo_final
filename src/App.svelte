@@ -147,14 +147,22 @@ onMount(() => {
      Durante décadas, muchas líneas de juguetes dieron origen a series animadas pensadas para promocionarlos. Esta colección recorre esas historias que nacieron del marketing y terminaron marcando infancias.
     </p>
     -->
+    
   <div class="bunni-container">
+     <img src="/images/nube.svg" class="fondo-nube nube-izquierda" alt=""/>
+
+  <img src="/images/nube.svg" class="fondo-nube nube-derecha" alt=""/>
+
+  
   <div class="speech">
     ¡Bienvenidos, queridísima audiencia! Soy Bunni, su anfitrión. Acá no van a encontrar cualquier historia… Esta es una colección de series y películas que nacieron de algo muy noble: ¡vender juguetes! Pero ojo, lo que empezó como pura estrategia de marketing terminó dejando huella en miles de infancias. Así que adelante, exploren, comparen, y revivan!
   </div>
   <img class="conejo" src="/images/Bunny_intro.svg" alt="Conejo" />
 </div>
-  
+
+
     <div id="guia-container">
+ 
       <img src="/images/nube.svg" class="fondo-nube" alt=""/>
       <button class="guia-button" on:click={abrirPopup}>
         <p>Guía de visualización</p>
@@ -302,7 +310,7 @@ onMount(() => {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     transform: scale(1.05) translateY(50%);
   }
-  
+
   @keyframes flotar {
     0%, 100% {transform: translate(0%, -40%);}
     50% {transform: translate(0%, -20%);}
@@ -378,7 +386,18 @@ onMount(() => {
   animation: flotar2 5s ease-in-out infinite;
 }
 
+.nube-izquierda {
+  left: -350px;
+  bottom:200px;
+  width: 200px;
+  animation: flotar2 5s ease-in-out infinite;
+}
 
+.nube-derecha {
+  right: -400px;
+  width: 120px;
+  animation: flotar2 5s ease-in-out infinite;
+}
 
   button {
     text-align: center;

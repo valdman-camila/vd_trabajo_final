@@ -1,374 +1,390 @@
 <script>
-    import * as d3 from "d3"
-    export let series= ""
-    import Color from "/src/color.svelte"
-    import  Mancha from "/src/mancha.svelte"
-    import { llamadoGato, gatoEspecifico } from '/src/store.js'
-    import { get } from 'svelte/store'
-    import { onMount } from 'svelte'
-    import { fade } from 'svelte/transition'
+  import * as d3 from "d3";
+  export let series = "";
+  import Color from "/src/color.svelte";
+  import Mancha from "/src/mancha.svelte";
+  import { llamadoGato, gatoEspecifico } from "/src/store.js";
+  import { get } from "svelte/store";
+  import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
 
+  let arrdos = [];
 
-    let arrdos=[]
+  function manejarClick(i, j) {
+    llamadoGato.update((n) => n + 1);
+    gatoEspecifico.set(i + j * 4);
+  }
 
-    function manejarClick(i, j) {
-      llamadoGato.update(n => n + 1);
-      gatoEspecifico.set(i+j*4);
-    }
-
-      let mostrarBoton = false;
+  let mostrarBoton = false;
 
   function manejarScroll() {
-    mostrarBoton = window.scrollY > 400 && window.scrollY < 2500; 
+    mostrarBoton = window.scrollY > 400 && window.scrollY < 2500;
   }
 
   onMount(() => {
-    window.addEventListener('scroll', manejarScroll);
-    arrdos=agruparCuatro(series)
-    return () => window.removeEventListener('scroll', manejarScroll);
-  })
-  let gatos= "series"
-  let orden = ""
-  let filtro = "todas"
-	let resaltar = "todas"
+    window.addEventListener("scroll", manejarScroll);
+    arrdos = agruparCuatro(series);
+    return () => window.removeEventListener("scroll", manejarScroll);
+  });
+  let gatos = "series";
+  let orden = "";
+  let filtro = "todas";
+  let resaltar = "todas";
   $: seriePelicu = series;
 
-    const maxRating = d3.max(series, (d) => d.Rating)
-    const minRating = d3.min(series, (d) => d.Rating)
-    const diamRating = d3.scaleLinear()
-        .domain([minRating, maxRating]).range([80, 180])
+  const maxRating = d3.max(series, (d) => d.Rating);
+  const minRating = d3.min(series, (d) => d.Rating);
+  const diamRating = d3
+    .scaleLinear()
+    .domain([minRating, maxRating])
+    .range([80, 180]);
 
-    const manchaW = d3.scaleLinear()
-        .domain([minRating, maxRating]).range([15, 180])
-    const manchaH = d3.scaleLinear()
-        .domain([minRating, maxRating]).range([15, 180])
-    const maxDuracion = d3.max(series, (d) => d.Duracion)
-    let colorDuracion = d3.scaleThreshold()
-        .domain([ 50, 100, 150,200])
-        .range(["#FDF8F2", "#EFCFA9", "#DF9F53", "#AC6C20", "#6C4414"])
-        const maxVentas= d3.max(series, (d) => d.Ventas)
-    const minVentas = d3.min(series, (d) => d.Ventas)
-    let manchaVentas=d3.scaleLinear()
-        .domain([minVentas, maxVentas]).range([1, 5])
+  const manchaW = d3
+    .scaleLinear()
+    .domain([minRating, maxRating])
+    .range([15, 180]);
+  const manchaH = d3
+    .scaleLinear()
+    .domain([minRating, maxRating])
+    .range([15, 180]);
+  const maxDuracion = d3.max(series, (d) => d.Duracion);
+  let colorDuracion = d3
+    .scaleThreshold()
+    .domain([50, 100, 150, 200])
+    .range(["#FDF8F2", "#EFCFA9", "#DF9F53", "#AC6C20", "#6C4414"]);
+  const maxVentas = d3.max(series, (d) => d.Ventas);
+  const minVentas = d3.min(series, (d) => d.Ventas);
+  let manchaVentas = d3
+    .scaleLinear()
+    .domain([minVentas, maxVentas])
+    .range([1, 5]);
 
- 
-
- 
-
-  function agruparCuatro( lista){
-    let filas=[];
-     let temp2=[];
-  for(let i = 0; i < seriePelicu.length; i++){
-            temp2.push(seriePelicu[i]);
-      if((i+1) % 4 == 0 || (i + 1) == seriePelicu.length){
+  function agruparCuatro(lista) {
+    let filas = [];
+    let temp2 = [];
+    for (let i = 0; i < seriePelicu.length; i++) {
+      temp2.push(seriePelicu[i]);
+      if ((i + 1) % 4 == 0 || i + 1 == seriePelicu.length) {
         filas.push(temp2);
-        temp2=[];
-      } 
+        temp2 = [];
+      }
+    }
+    return filas;
   }
-  return filas;
-}
 
-
-  let textoBotonO = 'Ordenar por ▾';
-   let textoBtnF="Filtrar por ▾";
-   let serieFiltrar=series
+  let textoBotonO = "Ordenar por ▾";
+  let textoBtnF = "Filtrar por ▾";
+  let serieFiltrar = series;
 
   function orderSelection(opcion) {
     orden = opcion;
 
     // Cambiar el texto del botón basado en la opción seleccionada
     switch (opcion) {
-      case 'orden_ventas':
-        textoBotonO = 'Más ventas';
-        seriePelicu = d3.sort(seriePelicu, s => s.Ventas)
-        seriePelicu= d3.reverse(seriePelicu)
-        
-        
+      case "orden_ventas":
+        textoBotonO = "Más ventas";
+        seriePelicu = d3.sort(seriePelicu, (s) => s.Ventas);
+        seriePelicu = d3.reverse(seriePelicu);
+
         break;
-      case 'orden_tipo':
-        textoBotonO = 'Por tipo';
-        seriePelicu = d3.sort(seriePelicu, escena => escena.Tipo)
-        
+      case "orden_tipo":
+        textoBotonO = "Por tipo";
+        seriePelicu = d3.sort(seriePelicu, (escena) => escena.Tipo);
+
         break;
-      case 'orden_rating':
-        textoBotonO = 'Por rating';
-        seriePelicu = d3.sort(seriePelicu, escena => escena.Rating)
-        seriePelicu= d3.reverse(seriePelicu)
-        
+      case "orden_rating":
+        textoBotonO = "Por rating";
+        seriePelicu = d3.sort(seriePelicu, (escena) => escena.Rating);
+        seriePelicu = d3.reverse(seriePelicu);
+
         break;
-        case 'orden_duracipn':
-        textoBotonO = 'Por duración';
-        seriePelicu = d3.sort(seriePelicu, escena => escena.D)
-        seriePelicu= d3.reverse(seriePelicu)
-        
+      case "orden_duracipn":
+        textoBotonO = "Por duración";
+        seriePelicu = d3.sort(seriePelicu, (escena) => escena.D);
+        seriePelicu = d3.reverse(seriePelicu);
+
         break;
       default:
-        textoBotonO = 'Ordenar por ▾';
-        seriePelicu = series
-
-
+        textoBotonO = "Ordenar por ▾";
+        seriePelicu = series;
     }
-    arrdos=agruparCuatro(seriePelicu)
+    arrdos = agruparCuatro(seriePelicu);
   }
-function filterSelection(valorFilter){
-  filtro=valorFilter
+  function filterSelection(valorFilter) {
+    filtro = valorFilter;
     // Cambiar el texto del botón basado en la opción seleccionada
     switch (valorFilter) {
-      case 'Episodica':
-        textoBtnF = 'Episodica';
+      case "Episodica":
+        textoBtnF = "Episodica";
 
-    seriePelicu = series.filter(p => p.Tipo == filtro)
+        seriePelicu = series.filter((p) => p.Tipo == filtro);
 
         break;
-      case 'Serializada':
-        textoBtnF = 'Serializada';
+      case "Serializada":
+        textoBtnF = "Serializada";
 
-    seriePelicu = series.filter(p => p.Tipo == filtro)
+        seriePelicu = series.filter((p) => p.Tipo == filtro);
         break;
-      case 'Ambas':
-        textoBtnF = 'Ambas';
+      case "Ambas":
+        textoBtnF = "Ambas";
 
-    seriePelicu = series.filter(p => p.Tipo == filtro)
+        seriePelicu = series.filter((p) => p.Tipo == filtro);
         break;
-      case 'todas':
-        textoBtnF = 'Filtrar por ▾';
+      case "todas":
+        textoBtnF = "Filtrar por ▾";
 
-        seriePelicu = series
+        seriePelicu = series;
 
         break;
       default:
-        textoBtnF = 'Filtrar por ▾';
+        textoBtnF = "Filtrar por ▾";
 
-        seriePelicu = series
-
+        seriePelicu = series;
     }
-    arrdos=agruparCuatro(seriePelicu)
+    arrdos = agruparCuatro(seriePelicu);
   }
 
-
-
   function abrirPopup() {
-    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.getElementById('guia-visualizacion').classList.remove('hidden');
-    document.getElementById('overlay').classList.remove('hidden');
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.getElementById("guia-visualizacion").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
     document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = '${scrollBarWidth}px';
+    document.body.style.paddingRight = "${scrollBarWidth}px";
   }
 
   function cerrarPopup() {
-    document.getElementById('guia-visualizacion').classList.add('hidden');
-    document.getElementById('overlay').classList.add('hidden');
+    document.getElementById("guia-visualizacion").classList.add("hidden");
+    document.getElementById("overlay").classList.add("hidden");
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
-    currentGuideImage = 'series';
+    currentGuideImage = "series";
     $gatoEspecifico = undefined;
     llamadoGato.set(false);
   }
-
 </script>
 
-
 {#if mostrarBoton}
-  <button class="volver-a-guia"
-          on:click={abrirPopup}
-          transition:fade>
+  <button class="volver-a-guia" on:click={abrirPopup} transition:fade>
     Guía
   </button>
 {/if}
 
 <div class="techo-container">
-<div class="ordenar">
-  <img class="imagen_orden" src="./images/orden_boton.svg" alt="">
-  <div class="container_btn_ordenar">
-    <!-- El texto del botón cambia según la selección -->
-    <button class="boton_ordenar">{textoBotonO}</button>
+  <div class="ordenar">
+    <img class="imagen_orden" src="./images/orden_boton.svg" alt="" />
+    <div class="container_btn_ordenar">
+      <!-- El texto del botón cambia según la selección -->
+      <button class="boton_ordenar">{textoBotonO}</button>
 
-    <div class="ops_ordenar">
-      <button on:click={() => orderSelection("orden_ventas")} class:active={orden == "orden_ventas"}>Más ventas</button>
-      <button on:click={() => orderSelection("orden_tipo")} class:active={orden == "orden_tipo"}>Por tipo</button>
-      <button on:click={() => orderSelection("orden_rating")} class:active={orden == "orden_rating"}>Por rating</button>
-        <button on:click={() => orderSelection("orden_duracion")} class:active={orden == "orden_duracion"}>Por duración</button>
+      <div class="ops_ordenar">
+        <button
+          on:click={() => orderSelection("orden_ventas")}
+          class:active={orden == "orden_ventas"}>Más ventas</button
+        >
+        <button
+          on:click={() => orderSelection("orden_tipo")}
+          class:active={orden == "orden_tipo"}>Por tipo</button
+        >
+        <button
+          on:click={() => orderSelection("orden_rating")}
+          class:active={orden == "orden_rating"}>Por rating</button
+        >
+        <button
+          on:click={() => orderSelection("orden_duracion")}
+          class:active={orden == "orden_duracion"}>Por duración</button
+        >
+      </div>
     </div>
   </div>
-</div>
 
   <div class="filtrar">
-    <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="">
+    <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="" />
     <button class="boton_filtrar">{textoBtnF}</button>
-    <div class=ops_filtrar>
-      <button on:click={() => filterSelection("todas")} class:active={filtro == "todas"}>Todas</button>
-      <button on:click={() => filterSelection("Ambas")} class:active={filtro == "Ambas"}>Ambas</button>
-      <button on:click={() => filterSelection("Serializada")} class:active={filtro == "Serializada"}>Serializadas</button>
-      <button on:click={() => filterSelection("Episodica")} class:active={filtro == "Episodica"}>Episodico</button>
+    <div class="ops_filtrar">
+      <button
+        on:click={() => filterSelection("todas")}
+        class:active={filtro == "todas"}>Todas</button
+      >
+      <button
+        on:click={() => filterSelection("Ambas")}
+        class:active={filtro == "Ambas"}>Ambas</button
+      >
+      <button
+        on:click={() => filterSelection("Serializada")}
+        class:active={filtro == "Serializada"}>Serializadas</button
+      >
+      <button
+        on:click={() => filterSelection("Episodica")}
+        class:active={filtro == "Episodica"}>Episodico</button
+      >
     </div>
-  </div> 
+  </div>
 
-
-  <img class="techo" src="./images/techoo.svg" alt=""> 
+  <img class="techo" src="./images/techoo.svg" alt="" />
 </div>
 <div class="mueble">
-
-<div class="container">
+  <div class="container">
     {#each arrdos as cuatroG, j}
       <!-- Iteramos la data para visualizar c/ entidad -->
-      <div class= "gatos-con-estante">
-      {#each cuatroG as serie,i}
-      <div class="gato-wrapper">
-      <div class="person-container">
-        <button class="gato-interactivo" style="
-              width: {diamRating(serie.Rating)*0.634}px; 
-              height: {diamRating(serie.Rating)}px; " on:click={() => manejarClick(i,j)}><a href="#down">Click Here to Smoothly Scroll Down</a></button>
+      <div class="gatos-con-estante">
+        {#each cuatroG as serie, i}
+          <div class="gato-wrapper">
+            <div class="person-container">
+              <button
+                class="gato-interactivo"
+                style="
+              width: {diamRating(serie.Rating) * 0.634}px; 
+              height: {diamRating(serie.Rating)}px; "
+                on:click={() => manejarClick(i, j)}
+                ><a href="#down">Click Here to Smoothly Scroll Down</a></button
+              >
 
-        {#if serie.Tipo == "Serializada"}
-          <img
-            class="person"
-            src="./images/gatoDer.svg"
-            alt=""
-            style="
-              width: {diamRating(serie.Rating)*0.634}px; 
-              height: {diamRating(serie.Rating)}px; ">
-
-        {/if}
-        {#if serie.Tipo == "Episodica"}
- 
-          <img
-            class="person"
-            src="./images/gatoIzq.svg"
-            alt=""
-            style="
-              width: {diamRating(serie.Rating)*0.634}px; 
+              {#if serie.Tipo == "Serializada"}
+                <img
+                  class="person"
+                  src="./images/gatoDer.svg"
+                  alt=""
+                  style="
+              width: {diamRating(serie.Rating) * 0.634}px; 
+              height: {diamRating(serie.Rating)}px; "
+                />
+              {/if}
+              {#if serie.Tipo == "Episodica"}
+                <img
+                  class="person"
+                  src="./images/gatoIzq.svg"
+                  alt=""
+                  style="
+              width: {diamRating(serie.Rating) * 0.634}px; 
               height: {diamRating(serie.Rating)}px; 
 
-            ">
-  
-      {/if}
-      {#if serie.Tipo == "Ambas"}
-          <img
-            class="person"
-            src="./images/linea-gato-dos.svg"
-            alt=""
-            style="
-              width: {diamRating(serie.Rating)*0.634}px; 
+            "
+                />
+              {/if}
+              {#if serie.Tipo == "Ambas"}
+                <img
+                  class="person"
+                  src="./images/linea-gato-dos.svg"
+                  alt=""
+                  style="
+              width: {diamRating(serie.Rating) * 0.634}px; 
               height: {diamRating(serie.Rating)}px; 
 
-            ">
-      {/if}
+            "
+                />
+              {/if}
 
-        <div class= "manchas">
-        <Mancha tipo={serie.Tipo} cant={manchaVentas(serie.Ventas)} tamano={diamRating(serie.Rating)*0.634} altura= {diamRating(serie.Rating)}/>
-        </div>
-        <div class="person-color">
-        <Color tipo={serie.Tipo} tamano={diamRating(serie.Rating)*0.634} altura= {diamRating(serie.Rating)} color={colorDuracion(serie.Duracion)}/>
-        </div>
-
+              <div class="manchas">
+                <Mancha
+                  tipo={serie.Tipo}
+                  cant={manchaVentas(serie.Ventas)}
+                  tamano={diamRating(serie.Rating) * 0.634}
+                  altura={diamRating(serie.Rating)}
+                />
+              </div>
+              <div class="person-color">
+                <Color
+                  tipo={serie.Tipo}
+                  tamano={diamRating(serie.Rating) * 0.634}
+                  altura={diamRating(serie.Rating)}
+                  color={colorDuracion(serie.Duracion)}
+                />
+              </div>
+            </div>
+            <div class="nombre-container">
+              <p>{serie.Nombre}</p>
+            </div>
+          </div>
+        {/each}
+        <img class="estante" src="./images/estante.svg" alt="" />
       </div>
-      <div class="nombre-container">
-        <p>{serie.Nombre}</p>
-      </div>
-      </div>
-      {/each}
-          <img
-        class="estante"
-        src="./images/estante.svg"
-        alt="">
-       </div>     
     {/each}
-    </div>
-    </div>
-    <img class="piso" src="./images/piso-mueble.svg" alt=""> 
+  </div>
+</div>
+<img class="piso" src="./images/piso-mueble.svg" alt="" />
 
 <style>
+  .ordenar {
+    position: relative;
 
-
-    .ordenar {
-      position: relative;
-
-              margin-top: 20%;
+    margin-top: 20%;
     margin-left: 35%;
+  }
 
-
-
-    }
-
-    .imagen_orden{
+  .imagen_orden {
     width: 250px;
     /* top: 610%; 
     left: 50%; */
-margin-top: 23%;
+    margin-top: 23%;
     margin-left: 39%;
     position: absolute;
-
     z-index: 1;
-    }
+  }
 
-    .boton_ordenar {
-      position: absolute;
-        /* box-shadow: 0 5px 10px rgba(0,0,0,0.2); */
-      height: 50px;
-          width: 160px;
-     margin-top: 25%;
+  .boton_ordenar {
+    position: absolute;
+    /* box-shadow: 0 5px 10px rgba(0,0,0,0.2); */
+    height: 50px;
+    width: 160px;
+    margin-top: 25%;
     margin-left: 47%;
     /* top: 496px;
     left: 38%; */
-      background-color: #F6F5EA;
-      color: black;
-      /* padding: 10px 16px; */
-      font-size: 24px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-align: center;
+    background-color: #f6f5ea;
+    color: black;
+    /* padding: 10px 16px; */
+    font-size: 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
     user-select: none;
     z-index: 50;
-        font-family: "Pangolin", cursive;
-
-    }
-
-    .ops_ordenar {
-
-      width: 150px;
     font-family: "Pangolin", cursive;
-      display: none;
+  }
+
+  .ops_ordenar {
+    width: 150px;
+    font-family: "Pangolin", cursive;
+    display: none;
     margin-top: 30%;
     margin-left: 48%;
     position: absolute;
-      background-color: #F6F5EA;
-  
-      /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
-      border-radius: 4px;
-      z-index: 1;
-    }
+    background-color: #f6f5ea;
 
-    .ops_ordenar button {
-      font-family: "Pangolin", cursive;
-      color: black;
-      padding: 10px 14px;
-      text-align: left;
-      text-decoration: none;
-      background: none;
-      border: none;
-      width: 100%;
-      cursor: pointer;
-    }
+    /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+    border-radius: 4px;
+    z-index: 1;
+  }
 
-    .ops_ordenar button:hover {
-      background-color: #F0D786;
-    }
+  .ops_ordenar button {
+    font-family: "Pangolin", cursive;
+    color: black;
+    padding: 10px 14px;
+    text-align: left;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+  }
 
-    .ordenar:hover .ops_ordenar {
-      display: block;
-    }
-    
-    .filtrar {
-      position: relative;
-     
+  .ops_ordenar button:hover {
+    background-color: #f0d786;
+  }
+
+  .ordenar:hover .ops_ordenar {
+    display: block;
+  }
+
+  .filtrar {
+    position: relative;
 
     margin-left: 35%;
     margin-bottom: 20%;
-
-
-    }
-    .imagen_filtrar{
+  }
+  .imagen_filtrar {
     width: 250px;
     /* top: 610%; 
     left: 50%; */
@@ -377,116 +393,109 @@ margin-top: 23%;
     position: absolute;
 
     z-index: 1;
-    }
+  }
 
-    .boton_filtrar {
-
-      position: absolute;
+  .boton_filtrar {
+    position: absolute;
     font-family: "Pangolin", cursive;
-      height: 50px;
-          width: 160px;
-margin-top: 25%;
+    height: 50px;
+    width: 160px;
+    margin-top: 25%;
     margin-left: 2%;
-      background-color: #F6F5EA;
-      color: black;
-      /* padding: 10px 16px; */
-      font-size: 24px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-align: center;
+    background-color: #f6f5ea;
+    color: black;
+    /* padding: 10px 16px; */
+    font-size: 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
     user-select: none;
     z-index: 50;
-    }
+  }
 
-    .ops_filtrar {
-
-      background-color: #F6F5EA;
-        width: 150px;
+  .ops_filtrar {
+    background-color: #f6f5ea;
+    width: 150px;
     font-family: "Pangolin", cursive;
-      display: none;
+    display: none;
     margin-top: 30%;
     margin-left: 2%;
     position: absolute;
-      /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
-      border-radius: 4px;
-      z-index: 1;
-    }
+    /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+    border-radius: 4px;
+    z-index: 1;
+  }
 
-    .ops_filtrar button {
-          font-family: "Pangolin", cursive;
-      color: black;
-      padding: 10px 14px;
-      text-align: left;
-      text-decoration: none;
-      background: none;
-      border: none;
-      width: 100%;
-      cursor: pointer;
-    }
+  .ops_filtrar button {
+    font-family: "Pangolin", cursive;
+    color: black;
+    padding: 10px 14px;
+    text-align: left;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+  }
 
-    .ops_filtrar button:hover {
-      background-color: #F0D786;
-    }
+  .ops_filtrar button:hover {
+    background-color: #f0d786;
+  }
 
-    .filtrar:hover .ops_filtrar {
-      display: block;
-    }
-
-
+  .filtrar:hover .ops_filtrar {
+    display: block;
+  }
 
   button {
-		cursor: pointer;
-	}
-	.active {
-		color: black;
-		background: white;
-	}
-  .gatos-con-estante{
-            display: flex;
+    cursor: pointer;
+  }
+  .active {
+    color: black;
+    background: white;
+  }
+  .gatos-con-estante {
+    display: flex;
     justify-content: center;
     align-items: end;
     margin: auto;
     flex-wrap: wrap;
-   row-gap: 0px;
+    row-gap: 0px;
     column-gap: 50px;
   }
-  .techo{
-      margin: auto;
-        position: relative;
+  .techo {
+    margin: auto;
+    position: relative;
 
-     bottom: -16px;
+    bottom: -16px;
   }
-  .mueble{
-  margin: auto;
-    background-color: #F0D786;
- margin: 0px 61px;
+  .mueble {
+    margin: auto;
+    background-color: #f0d786;
+    margin: 0px 70px;
 
- border: 50px solid transparent;
-      border-image-slice: 60;
-  border-image-source:url("/images/estante-borde.svg"); 
+    border: 50px solid transparent;
+    border-image-slice: 60;
+    border-image-source: url("/images/estante-borde.svg");
   }
-.estante{
-  
+  .estante {
     height: 100%;
-     width: 100%;
-     
-}
-.piso{
-        margin: auto;
-        position: relative;
-
-          bottom: 11px;
-}
-    .container{
-        display: flex;
+    width: 100%;
+  }
+  .piso {
+    margin: auto;
+    position: relative;
+    margin: 0px 5px;
+    bottom: 8px;
+  }
+  .container {
+    display: flex;
     justify-content: center;
     align-items: end;
     margin: auto;
     flex-wrap: wrap;
-   row-gap: 50px;
+    row-gap: 50px;
     column-gap: 50px;
-
   }
   .person-container {
     display: flex;
@@ -497,7 +506,7 @@ margin-top: 25%;
     width: 120px;
 
     height: 180px;
-    margin:auto;
+    margin: auto;
     height: 200px;
 
     /*
@@ -508,30 +517,28 @@ margin-top: 25%;
     align-items: center;
     flex: 180px 0 0;
     */
-    
   }
-    .person {
-        position: absolute;
-        /*
+  .person {
+    position: absolute;
+    /*
     bottom: -10px;
     */
 
     z-index: 3;
   }
-  .manchas{
-      bottom: -3.5%;
-         position: absolute;
+  .manchas {
+    bottom: -3.5%;
+    position: absolute;
     mix-blend-mode: multiply;
     z-index: 3;
   }
-    .person-color{
+  .person-color {
     position: absolute;
     /*
     left: 2%;
     right: 3.10%;
      */
-    bottom: -4%;  
-     
+    bottom: -4%;
   }
 
   .nombre-container {
@@ -558,26 +565,38 @@ margin-top: 25%;
     width: 200px;
     transition: transform 0.4s ease-in-out;
   }
-  .gato-interactivo{
+  .gato-interactivo {
     z-index: 900;
     position: absolute;
     opacity: 0;
   }
   @keyframes salto {
-    0%   {transform: translateY(0px);}
-    15%  {transform: translateY(-20px);}
-    30%  {transform: translateY(0px);}
-    45%  {transform: translateY(-10px);}
-    60%  {transform: translateY(0px);}
-    100% {transform: translateY(0px);}
+    0% {
+      transform: translateY(0px);
+    }
+    15% {
+      transform: translateY(-20px);
+    }
+    30% {
+      transform: translateY(0px);
+    }
+    45% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
   }
 
-
-  .person-container, .nombre-container {
-    transition: all 0.6s ease; 
+  .person-container,
+  .nombre-container {
+    transition: all 0.6s ease;
   }
 
-  .gato-wrapper:hover  {
+  .gato-wrapper:hover {
     transform: scale(1.1);
   }
 
@@ -588,21 +607,20 @@ margin-top: 25%;
   .gato-wrapper:hover .person-container {
     animation: salto 1.4s ease-in-out infinite;
   }
-  
-  .gato-wrapper:hover {
 
-     animation-play-state: paused;
+  .gato-wrapper:hover {
+    animation-play-state: paused;
   }
 
-.volver-a-guia {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  padding: 12px 20px;
-  z-index: 1000;
-  cursor: pointer;
-  width: 100px;
-  height: 60px;
+  .volver-a-guia {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 12px 20px;
+    z-index: 1000;
+    cursor: pointer;
+    width: 100px;
+    height: 60px;
 
     background-color: #ffe4f0;
     color: #5b3c40;
@@ -615,14 +633,12 @@ margin-top: 25%;
     transition: all 0.3s ease;
     cursor: pointer;
     font-family: "Pangolin", cursive;
-}
-.volver-a-guia:hover {
-      filter: brightness(150%);
+  }
+  .volver-a-guia:hover {
+    filter: brightness(150%);
     background-color: #ffd6ec;
     border-color: #ffb6d1;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
-}
-
-
-  </style>
+  }
+</style>

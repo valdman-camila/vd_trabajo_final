@@ -1,8 +1,9 @@
 <script>
     import GatoJugador from './armarGato/GatoJugador.svelte';
     import {jugadorGatoTerminado} from './store.js';
-    import { resultadoJuego2 } from './store.js';
+    import {resultadoJuego1, resultadoJuego2 } from './store.js';
 
+   $: alturaJugador = $resultadoJuego1;
     //board
     let tileSize = 32;
     let rows = 16;
@@ -217,7 +218,7 @@
             createAliens();
         }
 
-        context.fillStyle="white";
+        context.fillStyle="black";
         context.font="16px courier";
         context.fillText(score, 5, 20);
     }
@@ -277,22 +278,26 @@
     }
 </script>
 
-<div class="space-container">
-      <h1 class="titulo_juego">Vencé a tu competencia!</h1>
-    <canvas id="board"></canvas>
+    <div class="space-container">
+        <h1 class="titulo_juego">Vencé a tu competencia!</h1>
+        <canvas id="board"></canvas>
 
-    <div id="player-character" style="display: none;">
-        <GatoJugador/>
+        <div id="player-character" style="display: none;">
+            <GatoJugador/>
+        </div>
+
+        <h2 id="game-over-text" style="display:none; color:white; margin-top: 20px;">GAME OVER!</h2>
+        <button id="start-game-button" style="margin-top: 10px; padding: 10px 20px; font-size: 20px; cursor: pointer;" disabled={!$jugadorGatoTerminado}>Jugar</button>
     </div>
-
-    <h2 id="game-over-text" style="display:none; color:white; margin-top: 20px;">GAME OVER!</h2>
-    <button id="start-game-button" style="margin-top: 10px; padding: 10px 20px; font-size: 20px; cursor: pointer;" disabled={!$jugadorGatoTerminado}>Jugar</button>
-</div>
 
 <style>
     #board {
         margin: 0;
         background-color: black;
+        background-image: url("/images/prueba_fondo2.jpg");
+              background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
     }
 
     .space-container {
@@ -304,11 +309,12 @@
         min-height: 100vh;
         text-align: center;
         background-color: black;
-        color: white;
+
+        color: black;
     }
     #player-character {
         position: absolute;
-        z-index: 10;
+        z-index: 10;    
     }
 
     button {

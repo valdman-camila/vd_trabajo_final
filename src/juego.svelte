@@ -18,6 +18,8 @@
   $: if (!gameStart && !gameOver) {
     moveLoop(); 
   }
+  
+
 
   onMount(() => {
     basket = document.getElementById("basket");
@@ -171,7 +173,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 40px;
+    padding-top: 50px;
     position: relative;
   }
 
@@ -184,17 +186,18 @@
 
   #tv-background {
     position: relative;
-    width: 480px;
-    height: 430px;
+width: 597px;
+        height: 407px;
   }
 
   .bezel {
     position: absolute;
     width: 450px;
-    height: 400px;
-    top: 15px;
+    height: 100%;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
+
     box-shadow: 2px 2px 8px #181818;
     background-image: radial-gradient(transparent 50%, #1e1d19);
     z-index: 10;
@@ -203,9 +206,10 @@
 
   .retro-tv {
     position: absolute;
-    width: 480px;
-    top: 0;
+    width: 620px;
+    top: 156px;
     left: 50%;
+    height: 504px;
     transform: translateX(-50%);
     pointer-events: none;
     user-select: none;
@@ -214,19 +218,28 @@
 
   #game-container {
     position: absolute;
-    top: 15px;
+    top: 15%;
     left: 50%;
     width: 400px;
-    height: 400px;
-    margin-top: 19%;
- 
+    height: 100%;
+    margin-top: 20%;
+ padding-top: 10%;
     border-radius: 10px;
     overflow: hidden;
-    background-image: url("/images/fondo_juego2.svg");
+    background-image: url("/images/fondo_juego.svg");
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
     transform: translateX(-50%);
     z-index: 15;
   }
-
+  .tv-interference-fondo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
+    background-color: #1e1d19;
+  }
   .tv-interference {
     position: absolute;
     top: 0; left: 0;
@@ -243,6 +256,7 @@
     pointer-events: none;
     opacity: 0.9;
     mix-blend-mode: screen;
+  
   }
 
   @keyframes interferenceAnim {
@@ -356,37 +370,39 @@
  
 </style>
 
-<div class="catch-container">
-  <h1 class="titulo_juego">Entretené a tu audencia!</h1>
+  <div class="catch-container">
+    <h1 class="titulo_juego">Entretené a tu audencia!</h1>
 
-  <div id="tv-background">
+    <div id="tv-background">
 
-    <img class="retro-tv" src="/images/retro-tv.svg" alt="Retro TV" />
+      <img class="retro-tv" src="/images/tele_vieja.svg" alt="Retro TV" />
 
-    <div id="game-container">
-      {#if !$jugadorGatoTerminado}
-        <div class="tv-interference"></div>
-      {/if}
+      <div id="game-container">
+        {#if !$jugadorGatoTerminado}
+          <div class="tv-interference-fondo"></div>
+          <div class="tv-interference"></div>
+        {/if}
 
-      <GatoJugador id="basket" />
-              <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
+        <GatoJugador id="basket" />
+                <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
 
-      {#if $jugadorGatoTerminado && (gameStart || gameOver)}
-        <button id="start-button" on:click={startGame}>
-          {gameOver ? "Jugar otra vez" : "Comenzar juego"}
-        </button>
-      {/if}
+        {#if $jugadorGatoTerminado && (gameStart || gameOver)}
+          <button id="start-button" on:click={startGame}>
+            {gameOver ? "Jugar otra vez" : "Comenzar juego"}
+          </button>
+        {/if}
 
-      {#if !gameStart && !gameOver}
-        <div class="status-panel">
-          <div class="score">Score: {score}</div>
-          <div class="time">Tiempo: {time}s</div>
-        </div>
-      {/if}
+        {#if !gameStart && !gameOver}
+          <div class="status-panel">
+            <div class="score">Score: {score}</div>
+            <div class="time">Tiempo: {time}s</div>
+          </div>
+        {/if}
+      </div>
+
     </div>
-
   </div>
-</div>
+
 <div id="gameOverModal" class="modal">
   <div class="modal-content">
     <h2>¡Juego terminado!</h2>

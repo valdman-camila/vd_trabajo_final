@@ -272,6 +272,7 @@ function filterSelection(valorFilter){
     {/each}
     </div>
     </div>
+  <img class="piso" src="./images/piso-mueble.svg" alt=""> 
 
 <style>
     .ordenar {
@@ -443,19 +444,27 @@ margin-top: 25%;
      width: 10011px;
      bottom: -16px;
   }
-  .mueble{
-  margin: auto;
-    background-color: #dfcdaf;
- margin: 0px 50px;
- border: 50px solid transparent;
-      border-image-slice: 60;
-  border-image-source:url("/images/estante-borde.svg"); 
+    .mueble{
+      margin: auto;
+        background-color: #F0D786;
+    margin: 0px 70px;
+
+    border: 50px solid transparent;
+          border-image-slice: 60;
+      border-image-source:url("/images/estante-borde.svg"); 
+    }
+  .estante{
+    
+      height: 100%;
+      width: 100%;
+      
   }
-.estante{
-  
-    height: 100%;
-     width: 100%;
-}
+  .piso{
+          margin: auto;
+          position: relative;
+  margin: 0px 5px;
+            bottom: 8px;
+  }
       .container{
         display: flex;
     justify-content: center;

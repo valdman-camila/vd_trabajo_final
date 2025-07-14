@@ -396,11 +396,10 @@ width: 597px;
         <GatoJugador id="basket" />
                 <img class="bezel" src="/images/bezel.png" alt="TV Bezel" />
 
-        {#if $jugadorGatoTerminado && (gameStart || gameOver)}
-          <button id="start-button" on:click={startGame}>
-            {gameOver ? "Jugar otra vez" : "Comenzar juego"}
-          </button>
-        {/if}
+      {#if $jugadorGatoTerminado && !gameStarted}
+          <button id="start-button" on:click={startGame}>Jugar</button>
+      {/if}
+
 
         {#if !gameStart && !gameOver}
           <div class="status-panel">

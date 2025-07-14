@@ -24,7 +24,7 @@
       una mejora? ¡Quizás una secuela sea lo que necesita para brillar aún más!
     </div>
     <img
-      src="/public/images/Ultimo_1.svg"
+      src="/images/Ultimo_1.svg"
       alt="Conejo"
       style="width: 500px; height: 500px"
     />
@@ -38,7 +38,7 @@
       vemos en la próxima aventura animada!
     </div>
     <img
-      src="/public/images/Ultimo_1.svg"
+      src="/images/Ultimo_1.svg"
       alt="Conejo"
       style="width: 500px; height: 500px"
     />

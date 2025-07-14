@@ -41,7 +41,7 @@
     basket = document.getElementById("basket");
     gameContainer = document.getElementById("game-container");
     score = 0;
-    time = 5;
+    time = 30;
     gameOver = false;
     gameStart = false;
     gameStarted = true;
@@ -79,6 +79,7 @@
     resultadoJuego1.set(altura);
     GatoTerminadoJuego1.set(true);
     mostrarModal(score);
+    document.getElementById("basket").style.display = "none";
   }
 
   function calcularAltura(puntaje) {
@@ -183,8 +184,8 @@
       <div id="game-container">
         {#if !$jugadorGatoTerminado || gameOver}
           <div class="tv-interference-fondo"></div>
-          <div class="tv-interference"></div>
           <div class="tapar-gato"></div>
+          <div class="tv-interference"></div>
         {/if}
 
         <GatoJugador id="basket" />
@@ -457,7 +458,7 @@
   }
 
   .tapar-gato {
-    width: 57px;
+    width: 70px;
     height: 91px;
     position: absolute;
     bottom: 0;

@@ -10,131 +10,130 @@
   font-style: normal;
 }
 
-#app{
-    position: relative;
-    max-width: 1580px;
-
+#app {
+  position: relative;
+  max-width: 1580px;
 }
 body {
-    background-color: #81C2E8;
-    font-family: "Pangolin", cursive;
-    overflow-x: hidden;
+  background-color: #81c2e8;
+  font-family: "Pangolin", cursive;
+  overflow-x: hidden;
 }
 html {
-    scroll-behavior: smooth;
- }
-.header-container{
-    text-align: center;
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-    overflow: hidden;
-    border-radius: 0 0 85% 85% / 30%;
-    color: white;
-    font-family: "Gloria Hallelujah", cursive;
+  scroll-behavior: smooth;
+}
+.header-container {
+  text-align: center;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 85% 85% / 30%;
+  color: white;
+  font-family: "Gloria Hallelujah", cursive;
 }
 .header-overlay {
-    width: 100%;
-    height: 100%;
-    padding: 50px;
-    background: #8E2F1A;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  background: #8e2f1a;
 }
-.titulo-nuevo{
-    width:500px;
-    max-width: 90%;
+.titulo-nuevo {
+  width: 500px;
+  max-width: 90%;
   height: auto;
   display: block;
   margin: 0 auto;
 }
-.footer-container{
-    text-align: center;
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-    overflow: hidden;
-    border-radius: 85% 85% 0% 0% / 30%;
-    color: white;
-    font-size: 20px;
+.footer-container {
+  text-align: center;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  border-radius: 85% 85% 0% 0% / 30%;
+  color: white;
+  font-size: 20px;
 }
-.titulo-idea{
-width: 500px;
+.titulo-idea {
+  width: 500px;
   height: auto;
   display: block;
   margin: 0 auto;
-  max-width:90%;
+  max-width: 90%;
 }
 .footer-overlay {
-    width: 100%;
-    height: 100%;
-    padding: 50px;
-    background: #8E2F1A;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  background: #8e2f1a;
 }
 a.button {
-    margin-top: 20px;
-    display: inline-block;
-    padding: 14px 28px;
-    background-color: #ffe4f0;
-    color: #5b3c40;
-    border: 2px solid #ffcce1;
-    border-radius: 25px;
-    font-size: 22px;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    font-family: "Pangolin", cursive;
+  margin-top: 20px;
+  display: inline-block;
+  padding: 14px 28px;
+  background-color: #ffe4f0;
+  color: #5b3c40;
+  border: 2px solid #ffcce1;
+  border-radius: 25px;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: "Pangolin", cursive;
 }
 a.button:hover {
-    filter: brightness(150%);
-    background-color: #ffd6ec;
-    border-color: #ffb6d1;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    transform: scale(1.05);
+  filter: brightness(150%);
+  background-color: #ffd6ec;
+  border-color: #ffb6d1;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
 }
 .change-section {
-    margin-top: 20px;
-    display: inline-block;
-    padding: 14px 28px;
-    background-color: #ffe4f0;
-    color: #5b3c40;
-    border: 2px solid #ffcce1;
-    border-radius: 25px;
-    font-size: 22px;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    font-family: "Pangolin", cursive; 
-    text-align: center;       
+  margin-top: 20px;
+  display: inline-block;
+  padding: 14px 28px;
+  background-color: #ffe4f0;
+  color: #5b3c40;
+  border: 2px solid #ffcce1;
+  border-radius: 25px;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: "Pangolin", cursive;
+  text-align: center;
 }
 .change-section:hover {
-    filter: brightness(150%);
-    background-color: #ffd6ec;
-    border-color: #ffb6d1;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    transform: scale(1.05);
+  filter: brightness(150%);
+  background-color: #ffd6ec;
+  border-color: #ffb6d1;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
 }
 .container-pre-armar {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-    position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  position: relative;
 }
 .bunni-container {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
-  margin: 400px auto 0 auto; 
+  margin: 400px auto 0 auto;
   width: fit-content;
 }
 
@@ -142,19 +141,18 @@ a.button:hover {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
-  margin: 500px auto 0 auto; 
+  margin: 500px auto 0 auto;
   width: fit-content;
 }
 
-
 .speech {
   position: absolute;
-  bottom:450px; 
+  bottom: 450px;
   left: 0%;
 
-  background-image: url('/images/Speech_intro.svg');
+  background-image: url("/images/Speech_intro.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -169,15 +167,14 @@ a.button:hover {
   min-height: 400px;
   max-width: 800px;
   flex-wrap: wrap;
-  width:600px;
+  width: 600px;
   z-index: 10;
-  
 }
 .speech2 {
   position: absolute;
-  bottom:250px;
+  bottom: 250px;
   left: 0%;
-  background-image: url('/images/Speech_intro.svg');
+  background-image: url("/images/Speech_intro.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -192,9 +189,8 @@ a.button:hover {
   min-height: 400px;
   max-width: 800px;
   flex-wrap: wrap;
-  width:500px;
+  width: 500px;
   z-index: 10;
-  
 }
 
 .bunny-speech {
@@ -218,7 +214,6 @@ a.button:hover {
   height: auto;
 }
 
-
 .conejo {
   width: 500px;
   height: 500px;
@@ -230,7 +225,7 @@ a.button:hover {
   color: #fff;
   text-align: center;
   padding: 100px 20px;
-  font-family: 'Pangolin', cursive;
+  font-family: "Pangolin", cursive;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* efecto de profundidad */
   margin-top: 100px;
 }
@@ -246,42 +241,41 @@ a.button:hover {
   transform: scaleX(-1);
 }
 
+#game-container {
+  width: 400px;
+  height: 400px;
 
-        #game-container {
-            width: 400px;
-            height: 400px;
-      
-            position: relative;
-            background-image: url("/images/fondo_juego2.svg");
-            margin: 50px auto;
-        }
-        
-        /* #basket {
+  position: relative;
+  background-image: url("/images/fondo_juego2.svg");
+  margin: 50px auto;
+}
+
+/* #basket {
             width: 57px;
             height: 91px;
             background-image: url("./images/prueba_1.png");
             position: absolute;
             bottom: 0;
         } */
-       
-        .fruit {
-            width: 24.11px;
-            height: 30px;
-            background-image: url("/images/pez.svg");
-            position: absolute;
-            top: 0;
-        } 
+
+.fruit {
+  width: 24.11px;
+  height: 30px;
+  background-image: url("/images/pez.svg");
+  position: absolute;
+  top: 0;
+}
 
 .button-linkedin {
-    background-color: #ffffff00;
+  background-color: #ffffff00;
 }
 
 .video-full {
-  width: 100vw;          /* Ocupa todo el ancho de la ventana */
-  height: auto;          /* Mantiene la proporción original */
-  display: block;        /* Elimina espacio debajo del video */
-  margin: 0 auto;        /* Centrado horizontal */
-  object-fit: cover;     /* Opcional: llena el ancho sin deformar */
+  width: 100vw; /* Ocupa todo el ancho de la ventana */
+  height: auto; /* Mantiene la proporción original */
+  display: block; /* Elimina espacio debajo del video */
+  margin: 0 auto; /* Centrado horizontal */
+  object-fit: cover; /* Opcional: llena el ancho sin deformar */
 }
 
 .boton-siguiente {
@@ -310,7 +304,6 @@ a.button:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-
 .message2 {
   display: flex;
   flex-direction: row; /* Asegura que el orden sea: conejo → texto */
@@ -329,7 +322,7 @@ a.button:hover {
 }
 
 .mensajedeconejo {
-  background-image: url('/images/Speech_intro.svg');
+  background-image: url("/images/Speech_intro.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -347,4 +340,9 @@ a.button:hover {
   overflow-wrap: break-word;
   animation: flotar2 5s ease-in-out infinite;
 }
-
+.fondo-graficos {
+  background-image: url("/images/tierra.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

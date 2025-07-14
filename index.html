@@ -5,19 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="images/icono.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Font Gloria Hallelujah-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Pangolin&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Pangolin&display=swap"
+      rel="stylesheet"
+    />
     <!--Font Pangolin-->
-    
+
     <title>VD | Maqueta</title>
 
     <!-- Llamada reseteo de estilos default: public/css/main.css  -->
     <link rel="stylesheet" href="./css/main.css" />
 
     <style>
-
-            .section.active {
+      .section.active {
         opacity: 1;
         pointer-events: auto;
         position: relative;
@@ -38,195 +40,280 @@
         animation: fadeIn 0.5s ease-in-out;
       }
       @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
       .section {
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
-  transition: opacity 0.5s ease, height 0.5s ease;
-}
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transition: opacity 0.5s ease, height 0.5s ease;
+      }
 
-.section.active {
-  opacity: 1;
-  height: auto;
-  overflow: visible;
-}
+      .section.active {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+      }
 
-.video-fondo {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.6;
-}
+      .video-fondo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.6;
+      }
 
-#tv-time {
-  margin-top: 50px;
-  margin-bottom: 200px;
-}
-
+      #tv-time {
+        /* margin-top: 50px;
+  margin-bottom: 200px; */
+      }
     </style>
   </head>
 
   <body>
     <!-- Sección de inicio, con la visualización de gatos -->
     <div id="home" class="section active">
-    <div class="header-container">
-      <div class="header-overlay">
-        <h1> <img src="/images/TituloIdea.svg" class="titulo-nuevo" alt=""/></h1>
+      <div class="header-container">
+        <div class="header-overlay">
+          <h1>
+            <img src="/images/TituloIdea.svg" class="titulo-nuevo" alt="" />
+          </h1>
+        </div>
       </div>
+      <div id="app"></div>
+      <script type="module" src="/src/main.js"></script>
+      <!-- JS for flourish charts -->
+      <script src="https://public.flourish.studio/resources/embed.js"></script>
+
+      <!-- Sección en la que la persona puede armar a su propio gato -->
+      <div id="app2"></div>
+
+      <!-- <div id="tv-time" style="position: relative; min-height: 100vh;"> -->
+      <div id="juego"></div>
     </div>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-    <!-- JS for flourish charts -->
-    <script src="https://public.flourish.studio/resources/embed.js"></script>
 
-    <!-- Sección en la que la persona puede armar a su propio gato -->
-    <div id="app2"></div>
-
-<div id="tv-time" style="position: relative; min-height: 100vh;">
-  <div id="juego"></div>
-</div>
-    
-
-  <video
-  class="video-full"
-  autoplay
-  muted
-  playsinline
-  loop
->
-  <source src="/video/toystore.mp4" type="video/mp4" />
-  Tu navegador no soporta el video.
-</video>
+    <video class="video-full" autoplay muted playsinline loop>
+      <source src="/video/toystore.mp4" type="video/mp4" />
+      Tu navegador no soporta el video.
+    </video>
     <div id="juego2"></div>
 
-  
     <div id="gato-final"></div>
 
-  <div class="message2">
-  <img class="conejofoto" src="/images/WinkConejo.svg" alt="Conejo" />
-  <div class="mensajedeconejo">
-    ¡Excelente! Estos son los resultados de tu serie. Pero, ¿por qué tuviste que participar en estos juegos para saber el rating y las ventas de tu serie? Bueno, veamos las estadísticas...
-  </div>
-</div>
-
-
-    <section class="seccion-graficos">
-  <h2 class="titulo-graficos">Sección de Gráficos</h2>
-    </section>
-
-    <div id="scrolly" class="section active">
-      <!--Aca ponemos el archivo con el scrollytelling-->
-          <!-- Contenedor de la story de flourish (scrolly)-->
-    <div id="my-wrapper">
-      <!--  Reemplazar el ID de ejemplo por la de la propia story -->
-      <div
-        class="flourish-embed"
-        data-src="story/3192694"
-        data-url="https://public.flourish.studio/story/3192694/"
-        data-height="100vh"
-      >
-        <script src="https://public.flourish.studio/resources/embed.js"></script>
-      </div>
-
-      <!-- Acá es donde agregás tus epígrafes, vinculándolos a las visualizaciones específicas de la story. Reemplazar los IDs y numerar los slide-1, slide-2, etc. Debe haber uno por cada slide de la story. -->
-      <div class="bunny-speech">
-  <p class="bunny-text">
-    ¡Bienvenidos! Acá tienen una vista completa de todas las series animadas basadas en juguetes.  
-    Un universo de colores, personajes y recuerdos listos para ser explorados.
-  </p>
-  <a href="#story/3192694/slide-1">
-    <img src="/images/NormalConejo.svg" alt="Conejo" class="bunny-img">
-  </a>
-</div>
-
-<div class="bunny-speech">
-       <p class="bunny-text">
-       Estas son las series ordenadas de menor rating a mayor rating, de izquierda a derecha. ¡Aplausos para las de la derecha! Y un "¡bueno, al menos lo intentaron!" para las demás.
-      </p>
-       <a href="#story/3192694/slide-2"><img src="/images/WinkConejo.svg" alt="Conejo" class="bunny-img"></a>
-</div>
-
-      <div class="bunny-speech">
-       <p class="bunny-text">
-        Ahora tenemos las series ordenadas por ventas, de izquierda a derecha: las que vendieron menos a la izquierda y las que vendieron más a la derecha. ¡Las ventas no solo nos dicen qué es popular, nos muestran qué es inolvidable! ¡Esas series que jamás dejamos de amar!
-      </p>
-      <a href="#story/3192694/slide-3"><img src="/images/DosOjosCerradosConejo.svg" alt="Conejo" class="bunny-img"></a>
-      </div>
-
-      <div class="bunny-speech">
-      <p class="bunny-text">
-        Este gráfico muestra el rating en el eje X y las ventas en el eje Y. Cada punto representa una serie, y la idea es ver si existe relación entre qué tanto gustaron y cuánto vendieron. Spoiler: gustar no siempre significa vender… triste pero real.
-       
-      </p>
-       <a href="#story/3192694/slide-4"><img src="/images/ConfundidoConejo.svg" alt="Conejo" class="bunny-img"></a>
-    </div>
-
-    <div class="bunni-container2">
-  <div class="speech2">
-    ¡Y llegamos al final! Ahora que has visto cómo le fue a tu serie en comparación con las demás, ¿cómo la ves? ¿Le fue bien o crees que necesita una mejora? ¡Quizás una secuela sea lo que necesita para brillar aún más!
-  </div>
-  <img class="conejo-inv" src="/images/Bunny_intro.svg" alt="Conejo" />
-</div>
-
-  <section class="seccion-graficos">
-    </section>
-
-     <div class="bunni-container">
-  <div class="speech">
-    Y así termina este viajecito por tus recuerdos. Gracias por venir. Nos vemos en la próxima aventura animada!
-  </div>
-  <img src="./public/images/Ultimo_1.svg" alt="Conejo" style="width: 500px; height: 500px;">
-</div>
-    
-
-    </div>
-    <div class="footer-container">
-      <div class="footer-overlay">
-        <p>Dataviz creativa | Visualización de Datos</p>
-        <p>
-          Delfina Abbate <a href="https://www.linkedin.com/in/camila-valdman-3241542a2/" target="_blank" class="button" style="background-color: #ffffff00; border: #ffcce100; box-shadow: 0 4px 6px rgba(0, 0, 0, 0); padding: 5px 5px; transform: translateY(20%);"><img src="./images/LinkedIn_icon.svg" alt="LinkedIn" style="height: 50px"/></a> 
-          | Luciana Alarcón <a href="https://www.linkedin.com/in/camila-valdman-3241542a2/" target="_blank" class="button" style="background-color: #ffffff00; border: #ffcce100; box-shadow: 0 4px 6px rgba(0, 0, 0, 0); padding: 5px 5px; transform: translateY(20%);"><img src="./images/LinkedIn_icon.svg" alt="LinkedIn" style="height: 50px"/></a> 
-          | Camila Nicole Valdman <a href="https://www.linkedin.com/in/camila-valdman-3241542a2/" target="_blank" class="button" style="background-color: #ffffff00; border: #ffcce100; box-shadow: 0 4px 6px rgba(0, 0, 0, 0); padding: 5px 5px; transform: translateY(20%);"><img src="./images/LinkedIn_icon.svg" alt="LinkedIn" style="height: 50px"/></a>
-        </p>
-        <a href="https://github.com/redandder/vd_maqueta_marcas_canales-main" target="_blank" class="button">Ver en GitHub</a>    
+    <div class="message2">
+      <img class="conejofoto" src="/images/WinkConejo.svg" alt="Conejo" />
+      <div class="mensajedeconejo">
+        ¡Excelente! Estos son los resultados de tu serie. Pero, ¿por qué tuviste
+        que participar en estos juegos para saber el rating y las ventas de tu
+        serie? Bueno, veamos las estadísticas...
       </div>
     </div>
+
+    <div class="fondo-graficos">
+      <section class="seccion-graficos">
+        <h2 class="titulo-graficos">Sección de Gráficos</h2>
+      </section>
+
+      <div id="scrolly" class="section active">
+        <!--Aca ponemos el archivo con el scrollytelling-->
+        <!-- Contenedor de la story de flourish (scrolly)-->
+        <div id="my-wrapper">
+          <!--  Reemplazar el ID de ejemplo por la de la propia story -->
+          <div
+            class="flourish-embed"
+            data-src="story/3192694"
+            data-url="https://public.flourish.studio/story/3192694/"
+            data-height="100vh"
+          >
+            <script src="https://public.flourish.studio/resources/embed.js"></script>
+          </div>
+
+          <!-- Acá es donde agregás tus epígrafes, vinculándolos a las visualizaciones específicas de la story. Reemplazar los IDs y numerar los slide-1, slide-2, etc. Debe haber uno por cada slide de la story. -->
+          <div class="bunny-speech">
+            <p class="bunny-text">
+              ¡Bienvenidos! Acá tienen una vista completa de todas las series
+              animadas basadas en juguetes. Un universo de colores, personajes y
+              recuerdos listos para ser explorados.
+            </p>
+            <a href="#story/3192694/slide-1">
+              <img
+                src="/images/NormalConejo.svg"
+                alt="Conejo"
+                class="bunny-img"
+              />
+            </a>
+          </div>
+
+          <div class="bunny-speech">
+            <p class="bunny-text">
+              Estas son las series ordenadas de menor rating a mayor rating, de
+              izquierda a derecha. ¡Aplausos para las de la derecha! Y un
+              "¡bueno, al menos lo intentaron!" para las demás.
+            </p>
+            <a href="#story/3192694/slide-2"
+              ><img src="/images/WinkConejo.svg" alt="Conejo" class="bunny-img"
+            /></a>
+          </div>
+
+          <div class="bunny-speech">
+            <p class="bunny-text">
+              Ahora tenemos las series ordenadas por ventas, de izquierda a
+              derecha: las que vendieron menos a la izquierda y las que
+              vendieron más a la derecha. ¡Las ventas no solo nos dicen qué es
+              popular, nos muestran qué es inolvidable! ¡Esas series que jamás
+              dejamos de amar!
+            </p>
+            <a href="#story/3192694/slide-3"
+              ><img
+                src="/images/DosOjosCerradosConejo.svg"
+                alt="Conejo"
+                class="bunny-img"
+            /></a>
+          </div>
+
+          <div class="bunny-speech">
+            <p class="bunny-text">
+              Este gráfico muestra el rating en el eje X y las ventas en el eje
+              Y. Cada punto representa una serie, y la idea es ver si existe
+              relación entre qué tanto gustaron y cuánto vendieron. Spoiler:
+              gustar no siempre significa vender… triste pero real.
+            </p>
+            <a href="#story/3192694/slide-4"
+              ><img
+                src="/images/ConfundidoConejo.svg"
+                alt="Conejo"
+                class="bunny-img"
+            /></a>
+          </div>
+
+          <div class="bunni-container2">
+            <div class="speech2">
+              ¡Y llegamos al final! Ahora que has visto cómo le fue a tu serie
+              en comparación con las demás, ¿cómo la ves? ¿Le fue bien o crees
+              que necesita una mejora? ¡Quizás una secuela sea lo que necesita
+              para brillar aún más!
+            </div>
+            <img
+              class="conejo-inv"
+              src="/images/Bunny_intro.svg"
+              alt="Conejo"
+            />
+          </div>
+
+          <section class="seccion-graficos"></section>
+
+          <div class="bunni-container">
+            <div class="speech">
+              Y así termina este viajecito por tus recuerdos. Gracias por venir.
+              Nos vemos en la próxima aventura animada!
+            </div>
+            <img
+              src="./public/images/Ultimo_1.svg"
+              alt="Conejo"
+              style="width: 500px; height: 500px"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="footer-container">
+        <div class="footer-overlay">
+          <p>Dataviz creativa | Visualización de Datos</p>
+          <p>
+            Delfina Abbate
+            <a
+              href="https://www.linkedin.com/in/camila-valdman-3241542a2/"
+              target="_blank"
+              class="button"
+              style="
+                background-color: #ffffff00;
+                border: #ffcce100;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+                padding: 5px 5px;
+                transform: translateY(20%);
+              "
+              ><img
+                src="./images/LinkedIn_icon.svg"
+                alt="LinkedIn"
+                style="height: 50px"
+            /></a>
+            | Luciana Alarcón
+            <a
+              href="https://www.linkedin.com/in/luciana-alarc%C3%B3n-663437343/"
+              target="_blank"
+              class="button"
+              style="
+                background-color: #ffffff00;
+                border: #ffcce100;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+                padding: 5px 5px;
+                transform: translateY(20%);
+              "
+              ><img
+                src="./images/LinkedIn_icon.svg"
+                alt="LinkedIn"
+                style="height: 50px"
+            /></a>
+            | Camila Nicole Valdman
+            <a
+              href="https://www.linkedin.com/in/camila-valdman-3241542a2/"
+              target="_blank"
+              class="button"
+              style="
+                background-color: #ffffff00;
+                border: #ffcce100;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+                padding: 5px 5px;
+                transform: translateY(20%);
+              "
+              ><img
+                src="./images/LinkedIn_icon.svg"
+                alt="LinkedIn"
+                style="height: 50px"
+            /></a>
+          </p>
+          <a
+            href="https://github.com/redandder/vd_maqueta_marcas_canales-main"
+            target="_blank"
+            class="button"
+            >Ver en GitHub</a
+          >
+        </div>
+      </div>
     </div>
 
-    
-  <!-- Tu JS principal -->
-  <script type="module" src="/src/main.js"></script>
+    <!-- Tu JS principal -->
+    <script type="module" src="/src/main.js"></script>
 
-  <script>
-    function loadSection(sectionId) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => {
-        section.classList.remove('active');
-      });
+    <script>
+      function loadSection(sectionId) {
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((section) => {
+          section.classList.remove("active");
+        });
 
-      const target = document.getElementById(sectionId);
-      if (target) {
-        target.classList.add('active');
+        const target = document.getElementById(sectionId);
+        if (target) {
+          target.classList.add("active");
+        }
       }
-    }
-
-  </script>
-      <script
+    </script>
+    <script
       src="https://cdn.flourish.rocks/flourish-scrolly-v3.1.0.min.js"
       type="text/javascript"
     ></script>
 
     <!-- ¡Inicializa la biblioteca para convertir tu historia en magia de desplazamiento! -->
     <script type="text/javascript">
-      initFlourishScrolly()
+      initFlourishScrolly();
     </script>
-
   </body>
 </html>

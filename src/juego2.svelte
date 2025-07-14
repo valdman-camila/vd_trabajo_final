@@ -1,7 +1,11 @@
 <script>
-  import GatoJugador from './armarGato/GatoJugador.svelte';
-  import { jugadorGatoTerminado, resultadoJuego2 } from './store.js';
-  import { onMount } from 'svelte';
+  import GatoJugador from "./armarGato/GatoJugador.svelte";
+  import {
+    jugadorGatoTerminado,
+    resultadoJuego2,
+    GatoTerminadoJuego1,
+  } from "./store.js";
+  import { onMount } from "svelte";
 
   let tileSize = 32;
   let rows = 16;
@@ -13,19 +17,22 @@
 
   let shipWidth = tileSize * 2;
   let shipHeight = tileSize;
-  let shipX = tileSize * columns / 2 - tileSize;
+  let shipX = (tileSize * columns) / 2 - tileSize;
   let shipY = tileSize * rows - tileSize * 2;
 
   let ship = { x: shipX, y: shipY, width: shipWidth, height: shipHeight };
   let shipImg;
   let shipVelocityX = tileSize;
 
-  let alienArray = [], alienImg;
+  let alienArray = [],
+    alienImg;
   let alienWidth = tileSize * 2;
   let alienHeight = tileSize;
   let alienX = tileSize;
   let alienY = tileSize;
-  let alienRows = 2, alienColumns = 3, alienCount = 0;
+  let alienRows = 2,
+    alienColumns = 3,
+    alienCount = 0;
   let alienVelocityX = 0.5;
 
   let bulletArray = [];
@@ -43,11 +50,11 @@
 
     playerDiv = document.getElementById("player-character");
     if (playerDiv) {
-      playerDiv.style.position = 'absolute';
-      playerDiv.style.width = ship.width + 'px';
-      playerDiv.style.height = ship.height + 'px';
-      playerDiv.style.left = board.offsetLeft + ship.x + 'px';
-      playerDiv.style.top = board.offsetTop + ship.y + 'px';
+      playerDiv.style.position = "absolute";
+      playerDiv.style.width = ship.width + "px";
+      playerDiv.style.height = ship.height + "px";
+      playerDiv.style.left = board.offsetLeft + ship.x + "px";
+      playerDiv.style.top = board.offsetTop + ship.y + "px";
     }
 
     shipImg = new Image();
@@ -59,7 +66,7 @@
     document.addEventListener("keydown", moveShip);
     document.addEventListener("keydown", shoot);
 
-    requestAnimationFrame(update);
+    // requestAnimationFrame(update);
   });
 
   function startGame() {
@@ -76,7 +83,7 @@
       ship.y = shipY;
 
       createAliens();
-      if (playerDiv) playerDiv.style.display = 'block';
+      if (playerDiv) playerDiv.style.display = "block";
       requestAnimationFrame(update);
     }
   }
@@ -88,8 +95,8 @@
 
     context.clearRect(0, 0, board.width, board.height);
     if (playerDiv) {
-      playerDiv.style.left = board.offsetLeft + ship.x + 'px';
-      playerDiv.style.top = board.offsetTop + ship.y + 'px';
+      playerDiv.style.left = board.offsetLeft + ship.x + "px";
+      playerDiv.style.top = board.offsetTop + ship.y + "px";
     }
 
     for (let alien of alienArray) {
@@ -98,9 +105,15 @@
         if (alien.x + alien.width >= board.width || alien.x <= 0) {
           alienVelocityX *= -1;
           alien.x += alienVelocityX * 2;
-          alienArray.forEach(a => a.y += alienHeight);
+          alienArray.forEach((a) => (a.y += alienHeight));
         }
-        context.drawImage(alienImg, alien.x, alien.y, alien.width, alien.height);
+        context.drawImage(
+          alienImg,
+          alien.x,
+          alien.y,
+          alien.width,
+          alien.height
+        );
         if (alien.y >= ship.y) endGame();
       }
     }
@@ -120,7 +133,7 @@
       }
     }
 
-    bulletArray = bulletArray.filter(b => !b.used && b.y >= 0);
+    bulletArray = bulletArray.filter((b) => !b.used && b.y >= 0);
 
     if (alienCount == 0) {
       score += alienColumns * alienRows * 100;
@@ -146,7 +159,8 @@
 
     setTimeout(() => {
       document.getElementById("gameOverModal").style.display = "block";
-      document.getElementById("scoreText").textContent = "Tu rating es: " + score;
+      document.getElementById("scoreText").textContent =
+        "Tu rating es: " + score;
     }, 200);
   }
 
@@ -163,7 +177,7 @@
           y: alienY + r * alienHeight,
           width: alienWidth,
           height: alienHeight,
-          alive: true
+          alive: true,
         });
       }
     }
@@ -174,7 +188,10 @@
     if (gameOver || !gameStarted) return;
     if (e.code == "ArrowLeft" && ship.x - shipVelocityX >= 0) {
       ship.x -= shipVelocityX;
-    } else if (e.code == "ArrowRight" && ship.x + shipVelocityX + ship.width <= board.width) {
+    } else if (
+      e.code == "ArrowRight" &&
+      ship.x + shipVelocityX + ship.width <= board.width
+    ) {
       ship.x += shipVelocityX;
     }
   }
@@ -184,23 +201,26 @@
     if (e.code == "Space") {
       e.preventDefault();
       bulletArray.push({
-        x: ship.x + shipWidth * 15 / 32,
+        x: ship.x + (shipWidth * 15) / 32,
         y: ship.y,
         width: tileSize / 8,
         height: tileSize / 2,
-        used: false
+        used: false,
       });
     }
   }
 
   function detectCollision(a, b) {
-    return a.x < b.x + b.width &&
+    return (
+      a.x < b.x + b.width &&
       a.x + a.width > b.x &&
       a.y < b.y + b.height &&
-      a.y + a.height > b.y;
+      a.y + a.height > b.y
+    );
   }
 </script>
 
+<!-- {#if $GatoTerminadoJuego1} -->
 <div class="space-container">
   <h1 class="titulo_juego">Vencé a tu competencia!</h1>
   <canvas id="board"></canvas>
@@ -213,6 +233,7 @@
     <button id="start-button" on:click={startGame}>Jugar</button>
   {/if}
 </div>
+<!-- {/if} -->
 
 <div id="gameOverModal" class="modal">
   <div class="modal-content">
@@ -230,7 +251,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: black;
+    background-color: #4caf50;
     color: white;
     gap: 20px;
   }
@@ -249,7 +270,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     border: none;
     padding: 16px 36px;
@@ -291,7 +312,8 @@
     cursor: pointer;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(155, 49, 49, 0.7);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
 </style>
-

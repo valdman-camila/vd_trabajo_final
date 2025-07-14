@@ -31,14 +31,13 @@
     jugadorGatoTerminado.set(true);
     dispatch("completo");
   }
-function empezar() {
-  comenzar = true;
-  tick().then(() => {
-    const destino = document.getElementById("crea-tu-propio-gato");
-    destino?.scrollIntoView({ behavior: "smooth" });
-  });
-}
-
+  function empezar() {
+    comenzar = true;
+    tick().then(() => {
+      const destino = document.getElementById("crea-tu-propio-gato");
+      destino?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
 </script>
 
 <img class="pasto" src="/images/pasto.png" alt="" />
@@ -133,9 +132,9 @@ function empezar() {
 
   .empezar {
     text-align: justify;
-    background-color: #4ac97b;
+    background-color: #4caf50;
 
-    border-radius: 10px;
+    /* border-radius: 10px; */
     padding: 2rem;
 
     /* max-width: 1000px;
@@ -149,7 +148,7 @@ function empezar() {
     position: absolute;
     margin-left: 70%;
     margin-top: -15%;
-    animation: saltito 2s infinite;
+    /* animation: saltito 2s infinite; */
   }
 
   @keyframes saltito {
@@ -185,7 +184,7 @@ function empezar() {
     position: relative;
     width: 100%;
     padding-bottom: 2rem;
-    background-color: #4ac97b;
+    background-color: #4caf50;
   }
 
   .person-container {

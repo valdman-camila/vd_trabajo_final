@@ -7,14 +7,12 @@
   import Color from "/src/color.svelte";
 
   import { tick } from "svelte";
-
   import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
-
   import { jugadorGatoTerminado } from "/src/store.js";
 
-  let paso = 0;
+  const dispatch = createEventDispatcher();
 
+  let paso = 0;
   let tipo = "Serializada";
   let altura = 260;
   let color;
@@ -31,6 +29,7 @@
     jugadorGatoTerminado.set(true);
     dispatch("completo");
   }
+
   function empezar() {
     comenzar = true;
     tick().then(() => {
@@ -41,50 +40,33 @@
 </script>
 
 <img class="pasto" src="/images/pasto.png" alt="" />
+
 {#if !comenzar}
   <div class="empezar">
     <div class="texto-empezar">
-      <h1>Queres hacer tu propia serie?</h1>
-      <p>Acompañame en este vieje</p>
+      <h1>¿Querés hacer tu propia serie?</h1>
+      <p>Acompañame en este viaje</p>
     </div>
-    <img class="conejo-guia" src="/images/DosOjosCerradosConejo.svg" alt="" />
+
     <button class="boton-empezar" on:click={empezar}>Empezar</button>
+
+    <img class="conejo-guia" src="/images/DosOjosCerradosConejo.svg" alt="" />
   </div>
 {/if}
+
 {#if comenzar}
   <div class="contenedor" id="crea-tu-propio-gato">
-    <!-- Contenedor del gato, fijo y separado del flujo -->
     <div class="person-container">
       {#if tipo === "Serializada"}
-        <img
-          class="person"
-          src="/images/gatoDer.svg"
-          alt=""
-          style="width: {altura * 0.674}px; height: {altura}px;"
-        />
+        <img class="person" src="/images/gatoDer.svg" alt="" style="width: {altura * 0.674}px; height: {altura}px;" />
       {:else if tipo === "Episodica"}
-        <img
-          class="person"
-          src="/images/gatoIzq.svg"
-          alt=""
-          style="width: {altura * 0.674}px; height: {altura}px;"
-        />
+        <img class="person" src="/images/gatoIzq.svg" alt="" style="width: {altura * 0.674}px; height: {altura}px;" />
       {:else}
-        <img
-          class="person"
-          src="/images/linea-gato-dos.svg"
-          alt=""
-          style="width: {altura * 0.674}px; height: {altura}px;"
-        />
+        <img class="person" src="/images/linea-gato-dos.svg" alt="" style="width: {altura * 0.674}px; height: {altura}px;" />
       {/if}
 
       <div class="manchas">
-        <Mancha
-          {tipo}
-          cant={cantidadManchas}
-          tamano={altura * 0.674}
-          {altura}
-        />
+        <Mancha {tipo} cant={cantidadManchas} tamano={altura * 0.674} {altura} />
       </div>
 
       <div class="person-color">
@@ -92,15 +74,8 @@
       </div>
     </div>
 
-    <!-- Componente actual según el paso -->
     {#if paso === 0}
       <SeleccionTipo bind:tipo on:next={avanzar} />
-      <!--{:else if paso === 2}
-    <SeleccionAltura bind:altura on:next={avanzar} />
-  {:else if paso === 1}
-    <SeleccionColor bind:color on:next={avanzar} />
-  {:else if paso === 3}
-    <SeleccionManchas bind:cantidadManchas on:next={avanzar} />-->
     {:else if paso === 1}
       <SeleccionColor bind:color on:next={avanzar} />
     {/if}
@@ -114,67 +89,56 @@
 <style>
   .pasto {
     position: relative;
-
     bottom: -10px;
-  }
-  .texto-empezar h1 {
-    font-size: 80px;
-    font-weight: bold;
-    color: #fdfeff;
-    margin-top: 7%;
-    margin-bottom: 2%;
-  }
-  .texto-empezar p {
-    font-size: 50px;
-
-    color: #fdfeff;
   }
 
   .empezar {
-    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     background-color: #4caf50;
-
-    /* border-radius: 10px; */
     padding: 2rem;
-
-    /* max-width: 1000px;
-    max-height: 1000px; */
-
     font-size: large;
     font-weight: 100;
-  }
-  .conejo-guia {
-    width: 250px;
-    position: absolute;
-    margin-left: 70%;
-    margin-top: -15%;
-    /* animation: saltito 2s infinite; */
+    border-radius: 10px;
   }
 
-  @keyframes saltito {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+  .texto-empezar h1 {
+    font-size: 60px;
+    font-weight: bold;
+    color: #fdfeff;
+    margin-bottom: 10px;
   }
+
+  .texto-empezar p {
+    font-size: 32px;
+    color: #fdfeff;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
   .boton-empezar {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 2rem;
-    font-size: 1.2rem;
-    margin: 20px 2px;
-    border-radius: 10px;
-    padding: 10px 20px;
+    background-color: #ffe4f0;
+    color: #5b3c40;
+    border: 2px solid #ffcce1;
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Pangolin", cursive;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   .boton-empezar:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+  }
+
+  .conejo-guia {
+    width: 220px;
+    margin-top: 2rem;
   }
 
   .contenedor {
@@ -224,3 +188,4 @@
     z-index: 1;
   }
 </style>
+

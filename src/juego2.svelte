@@ -43,38 +43,37 @@
   let gameStarted = false;
 
   onMount(() => {
-    board = document.getElementById("board");
-    board.width = boardWidth;
-    board.height = boardHeight;
-    context = board.getContext("2d");
-
-    playerDiv = document.getElementById("player-character");
-    if (playerDiv) {
-      playerDiv.style.position = "absolute";
-      playerDiv.style.width = ship.width + "px";
-      playerDiv.style.height = ship.height + "px";
-      playerDiv.style.left = board.offsetLeft + ship.x + "px";
-      playerDiv.style.top = board.offsetTop + ship.y + "px";
-    }
-
-    shipImg = new Image();
-    shipImg.src = "/images/ship.png";
-
-    alienImg = new Image();
-    alienImg.src = "/images/perro_malo.svg";
-
     document.addEventListener("keydown", moveShip);
     document.addEventListener("keydown", shoot);
-
-    // requestAnimationFrame(update);
   });
 
   function startGame() {
-    if (!gameStarted) {
+    if (!gameStarted && $GatoTerminadoJuego1) {
+      board = document.getElementById("board");
+      board.width = boardWidth;
+      board.height = boardHeight;
+      context = board.getContext("2d");
+
+      playerDiv = document.getElementById("player-character");
+      if (playerDiv) {
+        playerDiv.style.position = "absolute";
+        playerDiv.style.width = ship.width + "px";
+        playerDiv.style.height = ship.height + "px";
+        playerDiv.style.left = board.offsetLeft + ship.x + "px";
+        playerDiv.style.top = board.offsetTop + ship.y + "px";
+        playerDiv.style.display = "block";
+      }
+
+      shipImg = new Image();
+      shipImg.src = "/images/ship.png";
+
+      alienImg = new Image();
+      alienImg.src = "/images/perro_malo.svg";
+
       gameStarted = true;
       gameOver = false;
       score = 0;
-      alienVelocityX = 1;
+      alienVelocityX = 3;
       alienRows = 2;
       alienColumns = 3;
       alienArray = [];
@@ -83,7 +82,6 @@
       ship.y = shipY;
 
       createAliens();
-      if (playerDiv) playerDiv.style.display = "block";
       requestAnimationFrame(update);
     }
   }
@@ -158,9 +156,9 @@
     resultadoJuego2.set(manchas);
 
     setTimeout(() => {
-      document.getElementById("gameOverModal").style.display = "block";
+      document.getElementById("gameOverModal").style.display = "flex";
       document.getElementById("scoreText").textContent =
-        "Tu rating es: " + score;
+        "Tus ganacias son: " + score;
     }, 200);
   }
 
@@ -220,20 +218,20 @@
   }
 </script>
 
-<!-- {#if $GatoTerminadoJuego1} -->
-<div class="space-container">
-  <h1 class="titulo_juego">Vencé a tu competencia!</h1>
-  <canvas id="board"></canvas>
+{#if $GatoTerminadoJuego1}
+  <div class="space-container">
+    <h1 class="titulo_juego">Vencé a tu competencia!</h1>
+    <canvas id="board"></canvas>
 
-  <div id="player-character" style="display: none;">
-    <GatoJugador />
+    <div id="player-character" style="display: none;">
+      <GatoJugador />
+    </div>
+
+    {#if $jugadorGatoTerminado && !gameStarted && !gameOver}
+      <button id="start-button" on:click={startGame}>Jugar</button>
+    {/if}
   </div>
-
-  {#if $jugadorGatoTerminado && !gameStarted && !gameOver}
-    <button id="start-button" on:click={startGame}>Jugar</button>
-  {/if}
-</div>
-<!-- {/if} -->
+{/if}
 
 <div id="gameOverModal" class="modal">
   <div class="modal-content">
@@ -284,36 +282,65 @@
   .modal {
     display: none;
     position: fixed;
+    inset: 0;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
   }
 
   .modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
     max-width: 400px;
     text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.4s ease;
+    font-family: "Pangolin", cursive;
+  }
+
+  .modal-content h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .modal-content p {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 2rem;
   }
 
   .btn-cerrar {
     background-color: #cc4c3b;
     color: white;
     border: none;
-    padding: 16px 36px;
-    font-size: 20px;
+    padding: 14px 28px;
+    font-size: 18px;
     cursor: pointer;
-    border-radius: 14px;
+    border-radius: 12px;
     box-shadow: 0 4px 12px rgba(155, 49, 49, 0.7);
     transition:
-      background-color 0.3s ease,
-      box-shadow 0.3s ease;
+      transform 0.2s ease,
+      background-color 0.2s ease;
+    font-family: "Pangolin", cursive;
+  }
+
+  .btn-cerrar:hover {
+    transform: scale(1.05);
+    background-color: #b93c2d;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

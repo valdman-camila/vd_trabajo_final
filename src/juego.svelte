@@ -41,7 +41,7 @@
     basket = document.getElementById("basket");
     gameContainer = document.getElementById("game-container");
     score = 0;
-    time = 30;
+    time = 5;
     gameOver = false;
     gameStart = false;
     gameStarted = true;
@@ -60,7 +60,7 @@
   }
   function mostrarModal(score) {
     document.getElementById("scoreText").textContent = "Tu rating es: " + score;
-    document.getElementById("gameOverModal").style.display = "block";
+    document.getElementById("gameOverModal").style.display = "flex";
 
     // setTimeout(() => {
     //     document.getElementById("gameOverModal").style.display = "none";
@@ -392,52 +392,77 @@
     user-select: none;
   }
   .modal {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
+    inset: 0;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
   }
 
   .modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
     max-width: 400px;
     text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.4s ease;
+    font-family: "Pangolin", cursive;
   }
+
+  .modal-content h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .modal-content p {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+
   .btn-cerrar {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 50000;
     background-color: #cc4c3b;
     color: white;
     border: none;
-    padding: 16px 36px;
-    font-size: 20px;
+    padding: 14px 28px;
+    font-size: 18px;
     cursor: pointer;
-    border-radius: 14px;
+    border-radius: 12px;
     box-shadow: 0 4px 12px rgba(155, 49, 49, 0.7);
     transition:
-      background-color 0.3s ease,
-      box-shadow 0.3s ease;
-    user-select: none;
+      transform 0.2s ease,
+      background-color 0.2s ease;
+    font-family: "Pangolin", cursive;
   }
+
+  .btn-cerrar:hover {
+    transform: scale(1.05);
+    background-color: #b93c2d;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .tapar-gato {
     width: 57px;
     height: 91px;
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 17;
+    z-index: 19;
     user-select: none;
     background-color: #1e1d19;
   }

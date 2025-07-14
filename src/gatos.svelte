@@ -98,7 +98,7 @@
         seriePelicu = d3.reverse(seriePelicu);
 
         break;
-      case "orden_duracipn":
+      case "orden_duracion":
         textoBotonO = "Por duración";
         seriePelicu = d3.sort(seriePelicu, (escena) => escena.D);
         seriePelicu = d3.reverse(seriePelicu);

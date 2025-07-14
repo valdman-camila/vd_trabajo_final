@@ -1,37 +1,40 @@
-import './app.css'
-import App from "./App.svelte"
-import Gato from "./armarGato/gatoInteractivo.svelte"
-import Juego from "/src/juego.svelte"
-import Juego2 from "/src/juego2.svelte"
-import GatoFinal from "./armarGato/gatoResultado.svelte"
-import GatoResultado from './armarGato/gatoResultado.svelte'
+import "./app.css";
+import App from "./App.svelte";
+import Gato from "./armarGato/gatoInteractivo.svelte";
+import Juego from "/src/juego.svelte";
+import Juego2 from "/src/juego2.svelte";
+import GatoFinal from "./armarGato/gatoResultado.svelte";
+import GatoResultado from "./armarGato/gatoResultado.svelte";
+import ConejoFinal from "/src/conejoFinal.svelte";
 
 const app = new App({
   target: document.getElementById("app"),
-})
+});
 
 const juego = new Juego({
-  target: document.getElementById("juego")
-})
-
+  target: document.getElementById("juego"),
+});
 
 const juego2 = new Juego2({
-  target: document.getElementById("juego2")
-})
+  target: document.getElementById("juego2"),
+});
 
 const gato = new Gato({
   target: document.getElementById("app2"),
-})
+});
 
 const gatoResultado = new GatoResultado({
-  target: document.getElementById("gato-final")
-})
+  target: document.getElementById("gato-final"),
+});
+const conejoFinal = new ConejoFinal({
+  target: document.getElementById("conejo-final"),
+});
 
-export {app, gato}
+export { app, gato };
 
 function loadSection(sectionId) {
   const sections = document.querySelectorAll(".section");
-  sections.forEach(section => {
+  sections.forEach((section) => {
     section.classList.remove("active");
   });
 
@@ -40,4 +43,3 @@ function loadSection(sectionId) {
     target.classList.add("active");
   }
 }
-

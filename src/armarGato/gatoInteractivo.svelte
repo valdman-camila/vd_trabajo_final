@@ -43,12 +43,18 @@
 <img class="pasto" src="/images/pasto.png" alt="" />
 {#if !comenzar}
   <div class="empezar">
-    <div class="texto-empezar">
-      <h1>Queres hacer tu propia serie?</h1>
-      <p>Acompañame en este vieje</p>
+    <div class="contenido-empezar">
+      <div class="texto-empezar">
+        <h1>¿Querés hacer tu propia serie?</h1>
+        <p>Acompañame en este viaje</p>
+        <button class="boton-empezar" on:click={empezar}>Empezar</button>
+      </div>
+      <img
+        class="conejo-guia"
+        src="/images/DosOjosCerradosConejo.svg"
+        alt="Conejo guía"
+      />
     </div>
-    <img class="conejo-guia" src="/images/DosOjosCerradosConejo.svg" alt="" />
-    <button class="boton-empezar" on:click={empezar}>Empezar</button>
   </div>
 {/if}
 {#if comenzar}
@@ -117,51 +123,67 @@
 
     bottom: -10px;
   }
-  .texto-empezar h1 {
-    font-size: 80px;
-    font-weight: bold;
-    color: #fdfeff;
-    margin-top: 7%;
-    margin-bottom: 2%;
+  .texto-empezar {
+    flex: 1;
   }
-  .texto-empezar p {
-    font-size: 50px;
 
-    color: #fdfeff;
+  .texto-empezar h1 {
+    font-size: 64px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .texto-empezar p {
+    font-size: 32px;
+    margin-bottom: 2rem;
+    color: #f1f1f1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .empezar {
-    text-align: justify;
+    /* text-align: justify; */
     background-color: #4caf50;
 
     /* border-radius: 10px; */
-    padding: 2rem;
+    /* padding: 2rem; */
 
     /* max-width: 1000px;
     max-height: 1000px; */
 
-    font-size: large;
-    font-weight: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 4rem 2rem;
+    min-height: 100vh;
+    color: #fff;
+    overflow: hidden;
+  }
+  .contenido-empezar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    width: 100%;
+    gap: 2rem;
   }
   .conejo-guia {
-    width: 250px;
+    /* width: 250px;
     position: absolute;
     margin-left: 70%;
-    margin-top: -15%;
-    /* animation: saltito 2s infinite; */
+    margin-top: -15%; */
+    flex-shrink: 0;
+    width: 220px;
+    height: auto;
+
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
   }
 
-  @keyframes saltito {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
   .boton-empezar {
-    background-color: #ffffff;
+    /* background-color: #ffffff;
     color: #000000;
     padding: 2rem;
     font-size: 1.2rem;
@@ -170,11 +192,24 @@
     padding: 10px 20px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease; */
+    background-color: #ffffff;
+    color: #2e7d32;
+    font-weight: bold;
+    padding: 16px 32px;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-family: "Pangolin", cursive;
   }
 
   .boton-empezar:hover {
     transform: scale(1.1);
+    background-color: #16542a;
+    color: #ffffff;
   }
 
   .contenedor {

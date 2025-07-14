@@ -17,64 +17,37 @@
 </script>
 
 {#if alturaJugador !== null && manchasJugador !== null}
-  <div class="final">
-    <div class="cuadro-final">
-      <div class="cuadro-texto">
-        <h2>Este es tu gato!</h2>
-        <p>Tu serie es {serializacion} y tiene episodios</p>
-        <p>Un rating de: ..</p>
-        <p>Una ganancia de: {manchasJugador}</p>
-      </div>
-      <div class="contenedor">
-        <div class="person-container">
-          <img
-            src={serializacion === "Serializada"
-              ? "/images/gatoDer.svg"
-              : serializacion === "Episodica"
-                ? "/images/gatoIzq.svg"
-                : "/images/linea-gato-dos.svg"}
-            alt="Gato"
-            class="gato"
-            style="height: {alturaJugador}px"
-          />
-
-          <div class="person-color">
-            <Color
-              tipo={serializacion}
-              tamano={alturaJugador * 0.674}
-              altura={alturaJugador}
-              color={colorJugador}
-            />
-          </div>
-
-          <div class="manchas">
-            <Mancha
-              tipo={serializacion}
-              cant={manchasJugador}
-              tamano={alturaJugador * 0.674}
-              altura={alturaJugador}
-            />
-          </div>
-        </div>
-      </div>
+  <div class="bunni-container">
+    <div class="speech">
+      ¡Y llegamos al final! Ahora que has visto cómo le fue a tu serie en
+      comparación con las demás, ¿cómo la ves? ¿Le fue bien o crees que necesita
+      una mejora? ¡Quizás una secuela sea lo que necesita para brillar aún más!
     </div>
+    <img
+      src="./public/images/Ultimo_1.svg"
+      alt="Conejo"
+      style="width: 500px; height: 500px"
+    />
   </div>
-  <div class="message2">
-    <img class="conejofoto" src="/images/WinkConejo.svg" alt="Conejo" />
-    <div class="mensajedeconejo">
-      ¡Excelente! Estos son los resultados de tu serie. Pero, ¿Por qué tuviste
-      que participar en estos juegos para saber el rating y las ventas de tu
-      serie? Bueno, veamos las estadísticas...
+{:else}
+  <!-- <section class="seccion-graficos"></section> -->
+
+  <div class="bunni-container">
+    <div class="speech">
+      Y así termina este viajecito por tus recuerdos. Gracias por venir. Nos
+      vemos en la próxima aventura animada!
     </div>
+    <img
+      src="./public/images/Ultimo_1.svg"
+      alt="Conejo"
+      style="width: 500px; height: 500px"
+    />
   </div>
 {/if}
 
 <style>
-  .final {
-    background-color: #4caf50;
-  }
   .cuadro-final {
-    /* margin-top: 3%; */
+    margin-top: 3%;
     text-align: center;
 
     font-size: 21px;
@@ -85,7 +58,7 @@
     height: 50%;
     margin-left: 25%;
     margin-right: 25%;
-    /* margin-bottom: 2%; */
+    margin-bottom: 2%;
     animation-iteration-count: 1;
     animation-duration: 2.5s;
     padding: 2%;

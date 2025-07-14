@@ -70,7 +70,6 @@ html {
   width: 100%;
   height: 100%;
   padding: 50px;
-  background: #8e2f1a;
 }
 a.button {
   margin-top: 20px;
@@ -310,9 +309,10 @@ a.button:hover {
   align-items: center;
   justify-content: center;
   gap: 40px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  /* margin-top: 50px;
+  margin-bottom: 50px; */
   flex-wrap: wrap;
+  background-color: #4caf50;
 }
 
 .conejofoto {
@@ -339,6 +339,8 @@ a.button:hover {
   word-wrap: break-word;
   overflow-wrap: break-word;
   animation: flotar2 5s ease-in-out infinite;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .fondo-graficos {
   background-image: url("/images/tierra.svg");

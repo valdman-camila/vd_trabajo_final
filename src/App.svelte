@@ -125,8 +125,8 @@ onMount(() => {
             <div class="guia-image-wrapper">
                 <img
     src={currentDataType === 'series' 
-    ? "/images/GuiaVisualDeSeriesFinal.svg" 
-    : "/images/GuiaVisualDePeliculasFinal2.svg"}
+    ? "/images/GuiaSeriesFin2.svg" 
+    : "/images/GuiaPeliculasFin.svg"}
   alt="Guía Visual"
   width="950"
   in:fade={{ duration: 500 }}

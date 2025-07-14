@@ -138,9 +138,20 @@ a.button:hover {
   width: fit-content;
 }
 
+.bunni-container2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin: 500px auto 0 auto; 
+  width: fit-content;
+}
+
+
 .speech {
   position: absolute;
-  bottom:450px; /* ajustá según el diseño */
+  bottom:450px; 
   left: 0%;
 
   background-image: url('/images/Speech_intro.svg');
@@ -159,6 +170,29 @@ a.button:hover {
   max-width: 800px;
   flex-wrap: wrap;
   width:600px;
+  z-index: 10;
+  
+}
+.speech2 {
+  position: absolute;
+  bottom:250px;
+  left: 0%;
+  background-image: url('/images/Speech_intro.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px 50px 60px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Pangolin", cursive;
+  font-size: 20px;
+  min-width: 150px;
+  min-height: 400px;
+  max-width: 800px;
+  flex-wrap: wrap;
+  width:500px;
   z-index: 10;
   
 }
@@ -189,6 +223,27 @@ a.button:hover {
   width: 500px;
   height: 500px;
   margin-top: 350px;
+}
+.seccion-graficos {
+  width: 100%;
+  background-color: #9487bd; /* un tono más oscuro para contraste */
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+  font-family: 'Pangolin', cursive;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* efecto de profundidad */
+  margin-top: 100px;
+}
+
+.titulo-graficos {
+  font-size: 50px;
+  margin: 0;
+  letter-spacing: 2px;
+}
+.conejo-inv {
+  width: 400px;
+  height: auto;
+  transform: scaleX(-1);
 }
 
 
@@ -254,3 +309,42 @@ a.button:hover {
   transform: scale(0.97);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
+
+
+.message2 {
+  display: flex;
+  flex-direction: row; /* Asegura que el orden sea: conejo → texto */
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.conejofoto {
+  width: 300px;
+  height: auto;
+  animation: flotar2 5s ease-in-out infinite;
+}
+
+.mensajedeconejo {
+  background-image: url('/images/Speech_intro.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Pangolin", cursive;
+  font-size: 20px;
+  width: 600px;
+  min-height: 300px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  animation: flotar2 5s ease-in-out infinite;
+}
+

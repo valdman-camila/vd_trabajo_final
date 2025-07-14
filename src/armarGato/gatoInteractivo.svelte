@@ -6,6 +6,8 @@
   import Mancha from "/src/mancha.svelte";
   import Color from "/src/color.svelte";
 
+  import { tick } from "svelte";
+
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
@@ -29,9 +31,14 @@
     jugadorGatoTerminado.set(true);
     dispatch("completo");
   }
-  function empezar() {
-    comenzar = true;
-  }
+function empezar() {
+  comenzar = true;
+  tick().then(() => {
+    const destino = document.getElementById("crea-tu-propio-gato");
+    destino?.scrollIntoView({ behavior: "smooth" });
+  });
+}
+
 </script>
 
 <img class="pasto" src="/images/pasto.png" alt="" />
@@ -46,7 +53,7 @@
   </div>
 {/if}
 {#if comenzar}
-  <div class="contenedor">
+  <div class="contenedor" id="crea-tu-propio-gato">
     <!-- Contenedor del gato, fijo y separado del flujo -->
     <div class="person-container">
       {#if tipo === "Serializada"}

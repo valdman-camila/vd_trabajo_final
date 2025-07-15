@@ -126,7 +126,6 @@
     padding: 2rem;
     font-size: large;
     font-weight: 100;
-    border-radius: 10px;
   }
 
   .texto-empezar h1 {

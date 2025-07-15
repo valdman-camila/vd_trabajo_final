@@ -52,6 +52,7 @@
 
     <img class="conejo-guia" src="/images/DosOjosCerradosConejo.svg" alt="" />
   </div>
+  <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
 {#if comenzar}
@@ -104,9 +105,13 @@
       <p>¡Gato completo!</p>
     {/if}
   </div>
+  <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
 <style>
+  .piso-pasto {
+    position: absolute;
+  }
   .pasto {
     position: relative;
     bottom: -10px;

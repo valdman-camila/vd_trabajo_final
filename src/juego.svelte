@@ -99,7 +99,7 @@
 
   function calcularAltura(puntaje) {
     const min = 80;
-    const max = 180;
+    const max = 300;
     const maxPuntaje = 1300;
     return Math.round(
       min + (Math.min(puntaje, maxPuntaje) / maxPuntaje) * (max - min)
@@ -230,6 +230,7 @@
       </div>
     </div>
   </div>
+  <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 <div id="gameOverModal" class="modal">
   <div class="modal-content">
@@ -240,6 +241,9 @@
 </div>
 
 <style>
+  .piso-pasto {
+    position: absolute;
+  }
   body {
     margin: 0;
     padding: 0;
@@ -295,7 +299,7 @@
     pointer-events: none;
     user-select: none;
     z-index: 0;
-    /* margin-bottom: 50%; */
+    margin-bottom: 50%;
   }
 
   #game-container {

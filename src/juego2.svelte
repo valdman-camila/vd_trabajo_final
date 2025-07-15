@@ -264,6 +264,7 @@
       <button id="start-button" on:click={startGame}>Jugar</button>
     {/if}
   </div>
+  <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
 <div id="gameOverModal" class="modal">
@@ -275,6 +276,9 @@
 </div>
 
 <style>
+  .piso-pasto {
+    position: absolute;
+  }
   .space-container {
     box-sizing: border-box;
     padding: 4rem 2rem;

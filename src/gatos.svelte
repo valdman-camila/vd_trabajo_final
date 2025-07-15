@@ -419,6 +419,7 @@
     position: relative;
     margin: 0px 5px;
     bottom: 8px;
+    z-index: 10;  
   }
   .container {
     display: flex;
@@ -474,6 +475,8 @@
   }
 
   .nombre-container {
+    position: relative;   
+    z-index: 100;         
     margin-top: 30px;
     text-align: center;
     background-image: url("/images/fondo-sticker.png");
@@ -495,6 +498,7 @@
     position: relative;
     height: 176px;
     width: 200px;
+    z-index: 100;
     transition: transform 0.4s ease-in-out;
   }
   .gato-interactivo {

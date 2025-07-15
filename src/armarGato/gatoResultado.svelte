@@ -29,18 +29,24 @@
     { rango: "≥ 200", min: 200, max: 400, color: "#6C4414" },
   ];
   function obtenerRangoPorColor(color) {
+    if (!color) return null;
+
+    const colorLimpio = color.trim().toLowerCase();
     const rango = duracionColores.find(
-      (r) => r.color.toLowerCase() === color.toLowerCase()
+      (r) => r.color.toLowerCase() === colorLimpio
     );
+
     return rango
       ? { min: rango.min, max: rango.max, rangoTexto: rango.rango }
       : null;
   }
-  // $: {
-  //   rango = obtenerRangoPorColor($jugadorColor);
-  //   min_episodios = rango?.min ?? 0;
-  //   max_episodios = rango?.max ?? 0;
-  // }
+  $: {
+    const rango = obtenerRangoPorColor($jugadorColor);
+    console.log("Color actual:", $jugadorColor);
+    console.log("Rango detectado:", rango);
+    min_episodios = rango?.min ?? 0;
+    max_episodios = rango?.max ?? 0;
+  }
 </script>
 
 {#if alturaJugador !== null && manchasJugador !== null}
@@ -190,7 +196,7 @@
   }
 
   .conejofoto {
-    height: 100px;
+    height: 300px;
     width: auto;
   }
 </style>

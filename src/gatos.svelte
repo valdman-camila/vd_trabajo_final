@@ -41,14 +41,6 @@
     .domain([minRating, maxRating])
     .range([80, 180]);
 
-  const manchaW = d3
-    .scaleLinear()
-    .domain([minRating, maxRating])
-    .range([15, 180]);
-  const manchaH = d3
-    .scaleLinear()
-    .domain([minRating, maxRating])
-    .range([15, 180]);
   const maxDuracion = d3.max(series, (d) => d.Duracion);
   let colorDuracion = d3
     .scaleThreshold()

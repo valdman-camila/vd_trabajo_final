@@ -53,7 +53,7 @@
     basket = document.getElementById("basket");
     gameContainer = document.getElementById("game-container");
     score = 0;
-    time = 2;
+    time = 30;
     gameOver = false;
     gameStart = false;
     gameStarted = true;
@@ -98,9 +98,9 @@
   }
 
   function calcularAltura(puntaje) {
-    const min = 160;
-    const max = 360;
-    const maxPuntaje = 1000;
+    const min = 80;
+    const max = 180;
+    const maxPuntaje = 1300;
     return Math.round(
       min + (Math.min(puntaje, maxPuntaje) / maxPuntaje) * (max - min)
     );

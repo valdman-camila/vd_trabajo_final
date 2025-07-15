@@ -1,4 +1,5 @@
 <script>
+  import * as d3 from "d3";
   import GatoJugador from "./armarGato/GatoJugador.svelte";
   import {
     jugadorGatoTerminado,
@@ -55,6 +56,10 @@
     { min: 16000, max: 18000, gananciaMin: 830, gananciaMax: 930 },
     { min: 18000, max: Infinity, gananciaMin: 930, gananciaMax: 1000 }, // abierto
   ];
+  let manchaScore = d3
+    .scaleLinear()
+    .domain([0, 20000]) // score mínimo y máximo
+    .range([1, 5]); // valores a mapear (por ejemplo: tamaño o intensidad)
 
   onMount(() => {
     document.addEventListener("keydown", moveShip);
@@ -166,7 +171,7 @@
     gameOver = true;
     gameStarted = false;
 
-    let manchas = Math.min(5, Math.floor(score / 1000));
+    let manchas = manchaScore(score);
     resultadoJuego2.set(manchas);
     ganancia = calcularVentas(score);
     Ventas.set(ganancia);

@@ -469,7 +469,7 @@
     width: 800px;
     padding: 20px;
     background: rgb(255, 255, 255);
-    z-index: 200;
+    z-index: 2000;
     text-align: center;
     border-radius: 10%;
     display: flex;
@@ -530,24 +530,6 @@
     flex-direction: column;
     gap: 12px;
     z-index: 1000;
-  }
-
-  .data-type-fijo .change-data-button {
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 50%;
-    border: 2px solid #777676;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .data-type-fijo .change-data-button.active {
-    background-color: #d8d6d6;
-    border-color: #8d8d8d;
   }
 
   .data-type-fijo .change-data-button img {
@@ -676,31 +658,33 @@
     gap: 20px;
   }
 
-  .change-data-button {
-    padding: 10px 25px;
-    background-color: #ffffff;
-    color: #5b3c40;
-    border: 2px solid #7786e8;
-    border-radius: 25px;
-    font-family: "Pangolin", cursive;
-    font-size: 20px;
+  .data-type-fijo .change-data-button {
+    padding: 10px;
+    background-color: #ffe4f0; 
+    border-radius: 50%;
+    border: 2px solid #ffcce1; 
+    box-shadow: 0 3px 6px rgba(255, 182, 193, 0.3); 
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .change-data-button:hover {
-    background-color: #e9e9ff;
-    border-color: #1e2c99;
+  .data-type-fijo .change-data-button:hover {
+    background-color: #ffd6e3; 
+    border-color: #ffb6cc;
+    box-shadow: 0 5px 10px rgba(255, 182, 193, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   }
 
-  .change-data-button.active {
-    background-color: #908cff;
+  .data-type-fijo .change-data-button.active {
+    background-color: #f9a9be; 
+    border-color: #e4879f; 
+    box-shadow: 0 6px 12px rgba(249, 169, 190, 0.6);
     color: white;
-    border-color: #1e209a;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transform: translateY(-1px);
   }
+
+
 </style>

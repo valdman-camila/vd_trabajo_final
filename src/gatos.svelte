@@ -18,16 +18,31 @@
 
   let mostrarBoton = false;
 
-  function manejarScroll() {
-    mostrarBoton = window.scrollY > 400 && window.scrollY < 2500;
-  }
-
   onMount(() => {
-    window.addEventListener("scroll", manejarScroll);
+    const seccionGatos = document.querySelector(".mueble");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          mostrarBoton = entry.isIntersecting;
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1,
+      }
+    );
+
+    if (seccionGatos) observer.observe(seccionGatos);
+
     arrdos = agruparCuatro(series);
     arrayfiltrado.set(series);
-    return () => window.removeEventListener("scroll", manejarScroll);
+
+    return () => {
+      if (seccionGatos) observer.unobserve(seccionGatos);
+    };
   });
+
   let gatos = "series";
   let orden = "";
   let filtro = "todas";
@@ -36,22 +51,14 @@
 
   const maxRating = d3.max(series, (d) => d.Rating);
   const minRating = d3.min(series, (d) => d.Rating);
-  const diamRating = d3
-    .scaleLinear()
-    .domain([minRating, maxRating])
-    .range([80, 180]);
+  const diamRating = d3.scaleLinear().domain([minRating, maxRating]).range([80, 180]);
 
   const maxDuracion = d3.max(series, (d) => d.Duracion);
-  let colorDuracion = d3
-    .scaleThreshold()
-    .domain([50, 100, 150, 200])
-    .range(["#FDF8F2", "#EFCFA9", "#DF9F53", "#AC6C20", "#6C4414"]);
+  let colorDuracion = d3.scaleThreshold().domain([50, 100, 150, 200]).range(["#FDF8F2", "#EFCFA9", "#DF9F53", "#AC6C20", "#6C4414"]);
+
   const maxVentas = d3.max(series, (d) => d.Ventas);
   const minVentas = d3.min(series, (d) => d.Ventas);
-  let manchaVentas = d3
-    .scaleLinear()
-    .domain([minVentas, maxVentas])
-    .range([1, 5]);
+  let manchaVentas = d3.scaleLinear().domain([minVentas, maxVentas]).range([1, 5]);
 
   function agruparCuatro(lista) {
     let filas = [];
@@ -68,35 +75,28 @@
 
   let textoBotonO = "Ordenar por ▾";
   let textoBtnF = "Filtrar por ▾";
-  let serieFiltrar = series;
 
   function orderSelection(opcion) {
     orden = opcion;
-
-    // Cambiar el texto del botón basado en la opción seleccionada
     switch (opcion) {
       case "orden_ventas":
         textoBotonO = "Más ventas";
         seriePelicu = d3.sort(seriePelicu, (s) => s.Ventas);
         seriePelicu = d3.reverse(seriePelicu);
-
         break;
       case "orden_tipo":
         textoBotonO = "Por tipo";
         seriePelicu = d3.sort(seriePelicu, (escena) => escena.Tipo);
-
         break;
       case "orden_rating":
         textoBotonO = "Por rating";
         seriePelicu = d3.sort(seriePelicu, (escena) => escena.Rating);
         seriePelicu = d3.reverse(seriePelicu);
-
         break;
       case "orden_duracion":
         textoBotonO = "Por duración";
         seriePelicu = d3.sort(seriePelicu, (escena) => escena.D);
         seriePelicu = d3.reverse(seriePelicu);
-
         break;
       default:
         textoBotonO = "Ordenar por ▾";
@@ -106,35 +106,25 @@
     arrdos = agruparCuatro(seriePelicu);
     arrayfiltrado.set(seriePelicu);
   }
+
   function filterSelection(valorFilter) {
     filtro = valorFilter;
-    // Cambiar el texto del botón basado en la opción seleccionada
     switch (valorFilter) {
       case "Episodica":
         textoBtnF = "Episodica";
-
         seriePelicu = series.filter((p) => p.Tipo == filtro);
-
         break;
       case "Serializada":
         textoBtnF = "Serializada";
-
         seriePelicu = series.filter((p) => p.Tipo == filtro);
         break;
       case "Ambas":
         textoBtnF = "Ambas";
-
         seriePelicu = series.filter((p) => p.Tipo == filtro);
         break;
       case "todas":
-        textoBtnF = "Filtrar por ▾";
-
-        seriePelicu = series;
-
-        break;
       default:
         textoBtnF = "Filtrar por ▾";
-
         seriePelicu = series;
     }
     arrdos = agruparCuatro(seriePelicu);
@@ -142,12 +132,11 @@
   }
 
   function abrirPopup() {
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.getElementById("guia-visualizacion").classList.remove("hidden");
     document.getElementById("overlay").classList.remove("hidden");
     document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "${scrollBarWidth}px";
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
   }
 
   function cerrarPopup() {
@@ -166,6 +155,7 @@
     Guía
   </button>
 {/if}
+
 
 <div class="techo-container">
   <div class="controles">

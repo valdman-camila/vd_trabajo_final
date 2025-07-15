@@ -25,29 +25,21 @@
   $: if (peliculas && peliculas.length > 0) {
     maxRating2 = d3.max(peliculas, (d) => +d.Rating);
     minRating2 = d3.min(peliculas, (d) => +d.Rating);
-    diamRating2 = d3
-      .scaleLinear()
-      .domain([minRating2, maxRating2])
-      .range([80, 180]);
+    diamRating2 = d3.scaleLinear().domain([minRating2, maxRating2]).range([80, 180]);
 
     maxDuracion2 = d3.max(peliculas, (d) => d.Duracion);
-    colorDuracion2 = d3
-      .scaleThreshold()
-      .domain([50, 100, 150, 200])
-      .range(["#FDF8F2", "#EFCFA9", "#DF9F53", "#AC6C20", "#6C4414"]);
+    colorDuracion2 = d3.scaleThreshold().domain([50, 100, 150, 200]).range(["#FDF8F2", "#EFCFA9", "#DF9F53", "#AC6C20", "#6C4414"]);
 
     maxVentas2 = d3.max(peliculas, (d) => d.Ventas);
     minVentas2 = d3.min(peliculas, (d) => d.Ventas);
-    manchaVentas2 = d3
-      .scaleLinear()
-      .domain([minVentas2, maxVentas2])
-      .range([1, 5]);
+    manchaVentas2 = d3.scaleLinear().domain([minVentas2, maxVentas2]).range([1, 5]);
   }
 
   let orden = "";
   let filtro = "todas";
   let resaltar = "todas";
   $: seriePelicu = peliculas;
+
   function agruparCuatro(lista) {
     let filas = [];
     let temp2 = [];
@@ -67,31 +59,22 @@
 
   function orderSelection(opcion) {
     orden = opcion;
-
-    // Cambiar el texto del botón basado en la opción seleccionada
     switch (opcion) {
       case "orden_ventas":
         textoBotonO = "Más ventas";
-        seriePelicu = d3.sort(seriePelicu, (s) => s.Ventas);
-        seriePelicu = d3.reverse(seriePelicu);
-
+        seriePelicu = d3.sort(seriePelicu, (s) => s.Ventas).reverse();
         break;
       case "orden_tipo":
         textoBotonO = "Por tipo";
         seriePelicu = d3.sort(seriePelicu, (escena) => escena.Tipo);
-
         break;
       case "orden_rating":
         textoBotonO = "Por rating";
-        seriePelicu = d3.sort(seriePelicu, (escena) => escena.Rating);
-        seriePelicu = d3.reverse(seriePelicu);
-
+        seriePelicu = d3.sort(seriePelicu, (escena) => escena.Rating).reverse();
         break;
       case "orden_duracion":
         textoBotonO = "Por duración";
-        seriePelicu = d3.sort(seriePelicu, (escena) => escena.Duracion);
-        seriePelicu = d3.reverse(seriePelicu);
-
+        seriePelicu = d3.sort(seriePelicu, (escena) => escena.Duracion).reverse();
         break;
       default:
         textoBotonO = "Ordenar por ▾";
@@ -101,61 +84,60 @@
     arrayfiltrado2.set(seriePelicu);
   }
 
-  function manejarScroll2() {
-    mostrarBoton = window.scrollY > 400 && window.scrollY < 2300;
-  }
-
-  onMount(() => {
-    window.addEventListener("scroll", manejarScroll2);
-    arr2 = agruparCuatro(peliculas);
-    arrayfiltrado2.set(peliculas);
-    return () => window.removeEventListener("scroll", manejarScroll2);
-  });
-  function filtertresomas(elem) {
-    return elem == "4" && elem == "6";
-  }
-
   function filterSelection(valorFilter) {
     filtro = valorFilter;
-    // Cambiar el texto del botón basado en la opción seleccionada
     switch (valorFilter) {
       case "1":
         textoBtnF = "Una pelicula";
-
         seriePelicu = peliculas.filter((p) => p.Tipo == filtro);
-
         break;
       case "2":
         textoBtnF = "Dos peliculas";
-
         seriePelicu = peliculas.filter((p) => p.Tipo == filtro);
         break;
       case "3":
         textoBtnF = "Tres o más películas";
-        // Convertimos a número y filtramos si Tipo >= 3
         seriePelicu = peliculas.filter((p) => Number(p.Tipo) >= 3);
         break;
       case "todas":
-        textoBtnF = "Filtrar por ▾";
-
-        seriePelicu = peliculas;
-
-        break;
       default:
         textoBtnF = "Filtrar por ▾";
-
         seriePelicu = peliculas;
     }
     arr2 = agruparCuatro(seriePelicu);
     arrayfiltrado2.set(seriePelicu);
   }
+
+  onMount(() => {
+    const seccionGatos = document.querySelector(".mueble");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          mostrarBoton = entry.isIntersecting;
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1,
+      }
+    );
+
+    if (seccionGatos) observer.observe(seccionGatos);
+    arr2 = agruparCuatro(peliculas);
+    arrayfiltrado2.set(peliculas);
+
+    return () => {
+      if (seccionGatos) observer.unobserve(seccionGatos);
+    };
+  });
+
   function abrirPopup() {
-    const scrollBarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.getElementById("guia-visualizacion").classList.remove("hidden");
     document.getElementById("overlay").classList.remove("hidden");
     document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "${scrollBarWidth}px";
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
   }
 
   function cerrarPopup() {
@@ -174,6 +156,7 @@
     Guía
   </button>
 {/if}
+
 <div class="techo-container">
   <div class="controles">
     <div class="ordenar">

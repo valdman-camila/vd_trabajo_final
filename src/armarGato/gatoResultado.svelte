@@ -3,17 +3,44 @@
   import { jugadorColor } from "/src/store.js";
   import { resultadoJuego1 } from "/src/store.js";
   import { resultadoJuego2 } from "/src/store.js";
-
+  import { Rating } from "/src/store.js";
+  import { Ventas } from "/src/store.js";
   import Color from "/src/color.svelte";
   import Mancha from "/src/mancha.svelte";
 
   export let altura = 90;
   export let cantidadManchas = 0;
 
+  let min_episodios = 0;
+  let max_episodios = 0;
+
   $: serializacion = $jugadorTipo;
   $: colorJugador = $jugadorColor;
   $: alturaJugador = $resultadoJuego1;
   $: manchasJugador = $resultadoJuego2;
+  $: rating = $Rating;
+  $: ventas = $Ventas;
+
+  const duracionColores = [
+    { rango: "< 50", min: 0, max: 49, color: "#FDF8F2" },
+    { rango: "50 - 99", min: 50, max: 99, color: "#EFCFA9" },
+    { rango: "100 - 149", min: 100, max: 149, color: "#DF9F53" },
+    { rango: "150 - 199", min: 150, max: 199, color: "#AC6C20" },
+    { rango: "≥ 200", min: 200, max: 400, color: "#6C4414" },
+  ];
+  function obtenerRangoPorColor(color) {
+    const rango = duracionColores.find(
+      (r) => r.color.toLowerCase() === color.toLowerCase()
+    );
+    return rango
+      ? { min: rango.min, max: rango.max, rangoTexto: rango.rango }
+      : null;
+  }
+  // $: {
+  //   rango = obtenerRangoPorColor($jugadorColor);
+  //   min_episodios = rango?.min ?? 0;
+  //   max_episodios = rango?.max ?? 0;
+  // }
 </script>
 
 {#if alturaJugador !== null && manchasJugador !== null}
@@ -21,9 +48,14 @@
     <div class="cuadro-final">
       <div class="cuadro-texto">
         <h2>Este es tu gato!</h2>
-        <p>Tu serie es {serializacion} y tiene episodios</p>
-        <p>Un rating de: ..</p>
-        <p>Una ganancia de: {manchasJugador}</p>
+
+        <p>
+          Tu serie es {serializacion} y tiene entre {min_episodios} y {max_episodios}
+          episodios
+        </p>
+
+        <p>Un rating de: {rating}</p>
+        <p>Una ganancia de: {ventas} millones</p>
       </div>
       <div class="contenedor">
         <div class="person-container">
@@ -72,84 +104,93 @@
 <style>
   .final {
     background-color: #4caf50;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
   }
-  .cuadro-final {
-    /* margin-top: 3%; */
-    text-align: center;
 
-    font-size: 21px;
-    scale: 1;
+  .cuadro-final {
+    display: flex;
+    flex-direction: column; /* ¡Ahora en columna! */
+    align-items: center;
+    justify-content: center;
     background-color: azure;
-    animation-name: example;
-    width: 50%;
-    height: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
-    /* margin-bottom: 2%; */
-    animation-iteration-count: 1;
-    animation-duration: 2.5s;
-    padding: 2%;
+    padding: 2rem;
     border-radius: 25px;
+    animation-name: example;
+    animation-duration: 2.5s;
+    animation-iteration-count: 1;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    gap: 2rem;
   }
-  @keyframes example {
-    0% {
-      width: 50%;
-      height: 50%;
-    }
-    50% {
-      /* width: 70%;
-    height: 70%; */
-      scale: 1.15;
-    }
-    100% {
-      width: 50%;
-      height: 50%;
-    }
+
+  .cuadro-texto {
+    font-size: 1.2rem;
+    line-height: 1.6;
   }
+
   .contenedor {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     position: relative;
     width: 100%;
-    padding-bottom: 2rem;
   }
 
   .person-container {
     position: relative;
-    height: 250px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-bottom: 2rem;
   }
 
   .gato {
     position: relative;
     z-index: 1;
+    height: auto;
+    max-width: 100%;
   }
 
   .manchas {
     position: absolute;
     z-index: 0;
-    transform: translateX(2%);
-    bottom: -2%;
+    transform: translateX(-1%);
+    bottom: -4%;
     mix-blend-mode: multiply;
   }
 
-  .mancha {
-    width: 10px;
-    height: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
+  .person-color {
+    z-index: 0;
     position: absolute;
+
+    bottom: -4%;
   }
 
-  .person-color {
-    z-index: -1;
-    position: absolute;
-    transform: translateX(2%);
-    bottom: -2%;
+  @keyframes example {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .message2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    font-size: 1.1rem;
+    text-align: left;
+  }
+
+  .conejofoto {
+    height: 100px;
+    width: auto;
   }
 </style>

@@ -2,10 +2,10 @@
   import * as d3 from "d3";
   import Color from "/src/color.svelte";
   import Mancha from "/src/mancha.svelte";
-  import { gatoEspecifico } from "/src/store.js";
+  import { gatoEspecifico, arrayfiltrado } from "./store.js";
   import series from "/src/data/SeriesYJuguetes.json";
 
-  $: serie = $gatoEspecifico !== null ? series[$gatoEspecifico] : null;
+  $: serie = $gatoEspecifico !== null ? $arrayfiltrado[$gatoEspecifico] : null;
 
   const maxRating = d3.max(series, (d) => d.Rating);
   const minRating = d3.min(series, (d) => d.Rating);

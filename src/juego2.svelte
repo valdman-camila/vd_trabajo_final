@@ -4,6 +4,7 @@
     jugadorGatoTerminado,
     resultadoJuego2,
     GatoTerminadoJuego1,
+    Ventas,
   } from "./store.js";
   import { onMount } from "svelte";
 
@@ -41,6 +42,19 @@
   let score = 0;
   let gameOver = false;
   let gameStarted = false;
+  let ganancia = 0;
+  const gananciaRangos = [
+    { min: 0, max: 2000, gananciaMin: 0, gananciaMax: 50 },
+    { min: 2000, max: 4000, gananciaMin: 50, gananciaMax: 120 },
+    { min: 4000, max: 6000, gananciaMin: 120, gananciaMax: 200 },
+    { min: 6000, max: 8000, gananciaMin: 200, gananciaMax: 320 },
+    { min: 8000, max: 10000, gananciaMin: 320, gananciaMax: 450 },
+    { min: 10000, max: 12000, gananciaMin: 450, gananciaMax: 600 },
+    { min: 12000, max: 14000, gananciaMin: 600, gananciaMax: 720 },
+    { min: 14000, max: 16000, gananciaMin: 720, gananciaMax: 830 },
+    { min: 16000, max: 18000, gananciaMin: 830, gananciaMax: 930 },
+    { min: 18000, max: Infinity, gananciaMin: 930, gananciaMax: 1000 }, // abierto
+  ];
 
   onMount(() => {
     document.addEventListener("keydown", moveShip);
@@ -154,12 +168,26 @@
 
     let manchas = Math.min(5, Math.floor(score / 1000));
     resultadoJuego2.set(manchas);
+    ganancia = calcularVentas(score);
+    Ventas.set(ganancia);
 
     setTimeout(() => {
       document.getElementById("gameOverModal").style.display = "flex";
       document.getElementById("scoreText").textContent =
-        "Tus ganacias son: " + score;
+        "Tus ganacias son: " + ganancia;
     }, 200);
+  }
+  function calcularVentas(puntaje) {
+    for (const rango of gananciaRangos) {
+      if (puntaje >= rango.min && puntaje < rango.max) {
+        const progreso = (puntaje - rango.min) / (rango.max - rango.min);
+        const ganancia =
+          rango.gananciaMin +
+          progreso * (rango.gananciaMax - rango.gananciaMin);
+        return Number(ganancia.toFixed(1)); // en millones
+      }
+    }
+    return 1000; // por si está fuera del rango
   }
 
   function cerrarModal() {
@@ -243,6 +271,9 @@
 
 <style>
   .space-container {
+    box-sizing: border-box;
+    padding: 4rem 2rem;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -253,7 +284,11 @@
     color: white;
     gap: 20px;
   }
-
+  .titulo_juego {
+    font-size: 2.5rem;
+    font-family: "Pangolin", cursive;
+    margin: 2rem;
+  }
   #board {
     background-color: black;
     background-image: url("/images/prueba_fondo2.jpg");
@@ -263,22 +298,23 @@
   }
 
   #start-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    background-color: #4caf50;
-    color: white;
+    background-color: #ffffff;
+    color: #4caf50;
     border: none;
     padding: 16px 36px;
-    font-size: 20px;
+    font-size: 1.25rem;
     cursor: pointer;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.7);
     font-family: "Pangolin", cursive;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
   }
-
+  #start-button:hover {
+    transform: scale(1.05);
+    background-color: #e8f5e9;
+  }
   .modal {
     display: none;
     position: fixed;

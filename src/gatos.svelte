@@ -7,6 +7,7 @@
   import { get } from "svelte/store";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { arrayfiltrado } from "./store.js";
 
   let arrdos = [];
 
@@ -24,6 +25,7 @@
   onMount(() => {
     window.addEventListener("scroll", manejarScroll);
     arrdos = agruparCuatro(series);
+    arrayfiltrado.set(series);
     return () => window.removeEventListener("scroll", manejarScroll);
   });
   let gatos = "series";
@@ -108,7 +110,9 @@
         textoBotonO = "Ordenar por ▾";
         seriePelicu = series;
     }
+
     arrdos = agruparCuatro(seriePelicu);
+    arrayfiltrado.set(seriePelicu);
   }
   function filterSelection(valorFilter) {
     filtro = valorFilter;
@@ -142,6 +146,7 @@
         seriePelicu = series;
     }
     arrdos = agruparCuatro(seriePelicu);
+    arrayfiltrado.set(seriePelicu);
   }
 
   function abrirPopup() {
@@ -171,58 +176,63 @@
 {/if}
 
 <div class="techo-container">
-  <div class="ordenar">
-    <img class="imagen_orden" src="./images/orden_boton.svg" alt="" />
-    <div class="container_btn_ordenar">
-      <!-- El texto del botón cambia según la selección -->
-      <button class="boton_ordenar">{textoBotonO}</button>
+  <div class="controles">
+    <div class="ordenar">
+      <div class="imagen-con-boton">
+        <img class="imagen_orden" src="./images/orden_boton.svg" alt="" />
+        <button class="boton_ordenar">{textoBotonO}</button>
 
-      <div class="ops_ordenar">
-        <button
-          on:click={() => orderSelection("orden_ventas")}
-          class:active={orden == "orden_ventas"}>Más ventas</button
-        >
-        <button
-          on:click={() => orderSelection("orden_tipo")}
-          class:active={orden == "orden_tipo"}>Por tipo</button
-        >
-        <button
-          on:click={() => orderSelection("orden_rating")}
-          class:active={orden == "orden_rating"}>Por rating</button
-        >
-        <button
-          on:click={() => orderSelection("orden_duracion")}
-          class:active={orden == "orden_duracion"}>Por duración</button
-        >
+        <div class="ops_ordenar">
+          <button
+            on:click={() => orderSelection("orden_ventas")}
+            class:active={orden == "orden_ventas"}>Más ventas</button
+          >
+          <button
+            on:click={() => orderSelection("orden_tipo")}
+            class:active={orden == "orden_tipo"}>Por tipo</button
+          >
+          <button
+            on:click={() => orderSelection("orden_rating")}
+            class:active={orden == "orden_rating"}>Por rating</button
+          >
+          <button
+            on:click={() => orderSelection("orden_duracion")}
+            class:active={orden == "orden_duracion"}>Por duración</button
+          >
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="filtrar">
-    <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="" />
-    <button class="boton_filtrar">{textoBtnF}</button>
-    <div class="ops_filtrar">
-      <button
-        on:click={() => filterSelection("todas")}
-        class:active={filtro == "todas"}>Todas</button
-      >
-      <button
-        on:click={() => filterSelection("Ambas")}
-        class:active={filtro == "Ambas"}>Ambas</button
-      >
-      <button
-        on:click={() => filterSelection("Serializada")}
-        class:active={filtro == "Serializada"}>Serializadas</button
-      >
-      <button
-        on:click={() => filterSelection("Episodica")}
-        class:active={filtro == "Episodica"}>Episodico</button
-      >
+    <div class="filtrar">
+      <div class="imagen-con-boton">
+        <img class="imagen_filtrar" src="./images/filtro_boton.svg" alt="" />
+        <button class="boton_filtrar">{textoBtnF}</button>
+
+        <div class="ops_filtrar">
+          <button
+            on:click={() => filterSelection("todas")}
+            class:active={filtro == "todas"}>Todas</button
+          >
+          <button
+            on:click={() => filterSelection("Ambas")}
+            class:active={filtro == "Ambas"}>Ambas</button
+          >
+          <button
+            on:click={() => filterSelection("Serializada")}
+            class:active={filtro == "Serializada"}>Serializadas</button
+          >
+          <button
+            on:click={() => filterSelection("Episodica")}
+            class:active={filtro == "Episodica"}>Episodico</button
+          >
+        </div>
+      </div>
     </div>
   </div>
 
   <img class="techo" src="./images/techoo.svg" alt="" />
 </div>
+
 <div class="mueble">
   <div class="container">
     {#each arrdos as cuatroG, j}
@@ -305,145 +315,85 @@
 <img class="piso" src="./images/piso-mueble.svg" alt="" />
 
 <style>
-  .ordenar {
+  .techo-container {
     position: relative;
-
-    margin-top: 20%;
-    margin-left: 35%;
+    z-index: 1;
+    overflow: visible;
   }
 
-  .imagen_orden {
+  .controles {
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 32%;
+
+    display: flex;
+    gap: 10rem;
+  }
+
+  .imagen-con-boton {
+    position: relative;
+    display: inline-block;
+  }
+
+  .imagen_orden,
+  .imagen_filtrar {
     width: 250px;
-    /* top: 610%; 
-    left: 50%; */
-    margin-top: 23%;
-    margin-left: 39%;
-    position: absolute;
-    z-index: 1;
-  }
-
-  .boton_ordenar {
-    position: absolute;
-    /* box-shadow: 0 5px 10px rgba(0,0,0,0.2); */
-    height: 50px;
-    width: 160px;
-    margin-top: 25%;
-    margin-left: 47%;
-    /* top: 496px;
-    left: 38%; */
-    background-color: #f6f5ea;
-    color: black;
-    /* padding: 10px 16px; */
-    font-size: 24px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
-    user-select: none;
-    z-index: 50;
-    font-family: "Pangolin", cursive;
-  }
-
-  .ops_ordenar {
-    width: 150px;
-    font-family: "Pangolin", cursive;
-    display: none;
-    margin-top: 30%;
-    margin-left: 48%;
-    position: absolute;
-    background-color: #f6f5ea;
-
-    /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
-    border-radius: 4px;
-    z-index: 1;
-  }
-
-  .ops_ordenar button {
-    font-family: "Pangolin", cursive;
-    color: black;
-    padding: 10px 14px;
-    text-align: left;
-    text-decoration: none;
-    background: none;
-    border: none;
-    width: 100%;
-    cursor: pointer;
-  }
-
-  .ops_ordenar button:hover {
-    background-color: #f0d786;
-  }
-
-  .ordenar:hover .ops_ordenar {
     display: block;
   }
 
-  .filtrar {
-    position: relative;
-
-    margin-left: 35%;
-    margin-bottom: 20%;
-  }
-  .imagen_filtrar {
-    width: 250px;
-    /* top: 610%; 
-    left: 50%; */
-    margin-top: 23%;
-    margin-left: -5%;
-    position: absolute;
-
-    z-index: 1;
-  }
-
+  .boton_ordenar,
   .boton_filtrar {
     position: absolute;
-    font-family: "Pangolin", cursive;
+    top: 34%;
+    left: 64%;
+    transform: translate(-50%, -50%);
     height: 50px;
     width: 160px;
-    margin-top: 25%;
-    margin-left: 2%;
     background-color: #f6f5ea;
     color: black;
-    /* padding: 10px 16px; */
     font-size: 24px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    text-align: center;
     user-select: none;
-    z-index: 50;
+    font-family: "Pangolin", cursive;
+    z-index: 2;
   }
 
+  /* Dropdowns */
+  .ops_ordenar,
   .ops_filtrar {
+    display: none;
     background-color: #f6f5ea;
     width: 150px;
-    font-family: "Pangolin", cursive;
-    display: none;
-    margin-top: 30%;
-    margin-left: 2%;
     position: absolute;
-    /* box-shadow: 0px 8px 16px rgba(0,0,0,0.2); */
+    top: 62%;
+    left: 57%;
+    transform: translateX(-50%);
     border-radius: 4px;
-    z-index: 1;
+    z-index: 3;
   }
 
+  .ops_ordenar button,
   .ops_filtrar button {
-    font-family: "Pangolin", cursive;
-    color: black;
-    padding: 10px 14px;
-    text-align: left;
-    text-decoration: none;
+    width: 100%;
     background: none;
     border: none;
-    width: 100%;
+    color: black;
+    padding: 10px 14px;
     cursor: pointer;
+    font-family: "Pangolin", cursive;
   }
 
+  .ops_ordenar button:hover,
   .ops_filtrar button:hover {
     background-color: #f0d786;
   }
 
-  .filtrar:hover .ops_filtrar {
+  /* Mostrar dropdowns al hacer hover */
+  .imagen-con-boton:hover .ops_ordenar,
+  .imagen-con-boton:hover .ops_filtrar {
     display: block;
   }
 
@@ -598,18 +548,22 @@
 
   .gato-wrapper:hover {
     transform: scale(1.1);
+    z-index: 1000;
   }
 
   .gato-wrapper:hover .nombre-container {
     transform: translateY(-20%);
+    z-index: 1000;
   }
 
   .gato-wrapper:hover .person-container {
     animation: salto 1.4s ease-in-out infinite;
+    z-index: 1000;
   }
 
   .gato-wrapper:hover {
     animation-play-state: paused;
+    z-index: 1000;
   }
 
   .volver-a-guia {

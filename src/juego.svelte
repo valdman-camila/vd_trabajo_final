@@ -5,6 +5,7 @@
     jugadorGatoTerminado,
     resultadoJuego1,
     GatoTerminadoJuego1,
+    Rating,
   } from "./store.js";
   import { onMount } from "svelte";
 
@@ -12,7 +13,7 @@
   let time = 30;
   let gameOver = false;
   let gameStart = true;
-
+  let rating = 0.0;
   let timerId;
   let isMovingLeft = false;
   let isMovingRight = false;
@@ -20,7 +21,18 @@
   let basket;
   let gameContainer;
   let gameStarted = false;
-
+  const ratingRangos = [
+    { min: 0, max: 100, ratingMin: 1.0, ratingMax: 2.0 },
+    { min: 100, max: 250, ratingMin: 2.0, ratingMax: 3.2 },
+    { min: 250, max: 400, ratingMin: 3.2, ratingMax: 4.3 },
+    { min: 400, max: 550, ratingMin: 4.3, ratingMax: 5.8 },
+    { min: 550, max: 700, ratingMin: 5.8, ratingMax: 6.5 },
+    { min: 700, max: 850, ratingMin: 6.5, ratingMax: 7.2 },
+    { min: 850, max: 950, ratingMin: 7.2, ratingMax: 7.9 },
+    { min: 950, max: 1050, ratingMin: 7.9, ratingMax: 8.5 },
+    { min: 1050, max: 1150, ratingMin: 8.5, ratingMax: 9.2 },
+    { min: 1150, max: 1300, ratingMin: 9.2, ratingMax: 9.8 },
+  ];
   $: if (!gameStart && !gameOver) {
     moveLoop();
   }
@@ -41,7 +53,7 @@
     basket = document.getElementById("basket");
     gameContainer = document.getElementById("game-container");
     score = 0;
-    time = 30;
+    time = 2;
     gameOver = false;
     gameStart = false;
     gameStarted = true;
@@ -59,7 +71,8 @@
     createFruit();
   }
   function mostrarModal(score) {
-    document.getElementById("scoreText").textContent = "Tu rating es: " + score;
+    document.getElementById("scoreText").textContent =
+      "Tu rating es: " + rating;
     document.getElementById("gameOverModal").style.display = "flex";
 
     // setTimeout(() => {
@@ -76,6 +89,8 @@
     clearFruits();
 
     const altura = calcularAltura(score);
+    rating = calcularRating(score);
+    Rating.set(rating);
     resultadoJuego1.set(altura);
     GatoTerminadoJuego1.set(true);
     mostrarModal(score);
@@ -89,6 +104,17 @@
     return Math.round(
       min + (Math.min(puntaje, maxPuntaje) / maxPuntaje) * (max - min)
     );
+  }
+  function calcularRating(puntaje) {
+    for (const rango of ratingRangos) {
+      if (puntaje >= rango.min && puntaje < rango.max) {
+        const progreso = (puntaje - rango.min) / (rango.max - rango.min);
+        const rating =
+          rango.ratingMin + progreso * (rango.ratingMax - rango.ratingMin);
+        return Number(rating.toFixed(1)); // redondeamos a 1 decimal
+      }
+    }
+    return 9.8; // si pasa el máximo
   }
 
   function createFruit() {
@@ -279,7 +305,7 @@
     height: 100%;
     margin-top: 20%;
     padding-top: 10%;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     background-image: url("/images/fondo_juego.svg");
     background-position: center;

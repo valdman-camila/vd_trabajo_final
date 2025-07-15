@@ -9,6 +9,7 @@
   import CuadroGato from "/src/CuadroGato.svelte";
   import CuadroGato2 from "/src/CuadroGato2.svelte";
   import { fade, slide } from "svelte/transition";
+  import { arrayfiltrado, arrayfiltrado2 } from "./store.js";
 
   console.log("series", series);
   console.log("peliculas", peliculas);
@@ -208,37 +209,41 @@
   {#if currentDataType === "series"}
     <input type="checkbox" id="down" />
     <div class="seccion4">
-      {#if $gatoEspecifico !== undefined && series[$gatoEspecifico]}
+      {#if $gatoEspecifico !== undefined && $arrayfiltrado[$gatoEspecifico]}
         <CuadroGato />
         <img class="fondo-nube-cuadro" src="./images/nube.svg" alt="" />
         <div class="cuadro-texto">
-          <h2>¿{series[$gatoEspecifico].Nombre} marcó tu infancia?</h2>
-          {#if series[$gatoEspecifico].Tipo == "Ambas"}
+          <h2>¿{$arrayfiltrado[$gatoEspecifico].Nombre} marcó tu infancia?</h2>
+          {#if $arrayfiltrado[$gatoEspecifico].Tipo == "Ambas"}
             <p>
               Esta serie es tanto <strong>Episódica</strong> como
               <strong>Serializada</strong>
-              y tiene <strong>{series[$gatoEspecifico].Duracion}</strong> episodios
+              y tiene
+              <strong>{$arrayfiltrado[$gatoEspecifico].Duracion}</strong> episodios
               en total.
             </p>
           {:else}
             <p>
               Esta serie es <strong
-                >{series[$gatoEspecifico].Tipo.toLowerCase()}</strong
+                >{$arrayfiltrado[$gatoEspecifico].Tipo.toLowerCase()}</strong
               >
-              y tiene <strong>{series[$gatoEspecifico].Duracion}</strong> episodios
+              y tiene
+              <strong>{$arrayfiltrado[$gatoEspecifico].Duracion}</strong> episodios
               en total.
             </p>
           {/if}
           <p>
-            Tiene un puntaje de <strong>{series[$gatoEspecifico].Rating}</strong
+            Tiene un puntaje de <strong
+              >{$arrayfiltrado[$gatoEspecifico].Rating}</strong
             >
             en IMBD y recaudó
-            <strong>{series[$gatoEspecifico].Ventas.toLocaleString()}</strong> millones
-            de dólares en ventas de juguetes. ¡Un montón!
+            <strong
+              >{$arrayfiltrado[$gatoEspecifico].Ventas.toLocaleString()}</strong
+            > millones de dólares en ventas de juguetes. ¡Un montón!
           </p>
           <p>
             ¿No te gustaría abrazar a <strong
-              >{series[$gatoEspecifico].Nombre}</strong
+              >{$arrayfiltrado[$gatoEspecifico].Nombre}</strong
             >?
           </p>
         </div>
@@ -248,44 +253,48 @@
   {:else if currentDataType === "peliculas"}
     <input type="checkbox" id="down" />
     <div class="seccion4">
-      {#if $gatoEspecifico !== undefined && peliculas[$gatoEspecifico]}
+      {#if $gatoEspecifico !== undefined && $arrayfiltrado2[$gatoEspecifico]}
         <CuadroGato2 />
         <img class="fondo-nube-cuadro" src="./images/nube.svg" alt="" />
         <div class="cuadro-texto">
-          <h2>¿{peliculas[$gatoEspecifico].Nombre} marcó tu infancia?</h2>
-          {#if peliculas[$gatoEspecifico].Tipo == "2"}
+          <h2>¿{$arrayfiltrado2[$gatoEspecifico].Nombre} marcó tu infancia?</h2>
+          {#if $arrayfiltrado2[$gatoEspecifico].Tipo == "2"}
             <p>
               Esta pelicula es parte de una saga de <strong>tres o más</strong>
               películas y dura
-              <strong>{peliculas[$gatoEspecifico].Duracion}</strong> minutos.
+              <strong>{$arrayfiltrado2[$gatoEspecifico].Duracion}</strong> minutos.
             </p>
-          {:else if peliculas[$gatoEspecifico].Tipo == "1"}
+          {:else if $arrayfiltrado2[$gatoEspecifico].Tipo == "1"}
             <p>
               Esta pelicula no cuenta con otras que siguen su historia, es solo <strong
-                >{peliculas[$gatoEspecifico].Tipo.toLowerCase()}</strong
+                >{$arrayfiltrado2[$gatoEspecifico].Tipo.toLowerCase()}</strong
               >
-              y dura <strong>{peliculas[$gatoEspecifico].Duracion}</strong> minutos.
+              y dura
+              <strong>{$arrayfiltrado2[$gatoEspecifico].Duracion}</strong> minutos.
             </p>
           {:else}
             <p>
               Esta pelicula es parte de una saga de <strong
-                >{peliculas[$gatoEspecifico].Tipo.toLowerCase()}</strong
+                >{$arrayfiltrado2[$gatoEspecifico].Tipo.toLowerCase()}</strong
               >
               películas y dura
-              <strong>{peliculas[$gatoEspecifico].Duracion}</strong> minutos.
+              <strong>{$arrayfiltrado2[$gatoEspecifico].Duracion}</strong> minutos.
             </p>
           {/if}
           <p>
             Tiene un puntaje de <strong
-              >{peliculas[$gatoEspecifico].Rating}</strong
+              >{$arrayfiltrado2[$gatoEspecifico].Rating}</strong
             >
             en IMBD y recaudó
-            <strong>{peliculas[$gatoEspecifico].Ventas.toLocaleString()}</strong
+            <strong
+              >{$arrayfiltrado2[
+                $gatoEspecifico
+              ].Ventas.toLocaleString()}</strong
             > millones de dólares en ventas de juguetes. ¡Un montón!
           </p>
           <p>
             ¿No te gustaría abrazar a <strong
-              >{peliculas[$gatoEspecifico].Nombre}</strong
+              >{$arrayfiltrado2[$gatoEspecifico].Nombre}</strong
             >?
           </p>
         </div>

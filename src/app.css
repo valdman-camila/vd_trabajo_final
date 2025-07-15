@@ -248,6 +248,9 @@ a.button:hover {
   background-image: url("/images/fondo_juego2.svg");
   margin: 50px auto;
 }
+.juego2 {
+  background-color: #4caf50;
+}
 
 /* #basket {
             width: 57px;

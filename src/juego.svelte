@@ -288,22 +288,22 @@
   .retro-tv {
     position: absolute;
     width: 633px;
-    top: 77px;
+    /* top: 77px; */
     left: 50%;
     height: 512px;
     transform: translateX(-50%);
     pointer-events: none;
     user-select: none;
     z-index: 0;
+    /* margin-bottom: 50%; */
   }
 
   #game-container {
     position: absolute;
-    top: 15%;
     left: 50%;
     width: 400px;
     height: 100%;
-    margin-top: 20%;
+    margin-top: 14%;
     padding-top: 10%;
     border-radius: 15px;
     overflow: hidden;

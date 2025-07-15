@@ -82,7 +82,7 @@
       shipImg.src = "/images/ship.png";
 
       alienImg = new Image();
-      alienImg.src = "/images/perro_malo.svg";
+      alienImg.src = "/images/perro_malo_marron.svg";
 
       gameStarted = true;
       gameOver = false;

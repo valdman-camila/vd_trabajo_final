@@ -103,7 +103,7 @@
     {/if}
 
     {#if paso >= 2}
-      <p>Gato completo!</p>
+      <p>Tu michi está listo!</p>
     {/if}
   </div>
 
@@ -160,6 +160,7 @@
 
   .boton-empezar:hover {
     transform: scale(1.05);
+    filter: brightness(150%);
   }
 
   .conejo-guia {

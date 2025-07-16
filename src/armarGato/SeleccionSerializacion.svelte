@@ -23,6 +23,7 @@
 </script>
 
 <div class="selector-tipo">
+  <p>Elegí como va a posar tu gato</p>
   <div class="botones">
     <button class="boton-flecha" data-dir="left" on:click={() => cambiar(-1)}>
       <FontAwesomeIcon icon={faPlay} rotation={180} />
@@ -42,20 +43,17 @@
     align-items: center;
   }
 
-  .botones {
-    display: flex;
-    gap: 1rem;
-    margin: 1rem 0;
-    align-items: center;
-  }
-
   .boton-flecha {
     margin-top: 20px;
-    display: inline-block;
-    padding: 14px 28px;
+    height: 56px;
+    width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     background-color: #ffe4f0;
     color: #5b3c40;
-    border-radius: 25px;
+    border-radius: 50%;
     font-size: 22px;
     font-weight: 600;
     text-decoration: none;
@@ -63,8 +61,8 @@
     transition: all 0.3s ease;
     cursor: pointer;
     font-family: "Pangolin", cursive;
-    
   }
+
 
   .boton-flecha:hover {
     transform: scale(1.3);
@@ -86,11 +84,29 @@
     transform: scale(0.9) translateX(4px);
   }
 
-  .texto-tipo {
-    font-size: 1.5rem;
-    transition: opacity 0.3s ease;
-    color: white;
+  .botones {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: center; /* Esto ya está bien */
+    justify-content: center;
   }
 
-
+  .texto-tipo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px; /* Igual altura que .boton-flecha */
+    padding: 0 24px; /* Margen horizontal */
+    font-size: 1.5rem;
+    font-family: "Pangolin", cursive;
+    color: white;
+    border-radius: 30px;
+    line-height: 1;
+    margin-top: 20px; /* igual que .boton-flecha para alineación vertical */
+  }
+  p {
+    color: white;
+    font-size: 1.5rem;
+  }
 </style>

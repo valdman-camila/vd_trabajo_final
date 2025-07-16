@@ -120,12 +120,12 @@
     padding: 2rem;
   }
 
-  .cuadro-final {
+   .cuadro-final {
     display: flex;
     flex-direction: column; /* ¡Ahora en columna! */
     align-items: center;
     justify-content: center;
-    background-color: azure;
+    background-color:rgb(255, 255, 255);
     padding: 2rem;
     border-radius: 25px;
     animation-name: example;
@@ -135,6 +135,7 @@
     width: 100%;
     text-align: center;
     gap: 2rem;
+    color:rgb(9, 9, 9);
   }
 
   .cuadro-texto {

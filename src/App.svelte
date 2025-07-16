@@ -216,8 +216,8 @@
           <h2>¿{$arrayfiltrado[$gatoEspecifico].Nombre} marcó tu infancia?</h2>
           {#if $arrayfiltrado[$gatoEspecifico].Tipo == "Ambas"}
             <p>
-              Esta serie es tanto <strong>Episódica</strong> como
-              <strong>Serializada</strong>
+              Esta serie es tanto <strong>episódica</strong> como
+              <strong>serializada</strong>
               y tiene
               <strong>{$arrayfiltrado[$gatoEspecifico].Duracion}</strong> episodios
               en total.

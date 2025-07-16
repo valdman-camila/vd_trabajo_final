@@ -111,11 +111,11 @@
     filtro = valorFilter;
     switch (valorFilter) {
       case "Episodica":
-        textoBtnF = "Episodica";
+        textoBtnF = "Episódicas";
         seriePelicu = series.filter((p) => p.Tipo == filtro);
         break;
       case "Serializada":
-        textoBtnF = "Serializada";
+        textoBtnF = "Serializadas";
         seriePelicu = series.filter((p) => p.Tipo == filtro);
         break;
       case "Ambas":
@@ -205,7 +205,7 @@
           >
           <button
             on:click={() => filterSelection("Episodica")}
-            class:active={filtro == "Episodica"}>Episodico</button
+            class:active={filtro == "Episodica"}>Episódicas</button
           >
         </div>
       </div>

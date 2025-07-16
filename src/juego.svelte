@@ -511,9 +511,9 @@
   }
 
   .instrucciones-juego {
-  background-color: #ffffff;
-  border: 2px #4caf50;
-  color: #333;
+  background-color: #a493ba;
+  border: 2px #511751;
+  color: #e7e3e3;
   padding: 10px 20px;
   border-radius: 15px;
   font-size: 18px;

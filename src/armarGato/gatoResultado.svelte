@@ -113,7 +113,7 @@
   .fondo-pasto {
     background-color: #4caf50;
 
-    width: 3000px;
+    width: 872px;
     height: 20px;
     position: absolute;
   }

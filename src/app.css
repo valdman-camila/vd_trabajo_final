@@ -295,10 +295,11 @@ a.button:hover {
 }
 
 .boton-siguiente:hover {
+  filter: brightness(150%);
   background-color: #ffd6ec;
   border-color: #ffb6d1;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .boton-siguiente:active {

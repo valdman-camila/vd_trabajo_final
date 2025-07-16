@@ -52,6 +52,7 @@
 
     <img class="conejo-guia" src="/images/DosOjosCerradosConejo.svg" alt="" />
   </div>
+  <div class="fondo-pasto"></div>
   <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
@@ -102,13 +103,22 @@
     {/if}
 
     {#if paso >= 2}
-      <p>¡Gato completo!</p>
+      <p>Gato completo!</p>
     {/if}
   </div>
+
+  <div class="fondo-pasto"></div>
   <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
 <style>
+  .fondo-pasto {
+    background-color: #4caf50;
+
+    width: 872px;
+    height: 20px;
+    position: absolute;
+  }
   .piso-pasto {
     position: absolute;
   }
@@ -210,5 +220,10 @@
     flex-direction: column;
     align-items: center;
     z-index: 1;
+  }
+
+  p {
+    color: white;
+    font-size: 1.5rem;
   }
 </style>

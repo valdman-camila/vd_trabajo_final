@@ -50,16 +50,28 @@
   }
 
   .boton-flecha {
-    background: none;
-    border: none;
+    margin-top: 20px;
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: #ffe4f0;
+    color: #5b3c40;
+    border-radius: 25px;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     cursor: pointer;
-    font-size: 2rem;
-    padding: 0.2rem;
-    transition: transform 0.2s ease;
+    font-family: "Pangolin", cursive;
+    
   }
 
   .boton-flecha:hover {
     transform: scale(1.3);
+    filter: brightness(150%);
+    background-color: #ffd6ec;
+    border-color: #ffb6d1;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   }
 
   .boton-flecha:active {
@@ -77,5 +89,8 @@
   .texto-tipo {
     font-size: 1.5rem;
     transition: opacity 0.3s ease;
+    color: white;
   }
+
+
 </style>

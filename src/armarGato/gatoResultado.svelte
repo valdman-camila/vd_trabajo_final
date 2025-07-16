@@ -105,18 +105,11 @@
       serie? Bueno, veamos las estadísticas...
     </div>
   </div>
-  <div class="fondo-pasto"></div>
+
   <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
 <style>
-  .fondo-pasto {
-    background-color: #4caf50;
-    top: 2%;
-    width: 900px;
-    height: 30px;
-    position: absolute;
-  }
   .piso-pasto {
     position: absolute;
   }

@@ -311,23 +311,26 @@
   }
 
   #start-button {
-    background-color: #ffffff;
-    color: #4caf50;
-    border: none;
-    padding: 16px 36px;
+    background-color: #ffe4f0;
+    color: #5b3c40;
+    border: 2px solid #ffcce1;
+    border-radius: 30px;
+    padding: 12px 24px;
     font-size: 1.25rem;
-    cursor: pointer;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.7);
+    font-weight: bold;
     font-family: "Pangolin", cursive;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
+
   #start-button:hover {
-    transform: scale(1.05);
-    background-color: #e8f5e9;
+    background-color: #ffd6ec;
+    border-color: #ffb6d1;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    filter: brightness(150%);
   }
+
   .modal {
     display: none;
     position: fixed;

@@ -88,11 +88,11 @@
     filtro = valorFilter;
     switch (valorFilter) {
       case "1":
-        textoBtnF = "Una pelicula";
+        textoBtnF = "Una película";
         seriePelicu = peliculas.filter((p) => p.Tipo == filtro);
         break;
       case "2":
-        textoBtnF = "Dos peliculas";
+        textoBtnF = "Dos películas";
         seriePelicu = peliculas.filter((p) => p.Tipo == filtro);
         break;
       case "3":

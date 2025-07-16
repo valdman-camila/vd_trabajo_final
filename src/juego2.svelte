@@ -396,9 +396,9 @@
     }
   }
   .instrucciones-juego {
-  background-color: #a493ba;
-  border: 2px #511751;
-  color: #e7e3e3;
+  background-color: #ffffff;
+  border: 2px #4caf50;
+  color: #333;
   padding: 10px 20px;
   border-radius: 15px;
   font-size: 18px;

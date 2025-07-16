@@ -125,7 +125,7 @@
     flex-direction: column; /* ¡Ahora en columna! */
     align-items: center;
     justify-content: center;
-    background-color: #a493ba;
+    background-color:rgb(255, 255, 255);
     padding: 2rem;
     border-radius: 25px;
     animation-name: example;
@@ -135,7 +135,7 @@
     width: 100%;
     text-align: center;
     gap: 2rem;
-    color:rgb(230, 234, 234);
+    color:rgb(9, 9, 9);
   }
 
   .cuadro-texto {

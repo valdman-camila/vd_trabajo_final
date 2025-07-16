@@ -83,4 +83,9 @@
   button {
     margin-top: 1rem;
   }
+
+  p {
+    color: white;
+    font-size: 1.5rem;
+  }
 </style>

@@ -102,7 +102,7 @@
     {/if}
 
     {#if paso >= 2}
-      <p>¡Gato completo!</p>
+      <p>Gato completo!</p>
     {/if}
   </div>
   <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
@@ -210,5 +210,10 @@
     flex-direction: column;
     align-items: center;
     z-index: 1;
+  }
+
+  p {
+    color: white;
+    font-size: 1.5rem;
   }
 </style>

@@ -352,3 +352,10 @@ a.button:hover {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.flourish-embed {
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
+  height: 100vh;
+}
+

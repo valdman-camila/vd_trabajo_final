@@ -54,12 +54,9 @@
     { min: 12000, max: 14000, gananciaMin: 600, gananciaMax: 720 },
     { min: 14000, max: 16000, gananciaMin: 720, gananciaMax: 830 },
     { min: 16000, max: 18000, gananciaMin: 830, gananciaMax: 930 },
-    { min: 18000, max: Infinity, gananciaMin: 930, gananciaMax: 1000 }, // abierto
+    { min: 18000, max: Infinity, gananciaMin: 930, gananciaMax: 1000 },
   ];
-  let manchaScore = d3
-    .scaleLinear()
-    .domain([0, 20000]) // score mínimo y máximo
-    .range([1, 5]); // valores a mapear (por ejemplo: tamaño o intensidad)
+  let manchaScore = d3.scaleLinear().domain([0, 20000]).range([1, 5]);
 
   onMount(() => {
     document.addEventListener("keydown", moveShip);
@@ -175,7 +172,7 @@
     resultadoJuego2.set(manchas);
     ganancia = calcularVentas(score);
     Ventas.set(ganancia);
-
+    document.getElementById("pasto").style.display = "none";
     setTimeout(() => {
       document.getElementById("gameOverModal").style.display = "flex";
       document.getElementById("scoreText").textContent =
@@ -268,7 +265,7 @@
       <button id="start-button" on:click={startGame}>Jugar</button>
     {/if}
   </div>
-  <img class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
+  <img id="pasto" class="piso-pasto" src="/images/piso-tierra.svg" alt="" />
 {/if}
 
 <div id="gameOverModal" class="modal">

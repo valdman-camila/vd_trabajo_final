@@ -114,9 +114,9 @@
 <style>
   .fondo-pasto {
     background-color: #4caf50;
-
-    width: 872px;
-    height: 20px;
+    top: 2%;
+    width: 900px;
+    height: 30px;
     position: absolute;
   }
   .piso-pasto {

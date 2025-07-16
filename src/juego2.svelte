@@ -137,7 +137,7 @@
 
     for (let bullet of bulletArray) {
       bullet.y += bulletVelocityY;
-      context.fillStyle = "white";
+      context.fillStyle = "#00B3FA";
       context.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
 
       for (let alien of alienArray) {
@@ -254,9 +254,9 @@
 {#if $GatoTerminadoJuego1}
   <div class="space-container">
     <h1 class="titulo_juego">Vencé a tu competencia!</h1>
-     <div class="instrucciones-juego">
-    Movete con las flechas ⬅️ ➡️ y presioná <strong>ESPACIO</strong> para disparar.  
-  ¡Derrotá a los perros y ganá puntos antes de que se te acabe el tiempo!
+    <div class="instrucciones-juego">
+      Movete con las flechas ⬅️ ➡️ y presioná <strong>ESPACIO</strong> para disparar.
+      ¡Derrotá a los perros y ganá puntos antes de que se te acabe el tiempo!
     </div>
     <canvas id="board"></canvas>
 
@@ -286,7 +286,6 @@
   .space-container {
     box-sizing: border-box;
     padding: 4rem 2rem;
-
     position: relative;
     display: flex;
     flex-direction: column;
@@ -322,6 +321,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin: -125px 37%;
   }
 
   #start-button:hover {
@@ -396,19 +396,18 @@
     }
   }
   .instrucciones-juego {
-  background-color: #ffffff;
-  border: 2px #4caf50;
-  color: #333;
-  padding: 10px 20px;
-  border-radius: 15px;
-  font-size: 18px;
-  font-family: "Pangolin", cursive;
-  text-align: center;
-  margin-bottom: 1rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-  
+    background-color: #ffffff;
+    border: 2px #4caf50;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-family: "Pangolin", cursive;
+    text-align: center;
+    margin-bottom: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 </style>

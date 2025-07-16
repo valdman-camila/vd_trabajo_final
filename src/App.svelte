@@ -442,14 +442,14 @@
   }
 
   .nube-izquierda {
-    left: -350px;
-    bottom: 200px;
+    left: 10px;
+    /* bottom: 0px; */
     width: 200px;
     animation: flotar2 5s ease-in-out infinite;
   }
 
   .nube-derecha {
-    right: -400px;
+    right: 0px;
     width: 120px;
     animation: flotar2 5s ease-in-out infinite;
   }

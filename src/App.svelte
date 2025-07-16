@@ -419,11 +419,11 @@
   }
 
    .speech {
-    background-image: url("/images/BubbleIzquierda.svg");
+    background-image: url("/images/BubbleIzquierdaF2.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    padding: 20px 70px 40px 150px;
+    padding: 20px 75px 20px 160px;
     display: flex;
     align-items: center;
     justify-content: center;

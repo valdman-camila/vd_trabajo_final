@@ -418,12 +418,12 @@
     margin-bottom: 50px;
   }
 
-  .speech {
-    background-image: url("/images/Speech_intro.svg");
+   .speech {
+    background-image: url("/images/BubbleIzquierdaF2.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    padding: 20px 50px 60px 50px;
+    padding: 20px 75px 20px 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -431,8 +431,8 @@
     font-family: "Pangolin", cursive;
     font-size: 18px;
     min-width: 150px;
-    min-height: 400px;
-    max-width: 800px;
+    min-height: 200px;
+    max-width: 500px;
     flex-wrap: wrap;
 
     animation: flotar2 5s ease-in-out infinite;

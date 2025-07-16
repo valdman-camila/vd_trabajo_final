@@ -144,20 +144,20 @@
      Durante décadas, muchas líneas de juguetes dieron origen a series animadas pensadas para promocionarlos. Esta colección recorre esas historias que nacieron del marketing y terminaron marcando infancias.
     </p>
     -->
+  <img src="/images/nube.svg" class="fondo-nube nube-izquierda" alt="" />
 
+  <img src="/images/nube.svg" class="fondo-nube nube-derecha" alt="" />
   <div class="bunni-container">
-    <img src="/images/nube.svg" class="fondo-nube nube-izquierda" alt="" />
-
-    <img src="/images/nube.svg" class="fondo-nube nube-derecha" alt="" />
-
-    <div class="speech">
-      ¡Bienvenidos, queridísima audiencia! Soy Bunni, su anfitrión. Acá no van a
-      encontrar cualquier historia… Esta es una colección de series y películas
-      que nacieron de algo muy noble: ¡vender juguetes! Pero ojo, lo que empezó
-      como pura estrategia de marketing terminó dejando huella en miles de
-      infancias. Así que adelante, exploren, comparen, y revivan!
+    <div class="contenedor-intro">
+      <img class="conejo" src="/images/Bunny_intro.svg" alt="Conejo" />
+      <div class="speech">
+        ¡Bienvenidos, queridísima audiencia! Soy Bunni, su anfitrión. Acá no van
+        a encontrar cualquier historia… Esta es una colección de series y
+        películas que nacieron de algo muy noble: ¡vender juguetes! Pero ojo, lo
+        que empezó como pura estrategia de marketing terminó dejando huella en
+        miles de infancias. Así que adelante, exploren, comparen, y revivan!
+      </div>
     </div>
-    <img class="conejo" src="/images/Bunny_intro.svg" alt="Conejo" />
   </div>
 
   <div id="guia-container">
@@ -305,6 +305,13 @@
 </main>
 
 <style>
+  .contenedor-intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-top: 10%;
+    gap: 80px;
+  }
+
   main {
     width: 100%;
   }
@@ -401,15 +408,12 @@
   }
   .bunni-container {
     position: relative;
-    width: fit-content;
+
     margin-top: 50px;
     margin-bottom: 50px;
   }
 
   .speech {
-    position: absolute;
-    bottom: 450px; /* ajustá según el diseño */
-    left: 0%;
     background-image: url("/images/Speech_intro.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -425,7 +429,7 @@
     min-height: 400px;
     max-width: 800px;
     flex-wrap: wrap;
-    width: 600px;
+
     animation: flotar2 5s ease-in-out infinite;
     z-index: 10;
   }
@@ -433,7 +437,7 @@
   .conejo {
     width: 500px;
     height: 500px;
-    margin-top: 350px;
+    margin-top: 0px;
     animation: flotar2 5s ease-in-out infinite;
   }
 
@@ -660,10 +664,10 @@
 
   .data-type-fijo .change-data-button {
     padding: 10px;
-    background-color: #ffe4f0; 
+    background-color: #ffe4f0;
     border-radius: 50%;
-    border: 2px solid #ffcce1; 
-    box-shadow: 0 3px 6px rgba(255, 182, 193, 0.3); 
+    border: 2px solid #ffcce1;
+    box-shadow: 0 3px 6px rgba(255, 182, 193, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -672,19 +676,17 @@
   }
 
   .data-type-fijo .change-data-button:hover {
-    background-color: #ffd6e3; 
+    background-color: #ffd6e3;
     border-color: #ffb6cc;
     box-shadow: 0 5px 10px rgba(255, 182, 193, 0.5);
     transform: translateY(-2px);
   }
 
   .data-type-fijo .change-data-button.active {
-    background-color: #f9a9be; 
-    border-color: #e4879f; 
+    background-color: #f9a9be;
+    border-color: #e4879f;
     box-shadow: 0 6px 12px rgba(249, 169, 190, 0.6);
     color: white;
     transform: translateY(-1px);
   }
-
-
 </style>

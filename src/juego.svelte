@@ -366,30 +366,35 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 50000;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 16px 36px;
+    background-color: #ffe4f0;
+    color: #5b3c40;
+    border: 2px solid #ffcce1;
+    border-radius: 30px;
+    padding: 12px 24px;
     font-size: 20px;
+    font-weight: bold;
+    font-family: "Pangolin", cursive;
     cursor: pointer;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.7);
-    transition:
-      background-color 0.3s ease,
-      box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     user-select: none;
   }
 
   #start-button:disabled {
-    background-color: #9ccc9c;
+    background-color: #f9dbe4;
+    border-color: #f2c8d8;
+    color: #a98c94;
     cursor: not-allowed;
     box-shadow: none;
   }
 
   #start-button:hover:not(:disabled) {
-    background-color: #ebf1e2;
-    box-shadow: 0 6px 14px rgba(197, 227, 199, 0.9);
+    background-color: #ffd6ec;
+    border-color: #ffb6d1;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    filter: brightness(150%);
   }
+
 
   .status-panel {
     position: absolute;

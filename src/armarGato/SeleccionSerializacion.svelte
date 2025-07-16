@@ -23,7 +23,7 @@
 </script>
 
 <div class="selector-tipo">
-  <p>Elegí si tu serie va a ser serializada o no</p>
+  <p>Elegí como va a posar tu gato</p>
   <div class="botones">
     <button class="boton-flecha" data-dir="left" on:click={() => cambiar(-1)}>
       <FontAwesomeIcon icon={faPlay} rotation={180} />

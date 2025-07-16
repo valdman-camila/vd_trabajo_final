@@ -27,7 +27,7 @@
 </script>
 
 <div class="selector-color">
-  <p>Elegí el color del gato</p>
+  <p>Elegí el color de tu gato</p>
   <div class="circulos">
     {#each coloresDisponibles as c (c)}
       <div

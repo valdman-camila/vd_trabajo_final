@@ -203,6 +203,10 @@
 {#if $jugadorGatoTerminado}
   <div class="catch-container">
     <h1 class="titulo_juego">Entretené a tu audencia!</h1>
+    <div class="instrucciones-juego">
+    <strong>Controles:</strong> Usá las flechas del teclado ⬅️ ➡️ para mover al gato y atrapar los peces 🐟.
+    </div>
+
 
     <div id="tv-background">
       <img class="retro-tv" src="/images/tele_vieja3.svg" alt="Retro TV" />
@@ -500,4 +504,21 @@
     user-select: none;
     background-color: #1e1d19;
   }
+
+  .instrucciones-juego {
+  background-color: #ffffff;
+  border: 2px #4caf50;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-family: "Pangolin", cursive;
+  text-align: center;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 </style>

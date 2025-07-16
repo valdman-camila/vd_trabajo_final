@@ -222,11 +222,16 @@
               <strong>{$arrayfiltrado[$gatoEspecifico].Duracion}</strong> episodios
               en total.
             </p>
+          {:else if $arrayfiltrado[$gatoEspecifico].Tipo == "Episodica"}
+            <p>
+              Esta serie es episódica
+              y tiene
+              <strong>{$arrayfiltrado[$gatoEspecifico].Duracion}</strong> episodios
+              en total.
+            </p>
           {:else}
             <p>
-              Esta serie es <strong
-                >{$arrayfiltrado[$gatoEspecifico].Tipo.toLowerCase()}</strong
-              >
+              Esta serie es serializada
               y tiene
               <strong>{$arrayfiltrado[$gatoEspecifico].Duracion}</strong> episodios
               en total.
@@ -260,13 +265,13 @@
           <h2>¿{$arrayfiltrado2[$gatoEspecifico].Nombre} marcó tu infancia?</h2>
           {#if $arrayfiltrado2[$gatoEspecifico].Tipo == "2"}
             <p>
-              Esta pelicula es parte de una saga de <strong>tres o más</strong>
+              Esta película es parte de una saga de <strong>tres o más</strong>
               películas y dura
               <strong>{$arrayfiltrado2[$gatoEspecifico].Duracion}</strong> minutos.
             </p>
           {:else if $arrayfiltrado2[$gatoEspecifico].Tipo == "1"}
             <p>
-              Esta pelicula no cuenta con otras que siguen su historia, es solo <strong
+              Esta película no cuenta con otras que siguen su historia, es solo <strong
                 >{$arrayfiltrado2[$gatoEspecifico].Tipo.toLowerCase()}</strong
               >
               y dura
@@ -274,7 +279,7 @@
             </p>
           {:else}
             <p>
-              Esta pelicula es parte de una saga de <strong
+              Esta película es parte de una saga de <strong
                 >{$arrayfiltrado2[$gatoEspecifico].Tipo.toLowerCase()}</strong
               >
               películas y dura

@@ -196,15 +196,15 @@
           >
           <button
             on:click={() => filterSelection("1")}
-            class:active={filtro == "1"}>Una pelicula</button
+            class:active={filtro == "1"}>Una película</button
           >
           <button
             on:click={() => filterSelection("2")}
-            class:active={filtro == "2"}>Dos peliculas</button
+            class:active={filtro == "2"}>Dos películas</button
           >
           <button
             on:click={() => filterSelection("3")}
-            class:active={filtro == "3"}>Tres o más peliculas</button
+            class:active={filtro == "3"}>Tres o más películas</button
           >
         </div>
       </div>

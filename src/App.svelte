@@ -122,23 +122,35 @@
 
 <main>
   <div id="overlay" class="hidden">
-    <div id="guia-visualizacion" class="guia-visualizacion hidden">
-      <div class="guia-image-wrapper">
-        <img
-          src={currentDataType === "series"
-            ? "/images/GuiaSeriesFin2.svg"
-            : "/images/GuiaPeliculasFin.svg"}
-          alt="Guía Visual"
-          width="950"
-          in:fade={{ duration: 500 }}
-          out:fade={{ duration: 500 }}
-          class="guia-content-image"
-        />
-      </div>
-
-      <button class="boton-cerrar-popup" on:click={cerrarPopup}>Cerrar</button>
+  <div id="guia-visualizacion" class="guia-visualizacion hidden">
+    <div class="guia-image-wrapper">
+      <img
+        src={currentDataType === "series"
+          ? "/images/GuiaVisualSeriesFinal11.svg"
+          : "/images/GuiaVisualPelisFinal11.svg"}
+        alt="Guía Visual"
+        width="950"
+        in:fade={{ duration: 500 }}
+        out:fade={{ duration: 500 }}
+        class="guia-content-image"
+      />
     </div>
+{#if currentDataType === "series"}
+  <a
+    href="https://agenciapodcast.com/los-tipos-de-series/"
+    class="info-link"
+  >
+    ¿Qué es una serie episódica o serializada?
+  </a>
+{:else}
+  <div></div>
+{/if}
+
+    
+    <button class="boton-cerrar-popup" on:click={cerrarPopup}>Cerrar</button>
   </div>
+</div>
+
 
   <!--<p class="bajada">
      Durante décadas, muchas líneas de juguetes dieron origen a series animadas pensadas para promocionarlos. Esta colección recorre esas historias que nacieron del marketing y terminaron marcando infancias.
@@ -482,10 +494,15 @@
     text-align: center;
     border-radius: 10%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     min-height: 600px;
+    flex-direction: column; 
+    align-items: center;     
+    justify-content: center;
+    padding: 40px 20px 80px 20px; 
+    gap: 20px; 
+  
   }
   .hidden {
     display: none;
@@ -649,15 +666,18 @@
     overflow: hidden;
     min-height: 500px;
     width: calc(100% - 120px);
+    position: relative;
+    width: 100%;
   }
 
   .guia-content-image {
     max-width: 79%;
     height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    max-width: 90%;
+    position: relative; 
+    top: auto;
+    left: auto;
+    transform: none;
   }
 
   .data-type-switcher {
@@ -694,4 +714,19 @@
     color: white;
     transform: translateY(-1px);
   }
+  .info-link {
+  display: block;
+  margin-top: 12px;
+  font-size: 16px;
+  text-align: center;
+  color: #151515;
+  text-decoration: underline;
+  font-family: 'Pangolin', cursive;
+  margin-top: -20px;
+  margin-right:300px;
+  min-height: 24px;
+}
+.info-link:hover {
+  color: #1a5093;
+}
 </style>

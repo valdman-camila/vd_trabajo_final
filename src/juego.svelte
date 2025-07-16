@@ -393,16 +393,19 @@
     right: 15px;
     display: flex;
     gap: 25px;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(238, 224, 255, 0.75); 
     padding: 10px 20px;
     border-radius: 16px;
-    box-shadow: 0 0 12px #4caf50aa;
-    color: #4caf50;
+    box-shadow: 0 0 12px #d8b4f8; 
+    color: #8e3e63; 
     font-weight: 700;
     font-size: 1.3rem;
     user-select: none;
     z-index: 50;
+    border: 2px solid #f3d1e8; 
+    font-family: "Pangolin", cursive;
   }
+
 
   #basket {
     width: 57px;

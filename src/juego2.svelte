@@ -254,6 +254,10 @@
 {#if $GatoTerminadoJuego1}
   <div class="space-container">
     <h1 class="titulo_juego">Vencé a tu competencia!</h1>
+     <div class="instrucciones-juego">
+    Movete con las flechas ⬅️ ➡️ y presioná <strong>ESPACIO</strong> para disparar.  
+  ¡Derrotá a los perros y ganá puntos antes de que se te acabe el tiempo!
+    </div>
     <canvas id="board"></canvas>
 
     <div id="player-character" style="display: none;">
@@ -388,4 +392,20 @@
       transform: translateY(0);
     }
   }
+  .instrucciones-juego {
+  background-color: #ffffff;
+  border: 2px #4caf50;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-family: "Pangolin", cursive;
+  text-align: center;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+  
 </style>

@@ -103,7 +103,7 @@
     {/if}
 
     {#if paso >= 2}
-      <p>Gato completo!</p>
+      <p>Tu michi está listo!</p>
     {/if}
   </div>
 

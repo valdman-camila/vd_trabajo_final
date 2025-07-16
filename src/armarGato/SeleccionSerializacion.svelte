@@ -23,6 +23,7 @@
 </script>
 
 <div class="selector-tipo">
+  <p>Elegí si tu serie va a ser serializada o no</p>
   <div class="botones">
     <button class="boton-flecha" data-dir="left" on:click={() => cambiar(-1)}>
       <FontAwesomeIcon icon={faPlay} rotation={180} />
@@ -103,5 +104,9 @@
     border-radius: 30px;
     line-height: 1;
     margin-top: 20px; /* igual que .boton-flecha para alineación vertical */
+  }
+  p {
+    color: white;
+    font-size: 1.5rem;
   }
 </style>
